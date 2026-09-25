@@ -1,0 +1,180 @@
+/* =====================================================================
+   PowerFit · Hoja de estilos
+   Tema oscuro con acento naranja. Sin librerías externas: todo es local,
+   así la política de seguridad (CSP) puede bloquear recursos de afuera.
+   ===================================================================== */
+
+/* ---------- Variables de color y medidas (se cambian en un solo lugar) ---------- */
+:root {
+  --fondo: #0f1115;          /* Fondo general de la página */
+  --panel: #171a21;          /* Fondo de tarjetas y barra lateral */
+  --panel-2: #1f232c;        /* Fondo de campos y filas alternas */
+  --borde: #2a2f3a;          /* Color de bordes suaves */
+  --texto: #e8eaf0;          /* Texto principal */
+  --texto-suave: #9aa1b1;    /* Texto secundario */
+  --acento: #ff6b1a;         /* Naranja PowerFit */
+  --acento-2: #ff8c4a;       /* Naranja claro (hover) */
+  --ok: #22c55e;             /* Verde: éxito / vigente */
+  --alerta: #f59e0b;         /* Amarillo: advertencia */
+  --error: #ef4444;          /* Rojo: error / vencido */
+  --radio: 12px;             /* Redondeo de esquinas */
+  --sombra: 0 8px 24px rgba(0, 0, 0, .35); /* Sombra de tarjetas */
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }                       /* El ancho incluye bordes y relleno */
+html, body { margin: 0; }                           /* Quita márgenes del navegador */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* Fuente del sistema (rápida, sin descargas) */
+  background: var(--fondo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+a { color: var(--acento); text-decoration: none; }  /* Enlaces en naranja */
+a:hover { color: var(--acento-2); }
+h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.15rem; margin: 0 0 1rem; }
+.suave { color: var(--texto-suave); }
+.derecha { text-align: right; }
+
+/* ---------- Estructura: barra lateral + contenido ---------- */
+.app { display: grid; grid-template-columns: 250px 1fr; min-height: 100vh; }
+.lateral {
+  background: var(--panel);
+  border-right: 1px solid var(--borde);
+  padding: 1.5rem 1rem;
+  display: flex; flex-direction: column; gap: .25rem;
+  position: sticky; top: 0; height: 100vh;
+}
+.marca { display: flex; align-items: center; gap: .6rem; font-weight: 800; font-size: 1.25rem; margin-bottom: 1.5rem; padding: 0 .5rem; }
+.marca .logo {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--acento), #ffb347);
+  display: grid; place-items: center; color: #111; font-weight: 900;
+}
+.marca span b { color: var(--acento); }
+.menu a {
+  display: flex; align-items: center; gap: .65rem;
+  padding: .65rem .8rem; border-radius: 10px;
+  color: var(--texto-suave); font-weight: 500;
+}
+.menu a:hover { background: var(--panel-2); color: var(--texto); }
+.menu a.activo { background: rgba(255, 107, 26, .12); color: var(--acento); }
+.menu .seccion { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: #5d6474; margin: 1rem .8rem .3rem; }
+.usuario-caja { margin-top: auto; padding: .9rem; background: var(--panel-2); border-radius: var(--radio); font-size: .9rem; }
+.usuario-caja .rol { display: inline-block; margin: .15rem 0 .6rem; }
+
+.contenido { padding: 2rem 2.5rem; max-width: 1200px; width: 100%; }
+.encabezado { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+
+/* ---------- Tarjetas ---------- */
+.tarjeta { background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); padding: 1.4rem; box-shadow: var(--sombra); margin-bottom: 1.5rem; }
+.grilla { display: grid; gap: 1rem; }
+.grilla-4 { grid-template-columns: repeat(4, 1fr); }
+.grilla-2 { grid-template-columns: repeat(2, 1fr); }
+.indicador { background: var(--panel); border: 1px solid var(--borde); border-radius: var(--radio); padding: 1.2rem; }
+.indicador .valor { font-size: 1.9rem; font-weight: 800; }
+.indicador .etiqueta { color: var(--texto-suave); font-size: .85rem; }
+.indicador.acento { border-color: rgba(255, 107, 26, .5); background: linear-gradient(160deg, rgba(255, 107, 26, .14), var(--panel) 60%); }
+
+/* ---------- Tablas ---------- */
+.tabla-contenedor { overflow-x: auto; }             /* En pantallas chicas la tabla se desplaza, no la página */
+table { width: 100%; border-collapse: collapse; font-size: .93rem; }
+th { text-align: left; color: var(--texto-suave); font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; padding: .7rem .8rem; border-bottom: 1px solid var(--borde); }
+td { padding: .75rem .8rem; border-bottom: 1px solid var(--borde); vertical-align: middle; }
+tr:hover td { background: rgba(255, 255, 255, .02); }
+
+/* ---------- Etiquetas de estado (chips) ---------- */
+.chip { display: inline-block; padding: .15rem .6rem; border-radius: 999px; font-size: .78rem; font-weight: 700; }
+.chip.ok { background: rgba(34, 197, 94, .15); color: var(--ok); }
+.chip.error { background: rgba(239, 68, 68, .15); color: var(--error); }
+.chip.alerta { background: rgba(245, 158, 11, .15); color: var(--alerta); }
+.chip.neutro { background: var(--panel-2); color: var(--texto-suave); }
+.chip.yoga { background: rgba(168, 85, 247, .15); color: #c084fc; }
+.chip.spinning { background: rgba(56, 189, 248, .15); color: #38bdf8; }
+.chip.crossfit { background: rgba(255, 107, 26, .15); color: var(--acento); }
+
+/* ---------- Barra de cupos ---------- */
+.cupos { min-width: 140px; }
+.barra { height: 8px; background: var(--panel-2); border-radius: 99px; overflow: hidden; margin-top: .3rem; }
+.barra > i { display: block; height: 100%; background: var(--ok); border-radius: 99px; }
+.barra.media > i { background: var(--alerta); }
+.barra.llena > i { background: var(--error); }
+
+/* ---------- Formularios ---------- */
+label { display: block; font-size: .85rem; color: var(--texto-suave); margin-bottom: .35rem; font-weight: 600; }
+input, select {
+  width: 100%; padding: .7rem .85rem; border-radius: 10px;
+  border: 1px solid var(--borde); background: var(--panel-2); color: var(--texto); font-size: 1rem;
+}
+input:focus, select:focus { outline: 2px solid var(--acento); border-color: transparent; }
+.campo { margin-bottom: 1rem; }
+.fila-form { display: flex; gap: .75rem; align-items: flex-end; flex-wrap: wrap; }
+.fila-form .campo { flex: 1; min-width: 160px; margin-bottom: 0; }
+.en-linea { display: inline; }
+
+/* ---------- Botones ---------- */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  padding: .7rem 1.1rem; border-radius: 10px; border: 1px solid transparent;
+  background: var(--acento); color: #111; font-weight: 700; cursor: pointer; font-size: .95rem;
+}
+.boton:hover { background: var(--acento-2); color: #111; }
+.boton.secundario { background: transparent; border-color: var(--borde); color: var(--texto); }
+.boton.secundario:hover { border-color: var(--acento); color: var(--acento); }
+.boton.peligro { background: transparent; border-color: rgba(239, 68, 68, .5); color: var(--error); }
+.boton.peligro:hover { background: rgba(239, 68, 68, .1); }
+.boton.chico { padding: .4rem .7rem; font-size: .82rem; }
+.boton.bloque { width: 100%; }
+.boton[disabled] { opacity: .45; cursor: not-allowed; }
+
+/* ---------- Mensajes (flash) ---------- */
+.mensajes { list-style: none; padding: 0; margin: 0 0 1.25rem; display: grid; gap: .5rem; }
+.mensaje { padding: .8rem 1rem; border-radius: 10px; border-left: 4px solid; background: var(--panel); }
+.mensaje.exito { border-color: var(--ok); }
+.mensaje.error { border-color: var(--error); }
+.mensaje.aviso { border-color: var(--alerta); }
+
+/* ---------- Login ---------- */
+.login-pagina { min-height: 100vh; display: grid; place-items: center; padding: 1.5rem;
+  background: radial-gradient(1000px 500px at 80% -10%, rgba(255, 107, 26, .18), transparent), var(--fondo); }
+.login-caja { width: 100%; max-width: 420px; }
+.login-caja .marca { justify-content: center; font-size: 1.6rem; }
+.demo-credenciales { font-size: .85rem; background: var(--panel-2); border-radius: 10px; padding: .8rem 1rem; margin-top: 1rem; }
+.demo-credenciales code { color: var(--acento-2); }
+
+/* ---------- Control de ingreso ---------- */
+.resultado-ingreso { text-align: center; padding: 2rem 1rem; border-radius: var(--radio); margin-top: 1rem; }
+.resultado-ingreso .icono { font-size: 3.5rem; line-height: 1; }
+.resultado-ingreso .titulo { font-size: 1.6rem; font-weight: 800; margin: .5rem 0; }
+.resultado-ingreso.ok { background: rgba(34, 197, 94, .12); border: 1px solid rgba(34, 197, 94, .4); }
+.resultado-ingreso.vencida, .resultado-ingreso.invalido { background: rgba(239, 68, 68, .12); border: 1px solid rgba(239, 68, 68, .4); }
+
+/* ---------- Selección de clases en la inscripción ---------- */
+.opciones-clase { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .75rem; }
+.opcion-clase { display: block; position: relative; cursor: pointer; margin: 0; color: var(--texto); font-weight: 400; }
+.opcion-clase input { position: absolute; opacity: 0; }  /* Oculta el checkbox nativo: se usa la tarjeta completa */
+.opcion-clase .caja { border: 1px solid var(--borde); border-radius: var(--radio); padding: 1rem; background: var(--panel-2); transition: border-color .15s; }
+.opcion-clase input:checked + .caja { border-color: var(--acento); box-shadow: 0 0 0 1px var(--acento) inset; }
+.opcion-clase input:focus-visible + .caja { outline: 2px solid var(--acento-2); }
+.opcion-clase.deshabilitada { cursor: not-allowed; opacity: .5; }
+.total-vivo { font-size: 1.4rem; font-weight: 800; color: var(--acento); }
+
+/* ---------- Adaptación a celulares ---------- */
+.contenido { min-width: 0; }                                            /* Permite que las tablas se achiquen en vez de desbordar la página */
+@media (max-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr); }                        /* Una sola columna: la barra lateral pasa arriba */
+  .lateral { position: static; height: auto; padding: .75rem 1rem; }     /* La barra deja de ser fija y se compacta */
+  .marca { margin-bottom: .5rem; }
+  .menu { display: flex; gap: .25rem; overflow-x: auto; padding-bottom: .25rem; } /* Menú horizontal con desplazamiento */
+  .menu a { white-space: nowrap; padding: .5rem .7rem; }
+  .menu .seccion { display: none; }                                      /* Oculta los títulos de sección para ahorrar espacio */
+  .usuario-caja { margin-top: .5rem; display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .6rem .8rem; }
+  .usuario-caja br { display: none; }
+  .usuario-caja .rol { margin: 0; }
+  .usuario-caja .boton.bloque { width: auto; }
+  .contenido { padding: 1.25rem 1rem; }
+  .grilla-4 { grid-template-columns: repeat(2, 1fr); }
+  .grilla-2 { grid-template-columns: 1fr; }
+  h1 { font-size: 1.35rem; }
+}

@@ -1,0 +1,10 @@
+{# Muestra los mensajes "flash" (éxito, error, aviso) enviados por las rutas #}
+{% with mensajes = get_flashed_messages(with_categories=true) %}
+  {% if mensajes %}
+    <ul class="mensajes">
+      {% for categoria, texto in mensajes %}
+        <li class="mensaje {{ categoria }}">{{ texto }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}

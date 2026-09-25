@@ -1,0 +1,63 @@
+{# =====================================================================
+   Plantilla base: todas las páginas la extienden con {% extends "base.html" %}.
+   Jinja escapa automáticamente todo lo que se imprime con {{ }} -> protege de XSS.
+   ===================================================================== #}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}PowerFit{% endblock %} · PowerFit</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+{% if usuario %}
+  {# ---------- Con sesión: barra lateral + contenido ---------- #}
+  {% set ep = request.endpoint or '' %}
+  <div class="app">
+    <aside class="lateral">
+      <div class="marca"><div class="logo">PF</div><span>Power<b>Fit</b></span></div>
+      <nav class="menu">
+        <a href="{{ url_for('panel.inicio') }}" class="{{ 'activo' if ep.startswith('panel.') }}">🏠 Panel</a>
+        <a href="{{ url_for('ingreso.control') }}" class="{{ 'activo' if ep.startswith('ingreso.') }}">🚪 Control de ingreso</a>
+        <a href="{{ url_for('clases.lista') }}" class="{{ 'activo' if ep.startswith('clases.') }}">🗓️ Clases</a>
+
+        {# Menú solo para la recepcionista #}
+        {% if usuario.rol == 'recepcionista' %}
+          <div class="seccion">Recepción</div>
+          <a href="{{ url_for('socios.lista') }}" class="{{ 'activo' if ep.startswith('socios.') }}">🪪 Socios</a>
+          <a href="{{ url_for('inscripciones.lista') }}" class="{{ 'activo' if ep.startswith('inscripciones.') }}">🧾 Inscripciones</a>
+          <a href="{{ url_for('suplementos.lista') }}" class="{{ 'activo' if ep.startswith('suplementos.') }}">💊 Suplementos</a>
+        {% endif %}
+
+        {# Menú solo para el instructor #}
+        {% if usuario.rol == 'instructor' %}
+          <div class="seccion">Instructor</div>
+          <a href="{{ url_for('asistencia.mis_clases') }}" class="{{ 'activo' if ep.startswith('asistencia.') }}">✅ Asistencia</a>
+          <a href="{{ url_for('clases.nueva') }}">➕ Nueva clase</a>
+        {% endif %}
+      </nav>
+
+      {# Caja del usuario con botón de cerrar sesión (POST + token CSRF) #}
+      <div class="usuario-caja">
+        <strong>{{ usuario.nombre }}</strong><br>
+        <span class="chip {{ 'crossfit' if usuario.rol == 'instructor' else 'spinning' }} rol">{{ usuario.rol|capitalize }}</span>
+        <form method="post" action="{{ url_for('auth.logout') }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="boton secundario chico bloque" type="submit">Cerrar sesión</button>
+        </form>
+      </div>
+    </aside>
+
+    <main class="contenido">
+      {% include "_mensajes.html" %}
+      {% block contenido %}{% endblock %}
+    </main>
+  </div>
+{% else %}
+  {# ---------- Sin sesión (login y errores) ---------- #}
+  {% block pagina %}{% endblock %}
+{% endif %}
+</body>
+</html>

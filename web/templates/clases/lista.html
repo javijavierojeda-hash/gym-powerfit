@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% from "_macros.html" import chip_tipo, barra_cupos, csrf with context %}
+{% block titulo %}Clases{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div><h1>Clases</h1><div class="suave">Cupos del mes {{ mes }}. Cada tipo calcula sus cupos disponibles con su propia regla.</div></div>
+  {# Solo el instructor ve el botón (y la ruta además está protegida en el servidor) #}
+  {% if usuario.rol == 'instructor' %}<a class="boton" href="{{ url_for('clases.nueva') }}">➕ Nueva clase</a>{% endif %}
+</div>
+
+{# Reglas de cada tipo (polimorfismo explicado) #}
+<div class="grilla grilla-4" style="margin-bottom: 1.5rem;">
+  <div class="indicador"><span class="chip yoga">Yoga</span><div class="etiqueta" style="margin-top: .5rem;">20 cupos · 60 min · $15.000<br>cupo − inscritos</div></div>
+  <div class="indicador"><span class="chip spinning">Spinning</span><div class="etiqueta" style="margin-top: .5rem;">15 bicicletas · 45 min · $18.000<br>bicicletas operativas − inscritos</div></div>
+  <div class="indicador"><span class="chip crossfit">Crossfit</span><div class="etiqueta" style="margin-top: .5rem;">12 cupos · 50 min · $22.000<br>cupo − 2 reservados − inscritos</div></div>
+  <div class="indicador"><div class="etiqueta">Total de clases</div><div class="valor">{{ clases|length }}</div></div>
+</div>
+
+<div class="tarjeta">
+  <div class="tabla-contenedor">
+    <table>
+      <thead><tr><th>Tipo</th><th>Horario</th><th>Instructor</th><th>Duración</th><th>Cupos</th><th></th></tr></thead>
+      <tbody>
+        {% for c in clases %}
+          <tr>
+            <td>{{ chip_tipo(c) }}</td>
+            <td>{{ c.horario|capitalize }}</td>
+            <td>{{ instructores.get(c.instructor_rut, 'Sin asignar') }}</td>
+            <td>{{ c.duracion_min }} min</td>
+            <td>{{ barra_cupos(c) }}{% if c.tipo == 'Spinning' %}<span class="suave" style="font-size: .8rem;">{{ c.bicicletas_operativas }} bicis operativas</span>{% endif %}</td>
+            <td class="derecha">
+              {% if usuario.rol == 'instructor' and c.instructor_rut == usuario.rut %}
+                <a class="boton secundario chico" href="{{ url_for('clases.editar', clase_id=c.id) }}">Editar</a>
+                <form method="post" action="{{ url_for('clases.eliminar', clase_id=c.id) }}" class="en-linea" data-confirmar="¿Eliminar la clase {{ c }}?">
+                  {{ csrf() }}<button class="boton peligro chico" type="submit">Eliminar</button>
+                </form>
+              {% endif %}
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="6" class="suave">No hay clases registradas.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

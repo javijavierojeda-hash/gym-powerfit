@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf with context %}
+{% block titulo %}Registrar socio{% endblock %}
+{% block contenido %}
+<div class="encabezado"><div><h1>Registrar socio</h1><div class="suave">El RUT se valida con el algoritmo módulo 11 antes de crear la ficha.</div></div></div>
+<div class="tarjeta" style="max-width: 560px;">
+  <form method="post">
+    {{ csrf() }}
+    <div class="campo">
+      <label for="rut">RUT</label>
+      <input id="rut" name="rut" value="{{ datos.rut }}" placeholder="12.345.678-5" maxlength="12" required autofocus>
+    </div>
+    <div class="campo">
+      <label for="nombre">Nombre completo</label>
+      <input id="nombre" name="nombre" value="{{ datos.nombre }}" placeholder="Ana Pérez" maxlength="80" required>
+    </div>
+    <div class="fila-form">
+      <button class="boton" type="submit">Crear ficha</button>
+      <a class="boton secundario" href="{{ url_for('socios.lista') }}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

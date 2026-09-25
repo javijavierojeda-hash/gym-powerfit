@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block titulo %}Error {{ codigo }}{% endblock %}
+{# La página de error funciona con o sin sesión: se usa el bloque que corresponda #}
+{% macro cuerpo() %}
+  <div class="tarjeta" style="max-width: 520px; margin: 3rem auto; text-align: center;">
+    <div style="font-size: 3rem; font-weight: 900; color: var(--acento);">{{ codigo }}</div>
+    <h2>{{ mensaje }}</h2>
+    {% if detalle %}<p class="suave">{{ detalle }}</p>{% endif %}
+    <a class="boton" href="{{ url_for('panel.inicio') }}">Volver al inicio</a>
+  </div>
+{% endmacro %}
+{% block contenido %}{{ cuerpo() }}{% endblock %}
+{% block pagina %}<div class="login-pagina">{{ cuerpo() }}</div>{% endblock %}

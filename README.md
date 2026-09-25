@@ -80,6 +80,7 @@ gym-powerfit/
 
 ## Documentación
 
+- 📗 **[Manual de Usuario (PDF)](docs/Manual_de_Usuario_PowerFit.pdf)** · [versión Word](docs/Manual_de_Usuario_PowerFit.docx): cómo usar el sistema paso a paso, con capturas.
 - 🧱 [Arquitectura y base de datos](docs/ARQUITECTURA.md): capas, cómo se vinculan y el modelo de tablas.
 - 🔐 [Seguridad](docs/SEGURIDAD.md): cada control y dónde está en el código.
 - 🚀 [Despliegue](docs/DESPLIEGUE.md): servidor local y publicación en PythonAnywhere.
@@ -110,3 +111,4 @@ gym-powerfit/
 - **Aplicación web Flask:** login por rol, socios, inscripciones con total en vivo, cobros, control de ingreso, clases, asistencia y suplementos. CSRF, cabeceras de seguridad, bloqueo por fuerza bruta y 403 por rol.
 - **Pruebas:** 70 pruebas con pytest (modelo, DAO y web).
 - **Documentación:** código comentado línea por línea y documentos en `docs/`.
+- **Manual de Usuario** en Word y PDF (17 páginas con capturas) y estado "Pendiente de pago" para socios que aún no pagan su primera mensualidad.

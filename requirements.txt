@@ -1,0 +1,3 @@
+# Dependencias del proyecto PowerFit (versiones fijadas para que todos usen las mismas)
+Flask==3.1.3      # Framework web: rutas, plantillas y sesiones
+pytest==9.1.1     # Framework de pruebas automáticas

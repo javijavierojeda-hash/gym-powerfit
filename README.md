@@ -22,6 +22,16 @@ Prototipo funcional para la asignatura **Programación Orientada a Objeto Seguro
 
 ## Cómo ejecutarlo (local)
 
+### Opción rápida en Windows (doble clic, sin usar comandos)
+
+1. Descarga el proyecto en ZIP: **[gym-powerfit.zip](https://github.com/javijavierojeda-hash/gym-powerfit/archive/refs/heads/main.zip)** y descomprímelo.
+2. Abre la carpeta y haz **doble clic en `iniciar_windows.bat`**.
+   - Si no tienes Python, lo instala solo (con winget). Después cierra la ventana y vuelve a hacer doble clic.
+   - La primera vez instala las dependencias (tarda aproximadamente 1 minuto).
+3. Se abre el navegador en **http://localhost:5000**.
+
+### Opción con comandos (Windows, Mac o Linux)
+
 ```bash
 # 1. Clonar e ingresar
 git clone https://github.com/javijavierojeda-hash/gym-powerfit.git

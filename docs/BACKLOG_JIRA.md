@@ -8,6 +8,9 @@ tareas técnicas, consideraciones de seguridad, puntos, responsable y sprint.
 **Asignatura:** Programación Orientada a Objeto Seguro (TI3V21 · 114-2B-F1)
 **Referencia de arquitectura:** repo del profesor `michaelarjelm/Taller-Mecanico` (model / dao / conectar.py / main.py)
 
+> ✅ **Estado (25-09-2026):** la primera versión del prototipo cubre todas las historias de código (modelo, DAOs, web, pruebas y seguridad; ver `README.md`).
+> **Pendientes:** publicar en PythonAnywhere (pasos en `docs/DESPLIEGUE.md`), actualizar el `.drawio` con los cambios de `docs/ARQUITECTURA.md` §4 y redactar el informe final.
+
 ---
 
 ## 0. Acuerdos del equipo
@@ -42,7 +45,7 @@ Tipos de commit (mismo estilo del profesor): `Feat`, `Fix`, `Refactor`, `Docs`, 
 |---|---|---|---|---|
 | **Yoga** | 20 | 60 min | `cupo_maximo − inscritos` | $15.000 |
 | **Spinning** | 15 bicicletas | 45 min | `bicicletas_operativas − inscritos` (una bici en mantención reduce el cupo) | $18.000 |
-| **Crossfit** | 12 | 50 min | `cupo_maximo − 2 (reservados a socios nuevos) − inscritos` | $22.000 |
+| **Crossfit** | 12 | 50 min | `cupo_maximo − 2 (reservados para clases de prueba) − inscritos` | $22.000 |
 
 - El total de la inscripción mensual = suma del precio de cada clase reservada.
 - Pagar la mensualidad extiende la membresía hasta el último día del mes pagado.

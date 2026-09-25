@@ -22,6 +22,9 @@
 {% macro chip_membresia(socio) -%}
   {% if socio.membresia.esta_vigente() %}
     <span class="chip ok">Vigente · {{ socio.membresia.dias_restantes() }} días</span>
+  {% elif socio.membresia.fecha_vencimiento < socio.membresia.fecha_inicio %}
+    {# Socio recién registrado que aún no paga su primera mensualidad #}
+    <span class="chip alerta">Pendiente de pago</span>
   {% else %}
     <span class="chip error">Vencida</span>
   {% endif %}

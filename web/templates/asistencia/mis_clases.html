@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from "_macros.html" import chip_tipo, barra_cupos with context %}
+{% block titulo %}Asistencia{% endblock %}
+{% block contenido %}
+<div class="encabezado"><div><h1>Asistencia</h1><div class="suave">Elige una de tus clases para marcar a los socios presentes hoy.</div></div></div>
+<div class="opciones-clase">
+  {% for c in clases %}
+    <a class="tarjeta" href="{{ url_for('asistencia.clase', clase_id=c.id) }}" style="color: inherit; margin: 0;">
+      <div style="display: flex; justify-content: space-between;">{{ chip_tipo(c) }}<span class="suave">{{ c.duracion_min }} min</span></div>
+      <h2 style="margin: .6rem 0;">{{ c.horario|capitalize }}</h2>
+      {{ barra_cupos(c) }}
+    </a>
+  {% else %}
+    <div class="tarjeta suave">No tienes clases asignadas. <a href="{{ url_for('clases.nueva') }}">Crea una</a>.</div>
+  {% endfor %}
+</div>
+{% endblock %}

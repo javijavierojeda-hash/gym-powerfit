@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "_macros.html" import chip_tipo, chip_membresia, csrf with context %}
+{% block titulo %}Asistencia {{ clase }}{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div><h1>{{ chip_tipo(clase) }} {{ clase.horario|capitalize }}</h1><div class="suave">Asistencia del {{ hoy|fecha }} · {{ presentes|length }} de {{ inscritos|length }} presentes</div></div>
+  <a class="boton secundario" href="{{ url_for('asistencia.mis_clases') }}">← Mis clases</a>
+</div>
+<div class="tarjeta">
+  <div class="tabla-contenedor">
+    <table>
+      <thead><tr><th>Socio</th><th>Membresía</th><th>Estado hoy</th><th></th></tr></thead>
+      <tbody>
+        {% for s in inscritos %}
+          {% set presente = s.rut in presentes %}
+          <tr>
+            <td>{{ s.nombre }}<br><span class="suave">{{ s.rut_formateado }}</span></td>
+            <td>{{ chip_membresia(s) }}</td>
+            <td>{% if presente %}<span class="chip ok">Presente</span>{% else %}<span class="chip neutro">Sin marcar</span>{% endif %}</td>
+            <td class="derecha">
+              {# Solo el instructor de la clase puede marcar (también se valida en el servidor) #}
+              {% if es_mia %}
+                <form method="post" class="en-linea">
+                  {{ csrf() }}
+                  <input type="hidden" name="rut" value="{{ s.rut }}">
+                  {% if presente %}
+                    <input type="hidden" name="accion" value="desmarcar">
+                    <button class="boton secundario chico" type="submit">Quitar</button>
+                  {% else %}
+                    <button class="boton chico" type="submit">Marcar presente</button>
+                  {% endif %}
+                </form>
+              {% endif %}
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="4" class="suave">No hay socios inscritos en esta clase este mes.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

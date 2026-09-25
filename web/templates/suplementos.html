@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf with context %}
+{% block titulo %}Suplementos{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div><h1>Suplementos importados</h1><div class="suave">El precio en pesos se calcula con el dólar del día.</div></div>
+</div>
+
+{# Cotización del dólar y su fuente #}
+<div class="grilla grilla-4" style="margin-bottom: 1.5rem;">
+  <div class="indicador acento">
+    <div class="etiqueta">Dólar del día</div>
+    <div class="valor">{{ cotizacion.valor|clp }}</div>
+    {% if cotizacion.fuente == 'api' %}<span class="chip ok">mindicador.cl · {{ cotizacion.fecha|fecha }}</span>
+    {% elif cotizacion.fuente == 'respaldo' %}<span class="chip alerta">Valor de respaldo ({{ cotizacion.fecha|fecha }})</span>
+    {% else %}<span class="chip error">Valor por defecto (sin conexión a la API)</span>{% endif %}
+  </div>
+</div>
+
+<div class="tarjeta">
+  <h2>Catálogo y venta en mesón</h2>
+  <div class="tabla-contenedor">
+    <table>
+      <thead><tr><th>Producto</th><th>Precio USD</th><th>Precio CLP hoy</th><th>Stock</th><th>Vender</th></tr></thead>
+      <tbody>
+        {% for s in suplementos %}
+          <tr>
+            <td>{{ s.nombre }}<br><span class="suave">{{ s.codigo }}</span></td>
+            <td>US$ {{ '%.2f'|format(s.precio_usd) }}</td>
+            <td><strong>{{ s.precio_clp|clp }}</strong></td>
+            <td>{% if s.stock == 0 %}<span class="chip error">Agotado</span>{% elif s.stock < 5 %}<span class="chip alerta">{{ s.stock }}</span>{% else %}{{ s.stock }}{% endif %}</td>
+            <td>
+              <form method="post" action="{{ url_for('suplementos.vender') }}" class="fila-form">
+                {{ csrf() }}
+                <input type="hidden" name="codigo" value="{{ s.codigo }}">
+                <input type="number" name="cantidad" min="1" max="{{ s.stock }}" value="1" style="width: 80px;" {{ 'disabled' if s.stock == 0 }} aria-label="Cantidad">
+                <button class="boton chico" type="submit" {{ 'disabled' if s.stock == 0 }}>Vender</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="tarjeta">
+  <h2>Últimas ventas</h2>
+  <div class="tabla-contenedor">
+    <table>
+      <thead><tr><th>Fecha</th><th>Producto</th><th>Cantidad</th><th>Dólar usado</th><th class="derecha">Total</th></tr></thead>
+      <tbody>
+        {% for v in ventas %}
+          <tr><td>{{ v['fecha']|fecha }} {{ v['fecha'][11:16] }}</td><td>{{ v['nombre'] }}</td><td>{{ v['cantidad'] }}</td><td>{{ v['valor_dolar']|clp }}</td><td class="derecha">{{ v['total_clp']|clp }}</td></tr>
+        {% else %}
+          <tr><td colspan="5" class="suave">Aún no hay ventas.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

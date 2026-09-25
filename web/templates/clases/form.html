@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf with context %}
+{% block titulo %}{{ 'Editar clase' if clase else 'Nueva clase' }}{% endblock %}
+{% block contenido %}
+<div class="encabezado"><div><h1>{{ 'Editar ' ~ clase if clase else 'Nueva clase' }}</h1><div class="suave">Solo los instructores pueden crear o modificar clases.</div></div></div>
+<div class="tarjeta" style="max-width: 560px;">
+  <form method="post">
+    {{ csrf() }}
+    {# El tipo solo se elige al crear (cambiarlo alteraría cupos ya vendidos) #}
+    {% if not clase %}
+      <div class="campo">
+        <label for="tipo">Tipo de clase</label>
+        <select id="tipo" name="tipo" required>
+          <option value="yoga">Yoga (20 cupos · 60 min)</option>
+          <option value="spinning">Spinning (15 bicicletas · 45 min)</option>
+          <option value="crossfit">Crossfit (12 cupos · 50 min)</option>
+        </select>
+      </div>
+    {% endif %}
+    <div class="fila-form" style="margin-bottom: 1rem;">
+      <div class="campo">
+        <label for="dia">Día</label>
+        <select id="dia" name="dia">{% for d in dias %}<option value="{{ d }}" {{ 'selected' if clase and clase.dia == d }}>{{ d|capitalize }}</option>{% endfor %}</select>
+      </div>
+      <div class="campo">
+        <label for="hora">Hora de inicio</label>
+        <input id="hora" type="time" name="hora" value="{{ clase.hora.strftime('%H:%M') if clase else '09:00' }}" required>
+      </div>
+    </div>
+    {# Bicicletas: visible solo para Spinning (app.js oculta el campo en los otros tipos) #}
+    {% if not clase or clase.tipo == 'Spinning' %}
+      <div class="campo" {{ 'data-bicicletas' if not clase }}>
+        <label for="bicicletas">Bicicletas operativas (0 a 15)</label>
+        <input id="bicicletas" type="number" name="bicicletas" min="0" max="15" value="{{ clase.bicicletas_operativas if clase else 15 }}">
+      </div>
+    {% endif %}
+    <div class="fila-form">
+      <button class="boton" type="submit">Guardar</button>
+      <a class="boton secundario" href="{{ url_for('clases.lista') }}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

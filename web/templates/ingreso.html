@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% from "_macros.html" import csrf with context %}
+{% block titulo %}Control de ingreso{% endblock %}
+{% block contenido %}
+<div class="encabezado"><div><h1>Control de ingreso</h1><div class="suave">No se permite la entrada de socios con la membresía vencida.</div></div></div>
+<div class="tarjeta" style="max-width: 640px;">
+  <form method="post" class="fila-form">
+    {{ csrf() }}
+    <div class="campo"><label for="rut">RUT del socio</label><input id="rut" name="rut" placeholder="12.345.678-5" maxlength="12" required autofocus></div>
+    <button class="boton" type="submit">Verificar</button>
+  </form>
+
+  {# Resultado: verde si puede pasar, rojo si está vencida o el RUT no sirve #}
+  {% if resultado %}
+    <div class="resultado-ingreso {{ resultado.estado }}">
+      {% if resultado.estado == 'ok' %}
+        <div class="icono">✅</div>
+        <div class="titulo">Puede ingresar</div>
+        <div>{{ resultado.socio.nombre }} · {{ resultado.socio.rut_formateado }}</div>
+        <div class="suave">Membresía vigente hasta {{ resultado.socio.membresia.fecha_vencimiento|fecha }} ({{ resultado.socio.membresia.dias_restantes() }} días)</div>
+      {% elif resultado.estado == 'vencida' %}
+        <div class="icono">⛔</div>
+        <div class="titulo">Membresía vencida</div>
+        <div>{{ resultado.socio.nombre }} · {{ resultado.socio.rut_formateado }}</div>
+        <div class="suave">{{ resultado.mensaje }}</div>
+        {% if usuario.rol == 'recepcionista' %}<p><a class="boton" href="{{ url_for('socios.ficha', rut=resultado.socio.rut) }}">Ir a cobrar</a></p>{% endif %}
+      {% else %}
+        <div class="icono">⚠️</div>
+        <div class="titulo">No se puede verificar</div>
+        <div class="suave">{{ resultado.mensaje }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

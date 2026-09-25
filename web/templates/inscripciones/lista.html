@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block titulo %}Inscripciones{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div><h1>Inscripciones mensuales</h1><div class="suave">Mes {{ mes }} · {{ inscripciones|length }} inscripción(es)</div></div>
+  <a class="boton" href="{{ url_for('inscripciones.nueva') }}">➕ Nueva inscripción</a>
+</div>
+<div class="tarjeta">
+  {# Selector de mes (GET) #}
+  <form method="get" class="fila-form" style="margin-bottom: 1rem;">
+    <div class="campo" style="max-width: 220px;"><label for="mes">Mes</label><input id="mes" type="month" name="mes" value="{{ mes }}"></div>
+    <button class="boton secundario" type="submit">Ver</button>
+  </form>
+  <div class="tabla-contenedor">
+    <table>
+      <thead><tr><th>Socio</th><th>Clases reservadas</th><th>Total</th><th>Estado</th><th></th></tr></thead>
+      <tbody>
+        {% for i in inscripciones %}
+          <tr>
+            <td>{{ i.socio.nombre }}<br><span class="suave">{{ i.socio.rut_formateado }}</span></td>
+            <td>{% for d in i.detalles %}{{ d.resumen() }}{% if not loop.last %}<br>{% endif %}{% endfor %}</td>
+            <td>{{ i.calcular_total()|clp }}</td>
+            <td>{% if i.pagada %}<span class="chip ok">Pagada</span>{% else %}<span class="chip alerta">Pendiente</span>{% endif %}</td>
+            <td class="derecha"><a class="boton secundario chico" href="{{ url_for('socios.ficha', rut=i.socio.rut) }}">Ver</a></td>
+          </tr>
+        {% else %}
+          <tr><td colspan="5" class="suave">No hay inscripciones en este mes.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

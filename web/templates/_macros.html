@@ -1,0 +1,33 @@
+{# Macros: "funciones" reutilizables de las plantillas #}
+
+{# Chip de color según el tipo de clase #}
+{% macro chip_tipo(clase) -%}
+  <span class="chip {{ clase.tipo|lower }}">{{ clase.tipo }}</span>
+{%- endmacro %}
+
+{# Barra de cupos: verde (hay cupo), amarilla (quedan pocos), roja (llena) #}
+{% macro barra_cupos(clase) -%}
+  {% set disponibles = clase.cupos_disponibles() %}
+  {% set vendibles = clase.inscritos + disponibles %}
+  {% set pct = ((clase.inscritos / vendibles * 100) if vendibles else 100)|round|int %}
+  <div class="cupos">
+    <span>{{ clase.inscritos }}/{{ vendibles }}</span>
+    {% if clase.esta_llena() %}<span class="chip error">LLENA</span>
+    {% else %}<span class="suave">· {{ disponibles }} libres</span>{% endif %}
+    <div class="barra {{ 'llena' if clase.esta_llena() else ('media' if pct >= 70) }}"><i style="width: {{ pct }}%"></i></div>
+  </div>
+{%- endmacro %}
+
+{# Chip del estado de la membresía #}
+{% macro chip_membresia(socio) -%}
+  {% if socio.membresia.esta_vigente() %}
+    <span class="chip ok">Vigente · {{ socio.membresia.dias_restantes() }} días</span>
+  {% else %}
+    <span class="chip error">Vencida</span>
+  {% endif %}
+{%- endmacro %}
+
+{# Campo oculto con el token CSRF (va en TODOS los formularios POST) #}
+{% macro csrf() -%}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+{%- endmacro %}

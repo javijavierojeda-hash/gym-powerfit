@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% from "_macros.html" import chip_tipo, barra_cupos with context %}
+{% block titulo %}Panel{% endblock %}
+{% block contenido %}
+<div class="encabezado">
+  <div>
+    <h1>Hola, {{ usuario.nombre.split()[0] }} 👋</h1>
+    <div class="suave">Resumen del mes {{ mes }}</div>
+  </div>
+  {% if usuario.rol == 'recepcionista' %}
+    <a class="boton" href="{{ url_for('socios.nuevo') }}">➕ Registrar socio</a>
+  {% else %}
+    <a class="boton" href="{{ url_for('clases.nueva') }}">➕ Nueva clase</a>
+  {% endif %}
+</div>
+
+{# Indicadores principales #}
+<div class="grilla grilla-4" style="margin-bottom: 1.5rem;">
+  <div class="indicador acento"><div class="etiqueta">Socios con membresía vigente</div><div class="valor">{{ vigentes }}<span class="suave" style="font-size: 1rem;"> / {{ total_socios }}</span></div></div>
+  <div class="indicador"><div class="etiqueta">Inscripciones del mes</div><div class="valor">{{ inscripciones }}</div></div>
+  <div class="indicador"><div class="etiqueta">Pagos pendientes</div><div class="valor">{{ pendientes }}</div></div>
+  <div class="indicador"><div class="etiqueta">Recaudado en el mes</div><div class="valor">{{ ingresos|clp }}</div></div>
+</div>
+
+{# Tabla de clases con barra de cupos #}
+<div class="tarjeta">
+  <h2>{{ 'Mis clases' if usuario.rol == 'instructor' else 'Clases de la semana' }}</h2>
+  <div class="tabla-contenedor">
+    <table>
+      <thead><tr><th>Tipo</th><th>Horario</th><th>Duración</th><th>Cupos del mes</th></tr></thead>
+      <tbody>
+        {% for c in clases %}
+          <tr>
+            <td>{{ chip_tipo(c) }}</td>
+            <td>{{ c.horario|capitalize }}</td>
+            <td>{{ c.duracion_min }} min</td>
+            <td>{{ barra_cupos(c) }}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="4" class="suave">No hay clases registradas.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

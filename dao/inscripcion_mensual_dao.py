@@ -142,6 +142,12 @@ class InscripcionMensualDao(Dao):  # Define la clase InscripcionMensualDao que h
         ).fetchall()  # Lista de filas
         return [self.buscar_por_id(f["id"]) for f in filas]  # Reconstruye cada inscripción
 
+    def listar_por_socio(self, socio_rut: str) -> list[InscripcionMensual]:  # Historial de inscripciones de un socio
+        filas = self.cursor.execute(  # Obtiene los ids de sus inscripciones
+            "SELECT id FROM inscripciones_mensuales WHERE socio_rut = ? ORDER BY mes DESC", (socio_rut,)  # Mes más reciente primero
+        ).fetchall()  # Lista de filas
+        return [self.buscar_por_id(f["id"]) for f in filas]  # Reconstruye cada inscripción
+
     def listar_socios_de_clase(self, clase_id: int, mes: str) -> list:  # Socios inscritos en una clase en un mes
         ruts = self.cursor.execute(  # Obtiene los RUT de los socios con reserva en esa clase
             """SELECT i.socio_rut FROM detalles_clase_reservada d

@@ -6,6 +6,8 @@ Aquí vive el algoritmo del RUT chileno (módulo 11). Lo usan tanto Socio
 existe en un solo lugar y no se duplica.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import re  # Importa expresiones regulares para revisar el formato del texto
 
 # Patrón de un RUT ya limpio: 7 u 8 dígitos, un guion y un dígito verificador (0-9 o K)

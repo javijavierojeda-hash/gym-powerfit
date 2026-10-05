@@ -3,6 +3,8 @@ Excepción propia del dominio: se lanza al intentar reservar una clase sin cupos
 Corresponde a <<exception>> CupoLlenoException del diagrama UML.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 
 class CupoLlenoException(Exception):  # Hereda de Exception: es una excepción propia del negocio
     """

@@ -4,6 +4,8 @@ Regla de cupos: depende de las bicicletas que estén operativas.
 Si una bicicleta está en mantención, ese cupo desaparece.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from datetime import time  # Importa el tipo hora para el constructor
 from model.clase import Clase  # Importa la clase base abstracta
 

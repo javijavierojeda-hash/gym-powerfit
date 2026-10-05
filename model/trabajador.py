@@ -9,6 +9,8 @@ PBKDF2-SHA256 con "salt" aleatorio, y la comparación se hace en tiempo
 constante para evitar ataques por tiempo de respuesta (timing attacks).
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import hashlib  # Librería estándar con funciones de hash (PBKDF2)
 import hmac  # Librería estándar con compare_digest (comparación en tiempo constante)
 import secrets  # Librería estándar para generar valores aleatorios seguros
@@ -26,14 +28,10 @@ class Trabajador(ABC):  # Hereda de ABC: no se puede instanciar directamente
     """
 
     def __init__(self, rut: str, nombre: str, password_hash: str) -> None:  # Constructor común
-        if not es_rut_valido(rut):  # El RUT del trabajador también se valida
-            raise ValueError(f"RUT invalido: {rut}")  # Rechaza RUT mal formados
-        if not nombre or not nombre.strip():  # El nombre es obligatorio
-            raise ValueError("El nombre del trabajador es obligatorio")  # Rechaza nombres vacíos
         if not isinstance(password_hash, str) or not password_hash.startswith(_ALGORITMO + "$"):  # Exige un hash real
             raise ValueError("password_hash invalido: use Trabajador.generar_hash()")  # Impide guardar contraseñas en texto plano
-        self.__rut: str = limpiar_rut(rut)  # Atributo privado: RUT normalizado
-        self.__nombre: str = nombre.strip()  # Atributo privado: nombre
+        self.rut = rut  # Usa el SETTER, que valida el RUT con módulo 11
+        self.nombre = nombre  # Usa el setter, que valida que el nombre no venga vacío
         self.__password_hash: str = password_hash  # Atributo privado: hash (sin getter público, nunca se expone)
 
     # ---------- Propiedades ----------
@@ -42,6 +40,12 @@ class Trabajador(ABC):  # Hereda de ABC: no se puede instanciar directamente
     def rut(self) -> str:  # Getter del RUT
         return self.__rut  # Retorna el RUT normalizado
 
+    @rut.setter
+    def rut(self, valor: str) -> None:  # Setter con validación del RUT
+        if not es_rut_valido(valor):  # El RUT del trabajador también se valida
+            raise ValueError(f"RUT invalido: {valor}")  # Rechaza RUT mal formados
+        self.__rut = limpiar_rut(valor)  # Atributo privado: RUT normalizado
+
     @property
     def rut_formateado(self) -> str:  # RUT con puntos para mostrar
         return formatear_rut(self.__rut)  # Ej: 11.111.111-1
@@ -49,6 +53,12 @@ class Trabajador(ABC):  # Hereda de ABC: no se puede instanciar directamente
     @property
     def nombre(self) -> str:  # Getter del nombre
         return self.__nombre  # Retorna el nombre
+
+    @nombre.setter
+    def nombre(self, valor: str) -> None:  # Setter con validación del nombre
+        if not valor or not valor.strip():  # El nombre es obligatorio
+            raise ValueError("El nombre del trabajador es obligatorio")  # Rechaza nombres vacíos
+        self.__nombre = valor.strip()  # Atributo privado: nombre sin espacios sobrantes
 
     @property
     @abstractmethod

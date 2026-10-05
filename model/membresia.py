@@ -5,6 +5,8 @@ Se separa de Socio para mantener la lógica del vencimiento en un solo lugar.
 En el UML es una composición: la membresía existe solo dentro de su socio.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from datetime import date, timedelta  # Importa fecha (sin hora) y diferencia de tiempo de la librería estándar
 
 _UN_DIA = timedelta(days=1)  # Constante privada: un día (permite membresías "sin pagar" que vencen el día anterior al inicio)

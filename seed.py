@@ -5,6 +5,8 @@ prototipo. Es seguro ejecutarlo varias veces: si ya hay datos, no duplica nada.
 Uso:  python seed.py
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import calendar  # Librería estándar para calcular el último día de cada mes
 from datetime import date, time, timedelta  # Tipos de fecha, hora y diferencia de tiempo
 import conectar  # Módulo de conexión a la base de datos
@@ -23,7 +25,6 @@ from model.instructor import Instructor  # Clase Instructor
 from model.recepcionista import Recepcionista  # Clase Recepcionista
 from model.socio import Socio  # Clase Socio
 from model.inscripcion_mensual import InscripcionMensual  # Clase InscripcionMensual
-from model.detalle_clase_reservada import DetalleClaseReservada  # Clase DetalleClaseReservada
 from model.suplemento import Suplemento  # Clase Suplemento
 from model.validaciones import calcular_dv  # Para armar RUT de ejemplo válidos
 from services.dolar_service import DolarService  # Servicio del dólar del día
@@ -98,7 +99,7 @@ def cargar_datos_demo(conexion) -> bool:  # Carga todos los datos de ejemplo
     for indice, socio in enumerate(socios[:10]):  # Recorre los 10 primeros socios
         inscripcion = InscripcionMensual(socio, mes)  # Crea la inscripción del mes
         for clase in (crossfit_viernes, extras[indice % len(extras)]):  # Reserva el crossfit + una clase extra
-            inscripcion.agregar_clase(DetalleClaseReservada(clase_dao.buscar_por_id(clase.id, mes)))  # Agrega con el cupo real
+            inscripcion.agregar_clase(clase_dao.buscar_por_id(clase.id, mes))  # Agrega con el cupo real
         inscripcion_dao.guardar(inscripcion, valentina.rut)  # Guarda la inscripción completa
         if indice < 8:  # Los 8 primeros pagan su mensualidad
             total = valentina.cobrar_mensualidad(inscripcion)  # Cobra y extiende la membresía hasta fin de mes

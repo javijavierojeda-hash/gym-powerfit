@@ -3,6 +3,8 @@ Clase Instructor: hereda de Trabajador.
 Dicta las clases, marca la asistencia y es el único que puede crear clases.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from datetime import time  # Importa el tipo hora
 from model.trabajador import Trabajador  # Importa la clase base abstracta
 from model.clase import Clase  # Importa Clase para los type hints
@@ -18,6 +20,9 @@ class Instructor(Trabajador):  # Instructor ES UN Trabajador (herencia)
     """
     Trabajador a cargo de las clases y de registrar la asistencia.
     """
+
+    def __init__(self, rut: str, nombre: str, password_hash: str) -> None:  # Constructor propio del subtipo
+        super().__init__(rut, nombre, password_hash)  # Llama al constructor de la clase base Trabajador
 
     @property
     def rol(self) -> str:  # Implementa la propiedad abstracta del padre

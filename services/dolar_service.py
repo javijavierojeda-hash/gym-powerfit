@@ -10,6 +10,8 @@ Diseño seguro y tolerante a fallos:
   (tabla 'indicadores') y, si no hay ninguno, un valor por defecto.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import json  # Librería estándar para interpretar la respuesta JSON de la API
 import time  # Librería estándar para medir cuánto dura la caché
 import urllib.request  # Librería estándar para hacer peticiones HTTP (sin instalar nada extra)

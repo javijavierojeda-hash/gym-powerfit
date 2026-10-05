@@ -1,3 +1,4 @@
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 import os  # Importa os para leer variables de entorno y armar rutas de archivos
 import sqlite3  # Importa el módulo sqlite3 para interactuar con bases de datos SQLite
 

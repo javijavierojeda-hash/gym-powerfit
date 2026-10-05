@@ -2,6 +2,8 @@
 Panel principal: resumen del gimnasio según el rol del trabajador.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from datetime import date  # Para obtener el mes actual
 from flask import Blueprint, render_template  # Utilidades de Flask
 from dao.clase_dao import ClaseDao  # Para listar clases

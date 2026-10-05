@@ -1,3 +1,4 @@
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 from dao.trabajador_dao import TrabajadorDao  # Importa TrabajadorDao para la herencia
 from model.instructor import Instructor  # Importa la clase del modelo que este DAO construye
 

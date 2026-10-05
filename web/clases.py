@@ -5,6 +5,8 @@ Rutas de clases.
   recepcionista no puede crear ni modificar clases -> recibe 403).
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import sqlite3  # Para reconocer el error de llave foránea al eliminar
 from datetime import date, time  # Para el mes actual y validar la hora
 from flask import Blueprint, abort, flash, redirect, render_template, request, url_for  # Utilidades de Flask

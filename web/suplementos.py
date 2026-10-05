@@ -3,6 +3,8 @@ Rutas de suplementos: precios en CLP según el dólar del día y venta en mesón
 (solo recepcionista, requerimiento 6).
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from flask import Blueprint, flash, redirect, render_template, request, url_for  # Utilidades de Flask
 from dao.suplemento_dao import SuplementoDao  # DAO de suplementos
 from services.dolar_service import DolarService  # Servicio del dólar del día

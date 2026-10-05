@@ -3,6 +3,8 @@ Control de ingreso al gimnasio (requerimiento 5): se ingresa el RUT y el
 sistema indica si el socio puede pasar o si tiene la membresía vencida.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from flask import Blueprint, render_template, request  # Utilidades de Flask
 from dao.socio_dao import SocioDao  # Para buscar al socio
 from model.membresia_vencida_exception import MembresiaVencidaException  # Excepción de membresía vencida

@@ -5,6 +5,8 @@ Uso local:   python app.py      -> abre http://localhost:5000
 Hosting:     el servidor WSGI importa la variable 'app' de este archivo.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import os  # Para leer variables de entorno
 from web import create_app  # Fábrica de la aplicación Flask
 

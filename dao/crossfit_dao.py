@@ -1,3 +1,4 @@
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 from dao.clase_dao import ClaseDao  # Importa ClaseDao para la herencia
 
 

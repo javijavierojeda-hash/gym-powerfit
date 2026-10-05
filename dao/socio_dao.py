@@ -1,3 +1,4 @@
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 from datetime import date  # Importa date para convertir el texto ISO en fecha
 from dao.dao import Dao  # Importa la clase base Dao
 from dao.membresia_dao import MembresiaDao  # Importa el DAO de la parte de la composición

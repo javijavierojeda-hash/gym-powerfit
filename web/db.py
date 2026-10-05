@@ -5,6 +5,8 @@ Cada petición HTTP abre UNA conexión (guardada en flask.g) y la cierra al
 terminar. Así nunca se comparten conexiones entre usuarios simultáneos.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from flask import current_app, g  # current_app: la app activa; g: almacén temporal por petición
 import conectar  # Módulo de conexión del proyecto (igual que en la consola)
 

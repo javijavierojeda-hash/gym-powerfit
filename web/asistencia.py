@@ -2,6 +2,8 @@
 Rutas de asistencia: el instructor ve sus clases y marca a los socios presentes.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from datetime import date  # Para la fecha y el mes actual
 from flask import Blueprint, abort, flash, redirect, render_template, request, url_for  # Utilidades de Flask
 from dao.asistencia_dao import AsistenciaDao  # DAO de asistencias

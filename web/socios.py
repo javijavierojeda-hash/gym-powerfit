@@ -2,6 +2,8 @@
 Rutas de socios: listar, registrar y ver ficha (solo recepcionista).
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from datetime import date  # Para el mes actual
 from flask import Blueprint, abort, flash, redirect, render_template, request, url_for  # Utilidades de Flask
 from dao.inscripcion_mensual_dao import InscripcionMensualDao  # Para ver la inscripción del mes

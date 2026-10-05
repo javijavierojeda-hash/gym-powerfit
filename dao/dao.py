@@ -1,3 +1,4 @@
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 from contextlib import contextmanager  # Importa el decorador para crear bloques "with" propios
 
 

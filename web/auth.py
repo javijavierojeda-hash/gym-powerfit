@@ -2,6 +2,8 @@
 Rutas de autenticación: iniciar y cerrar sesión.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for  # Utilidades de Flask
 from model.validaciones import es_rut_valido, limpiar_rut  # Validación y normalización del RUT
 from web.seguridad import (  # Controles de seguridad

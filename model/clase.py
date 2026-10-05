@@ -6,6 +6,8 @@ a definir su propia regla de cupos con el método abstracto cupos_disponibles().
 Esto es POLIMORFISMO: el mismo mensaje da resultados distintos según el tipo.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from abc import ABC, abstractmethod  # Importa lo necesario para crear clases abstractas
 from datetime import time  # Importa el tipo hora (sin fecha)
 from model.cupo_lleno_exception import CupoLlenoException  # Importa la excepción de cupo lleno

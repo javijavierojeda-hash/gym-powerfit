@@ -4,6 +4,8 @@ cuya membresía no está vigente.
 Corresponde a <<exception>> MembresiaVencidaException del diagrama UML.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 
 class MembresiaVencidaException(Exception):  # Hereda de Exception: excepción propia del negocio
     """

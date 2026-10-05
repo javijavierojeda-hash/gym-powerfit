@@ -5,6 +5,8 @@ El orden importa por las llaves foráneas: primero las tablas "padre"
 (trabajadores, clases, socios) y después las que las referencian.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from dao.instructor_dao import InstructorDao  # Crea trabajadores + instructores
 from dao.recepcionista_dao import RecepcionistaDao  # Crea recepcionistas
 from dao.yoga_dao import YogaDao  # Crea clases + yoga

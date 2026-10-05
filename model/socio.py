@@ -1,10 +1,12 @@
 """
 Clase Socio: el cliente del gimnasio.
 
-Se registra con su RUT, que se valida ANTES de crear la ficha (requerimiento 3),
+Se registra con su RUT, que se valida en el SETTER antes de crear la ficha (requerimiento 3),
 y se compone de una Membresia (rombo relleno en el UML: la membresía nace y
 muere con el socio).
 """
+
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 
 from datetime import date, timedelta  # Importa fecha y diferencia de tiempo
 from model.membresia import Membresia  # Importa la clase Membresia (parte de la composición)
@@ -24,12 +26,8 @@ class Socio:  # Define la clase Socio
         fecha_inicio: date | None = None,  # Inicio de la membresía (opcional)
         fecha_vencimiento: date | None = None,  # Vencimiento de la membresía (opcional)
     ) -> None:
-        if not Socio.validar_rut(rut):  # Valida el RUT antes de crear cualquier cosa
-            raise ValueError(f"RUT invalido: {rut}")  # Si es inválido la ficha NO se crea
-        if not nombre or not nombre.strip():  # Valida que el nombre no venga vacío
-            raise ValueError("El nombre del socio es obligatorio")  # Rechaza nombres vacíos
-        self.__rut: str = limpiar_rut(rut)  # Guarda el RUT normalizado (12345678-5)
-        self.__nombre: str = nombre.strip()  # Guarda el nombre sin espacios sobrantes
+        self.rut = rut  # Usa el SETTER: si el RUT es inválido lanza ValueError y la ficha NO se crea
+        self.nombre = nombre  # Usa el setter del nombre (valida que no venga vacío)
         hoy = date.today()  # Obtiene la fecha actual
         inicio = fecha_inicio or hoy  # Si no se indica inicio, la membresía parte hoy
         vencimiento = fecha_vencimiento or (inicio - timedelta(days=1))  # Sin fecha: queda "sin pagar" (vencida)
@@ -44,8 +42,18 @@ class Socio:  # Define la clase Socio
         return es_rut_valido(rut)  # Delega en la función compartida de validaciones
 
     @property
-    def rut(self) -> str:  # Getter de solo lectura del RUT (el RUT no se puede cambiar)
+    def rut(self) -> str:  # Getter del RUT
         return self.__rut  # Retorna el RUT normalizado
+
+    @rut.setter
+    def rut(self, valor: str) -> None:  # SETTER con validación: el dato que la ficha exige validar
+        """
+        Valida el RUT con el algoritmo módulo 11 antes de guardarlo.
+        Igual que el setter de 'patente' del Vehiculo del profesor.
+        """
+        if not Socio.validar_rut(valor):  # Si el RUT no es válido...
+            raise ValueError(f"RUT invalido: {valor}")  # ...se rechaza y el atributo no cambia
+        self.__rut = limpiar_rut(valor)  # Guarda el RUT normalizado (12345678-5)
 
     @property
     def rut_formateado(self) -> str:  # RUT listo para mostrar en pantalla

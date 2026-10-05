@@ -5,10 +5,14 @@ Es la TRANSACCIÓN del modelo: agrupa todas las clases que el socio reservó ese
 mes (requerimiento 4) y no permite reservar una clase llena (requerimiento 5).
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import re  # Importa expresiones regulares para validar el formato del mes
-from datetime import date  # Importa el tipo fecha
+from datetime import date, time  # Importa los tipos fecha y hora
 from model.socio import Socio  # Importa Socio (asociación "genera")
 from model.detalle_clase_reservada import DetalleClaseReservada  # Importa el detalle (composición "agrupa")
+from model.clase import Clase  # Importa Clase (agregación: el detalle recibe una clase que ya existe)
+from model.cupo_lleno_exception import CupoLlenoException  # Importa la excepción de cupo lleno
 
 _PATRON_MES = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")  # Formato válido del mes: AAAA-MM (ej: 2026-10)
 
@@ -31,7 +35,7 @@ class InscripcionMensual:  # Define la clase de la inscripción mensual
         if not _PATRON_MES.match(mes or ""):  # Valida el formato del mes
             raise ValueError("El mes debe tener formato AAAA-MM")  # Rechaza meses mal escritos
         self.__id: int | None = id  # Atributo privado: id en la base de datos
-        self.__socio: Socio = socio  # Atributo privado: socio inscrito
+        self.__socio: Socio = socio  # AGREGACIÓN: recibe un socio que YA EXISTE (no lo crea; el socio vive sin la inscripción)
         self.__mes: str = mes  # Atributo privado: mes de la inscripción
         self.__fecha: date = fecha or date.today()  # Atributo privado: fecha de la inscripción (hoy por defecto)
         self.__pagada: bool = pagada  # Atributo privado: estado del pago
@@ -71,27 +75,34 @@ class InscripcionMensual:  # Define la clase de la inscripción mensual
 
     # ---------- Reglas de negocio ----------
 
-    def agregar_clase(self, detalle: DetalleClaseReservada) -> None:  # Método del UML
+    def agregar_clase(self, clase: Clase, dia: str | None = None, hora: time | None = None) -> DetalleClaseReservada:  # Método del UML
         """
-        Agrega una clase reservada a la inscripción.
-        - Si la clase ya está en la inscripción, lanza ValueError.
-        - Si la clase está llena, LANZA CupoLlenoException y no agrega nada.
+        Reserva una clase dentro de esta inscripción.
+
+        COMPOSICIÓN: el detalle (la parte) se CREA AQUÍ DENTRO de la
+        inscripción (el todo); nadie lo crea desde afuera.
+        - Si la inscripción ya está pagada o la clase ya fue reservada -> ValueError.
+        - Si la clase está llena -> LANZA CupoLlenoException y no agrega nada.
+        Retorna el detalle creado.
         """
         if self.__pagada:  # Una inscripción ya pagada no se modifica
             raise ValueError("La inscripcion ya fue pagada y no se puede modificar")  # Protege la integridad del cobro
-        if any(d.clase.id is not None and d.clase.id == detalle.clase.id for d in self.__detalles):  # Revisa duplicados por id
-            raise ValueError(f"La clase {detalle.clase} ya esta en la inscripcion")  # No se reserva dos veces lo mismo
-        if any(d.clase is detalle.clase for d in self.__detalles):  # Revisa duplicados por objeto (clases aún sin id)
-            raise ValueError(f"La clase {detalle.clase} ya esta en la inscripcion")  # No se reserva dos veces lo mismo
-        detalle.clase.registrar_inscrito()  # Suma el inscrito; si está llena lanza CupoLlenoException y se corta aquí
-        self.__detalles.append(detalle)  # Solo si hubo cupo, el detalle queda en la inscripción
+        if any(d.clase is clase or (clase.id is not None and d.clase.id == clase.id) for d in self.__detalles):  # Revisa duplicados
+            raise ValueError(f"La clase {clase} ya esta en la inscripcion")  # No se reserva dos veces lo mismo
+        if clase.esta_llena():  # REGLA DEL NEGOCIO 1: no inscribir en una clase con el cupo lleno
+            raise CupoLlenoException(clase)  # Detiene la operación con la excepción propia del dominio
+        detalle = DetalleClaseReservada(clase, dia, hora)  # COMPOSICIÓN: la inscripción crea su propia línea de detalle
+        clase.registrar_inscrito()  # Suma un inscrito a la clase (ya se verificó que hay cupo)
+        self.__detalles.append(detalle)  # Guarda el detalle en la lista privada
+        return detalle  # Retorna el detalle creado (útil para mostrarlo)
 
-    def cargar_detalle(self, detalle: DetalleClaseReservada) -> None:  # Uso interno del DAO al leer desde la BD
+    def cargar_detalle(self, clase: Clase, dia: str, hora: time) -> None:  # Uso interno del DAO al leer desde la BD
         """
-        Agrega un detalle YA guardado en la base de datos, sin volver a
-        contar el cupo (ese inscrito ya está contado).
+        Reconstruye un detalle YA guardado en la base de datos, sin volver a
+        contar el cupo (ese inscrito ya está contado). También lo crea aquí
+        dentro, respetando la composición.
         """
-        self.__detalles.append(detalle)  # Reconstruye la inscripción tal como está guardada
+        self.__detalles.append(DetalleClaseReservada(clase, dia, hora))  # Crea el detalle dentro del todo
 
     def calcular_total(self) -> int:  # Método del UML: total a pagar del mes
         return sum(detalle.subtotal for detalle in self.__detalles)  # Suma el precio de cada clase reservada

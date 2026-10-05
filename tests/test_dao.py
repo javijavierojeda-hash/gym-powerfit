@@ -16,7 +16,6 @@ from dao.suplemento_dao import SuplementoDao
 from dao.inscripcion_mensual_dao import InscripcionMensualDao
 from dao.yoga_dao import YogaDao
 from model.cupo_lleno_exception import CupoLlenoException  # Excepción de cupo lleno
-from model.detalle_clase_reservada import DetalleClaseReservada  # Modelo
 from model.inscripcion_mensual import InscripcionMensual
 from model.instructor import Instructor
 from model.recepcionista import Recepcionista
@@ -84,13 +83,13 @@ def test_guardar_inscripcion_revisa_cupo_contra_la_bd(conexion, instructor):  # 
         socio = Socio(rut(10_000_000 + n), f"Socio {n}")  # Socio nuevo
         SocioDao(conexion).insertar(socio)  # Lo guarda
         i = InscripcionMensual(socio, MES)  # Inscripción
-        i.agregar_clase(DetalleClaseReservada(ClaseDao(conexion).buscar_por_id(crossfit.id, MES)))  # Reserva con el cupo real
+        i.agregar_clase(ClaseDao(conexion).buscar_por_id(crossfit.id, MES))  # Reserva con el cupo real
         dao.guardar(i)  # Guarda
     # Objeto "desactualizado": en memoria cree que la clase tiene 0 inscritos
     socio = Socio(rut(20_000_000), "Tarde")  # Socio que llega tarde
     SocioDao(conexion).insertar(socio)  # Lo guarda
     i = InscripcionMensual(socio, MES)  # Inscripción
-    i.agregar_clase(DetalleClaseReservada(crossfit))  # En memoria "hay cupo" (dato viejo)
+    i.agregar_clase(crossfit)  # En memoria "hay cupo" (dato viejo)
     with pytest.raises(CupoLlenoException):  # Pero la BD sabe que está llena
         dao.guardar(i)  # Debe rechazarse
     assert dao.buscar(socio.rut, MES) is None  # Rollback: no quedó nada guardado
@@ -103,7 +102,7 @@ def test_una_inscripcion_por_socio_y_mes(conexion, instructor):  # UNIQUE(socio,
     SocioDao(conexion).insertar(socio)  # La guarda
     for intento in range(2):  # Dos intentos para el mismo mes
         i = InscripcionMensual(socio, MES)  # Inscripción
-        i.agregar_clase(DetalleClaseReservada(ClaseDao(conexion).buscar_por_id(yoga.id, MES)))  # Reserva
+        i.agregar_clase(ClaseDao(conexion).buscar_por_id(yoga.id, MES))  # Reserva
         if intento == 0:  # La primera funciona
             InscripcionMensualDao(conexion).guardar(i)  # Se guarda
         else:  # La segunda...
@@ -119,7 +118,7 @@ def test_pago_se_registra_una_sola_vez(conexion, instructor):  # Sin doble cobro
     socio = Socio("12.345.678-5", "Ana")  # Socia
     SocioDao(conexion).insertar(socio)  # La guarda
     i = InscripcionMensual(socio, MES)  # Inscripción
-    i.agregar_clase(DetalleClaseReservada(yoga))  # Reserva Yoga
+    i.agregar_clase(yoga)  # Reserva Yoga
     dao = InscripcionMensualDao(conexion)  # DAO
     dao.guardar(i, recepcionista.rut)  # Guarda
     total = recepcionista.cobrar_mensualidad(i)  # Cobra en el modelo

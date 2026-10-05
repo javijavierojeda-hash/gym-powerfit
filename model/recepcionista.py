@@ -6,6 +6,8 @@ IMPORTANTE: NO tiene métodos para crear ni modificar clases. La restricción
 del requerimiento 2 queda expresada en la propia estructura de la clase.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import calendar  # Librería estándar para saber cuántos días tiene un mes
 from datetime import date  # Importa el tipo fecha
 from model.trabajador import Trabajador  # Importa la clase base abstracta
@@ -18,6 +20,9 @@ class Recepcionista(Trabajador):  # Recepcionista ES UN Trabajador (herencia)
     """
     Trabajadora del mesón: socios, cobros y venta de suplementos.
     """
+
+    def __init__(self, rut: str, nombre: str, password_hash: str) -> None:  # Constructor propio del subtipo
+        super().__init__(rut, nombre, password_hash)  # Llama al constructor de la clase base Trabajador
 
     @property
     def rol(self) -> str:  # Implementa la propiedad abstracta del padre

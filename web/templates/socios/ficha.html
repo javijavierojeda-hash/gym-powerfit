@@ -12,7 +12,11 @@
   <div class="tarjeta">
     <h2>Membresía</h2>
     <p>{{ chip_membresia(socio) }}</p>
-    <p class="suave">Inicio: {{ socio.membresia.fecha_inicio|fecha }}<br>Vencimiento: {{ socio.membresia.fecha_vencimiento|fecha }}</p>
+    {% if socio.membresia.fecha_vencimiento < socio.membresia.fecha_inicio %}
+      <p class="suave">Aún no paga su primera mensualidad. Al cobrar, la membresía queda vigente hasta fin de mes.</p>
+    {% else %}
+      <p class="suave">Inicio: {{ socio.membresia.fecha_inicio|fecha }}<br>Vencimiento: {{ socio.membresia.fecha_vencimiento|fecha }}</p>
+    {% endif %}
   </div>
   <div class="tarjeta">
     <h2>Resumen</h2>

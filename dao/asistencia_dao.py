@@ -1,3 +1,4 @@
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 import sqlite3  # Importa sqlite3 para reconocer el error de registro duplicado
 from datetime import date  # Importa date para las fechas de asistencia
 from dao.dao import Dao  # Importa la clase base Dao

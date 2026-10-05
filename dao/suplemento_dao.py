@@ -1,3 +1,4 @@
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 from datetime import datetime  # Importa datetime para registrar la fecha y hora de cada venta
 from dao.dao import Dao  # Importa la clase base Dao
 from model.suplemento import Suplemento  # Importa la clase del modelo que este DAO construye

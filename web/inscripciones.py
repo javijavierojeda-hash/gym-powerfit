@@ -2,13 +2,14 @@
 Rutas de inscripciones mensuales: crear, cobrar y anular (solo recepcionista).
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 from datetime import date  # Para calcular los meses disponibles
 from flask import Blueprint, abort, flash, redirect, render_template, request, url_for  # Utilidades de Flask
 from dao.clase_dao import ClaseDao  # Para listar las clases con cupos
 from dao.inscripcion_mensual_dao import InscripcionMensualDao  # Para guardar y leer inscripciones
 from dao.socio_dao import SocioDao  # Para buscar al socio
 from model.cupo_lleno_exception import CupoLlenoException  # Excepción de cupo lleno
-from model.detalle_clase_reservada import DetalleClaseReservada  # Detalle de cada clase reservada
 from model.inscripcion_mensual import InscripcionMensual  # La transacción del negocio
 from web.db import obtener_conexion  # Conexión de la petición
 from web.seguridad import requiere_rol, trabajador_actual  # Control de acceso
@@ -57,7 +58,7 @@ def nueva():  # Vista del formulario de inscripción
             inscripcion = InscripcionMensual(socio, mes)  # Crea la inscripción en memoria
             try:  # Intenta agregar las clases y guardar
                 for clase in seleccion:  # Recorre las clases elegidas
-                    inscripcion.agregar_clase(DetalleClaseReservada(clase))  # Lanza CupoLlenoException si está llena
+                    inscripcion.agregar_clase(clase)  # Lanza CupoLlenoException si está llena
                 dao.guardar(inscripcion, trabajador_actual().rut)  # Guarda todo (revisa el cupo de nuevo en la BD)
             except CupoLlenoException as error:  # Si alguna clase no tenía cupo...
                 flash(str(error) + ". La inscripcion NO se guardo.", "error")  # ...avisa y no guarda nada

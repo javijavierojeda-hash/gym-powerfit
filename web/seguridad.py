@@ -7,6 +7,8 @@ Aquí se concentran los controles de seguridad para que las rutas queden simples
 - Bloqueo por fuerza bruta: 5 intentos fallidos bloquean el RUT por 5 minutos.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import hashlib  # Para la verificación "ficticia" que iguala tiempos de respuesta
 import hmac  # Para comparar tokens en tiempo constante
 import secrets  # Para generar tokens aleatorios seguros

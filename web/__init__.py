@@ -6,6 +6,8 @@ Permite crear una app distinta para las pruebas (con BD en memoria)
 sin tocar la base de datos real.
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 import os  # Para leer variables de entorno (configuración y secretos)
 import secrets  # Para generar una clave secreta temporal si no se configuró una
 from datetime import date, timedelta  # Para la duración de la sesión y los filtros de fecha

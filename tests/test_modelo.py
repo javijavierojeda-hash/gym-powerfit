@@ -11,8 +11,8 @@ from model.spinning import Spinning
 from model.yoga import Yoga
 from model.cupo_lleno_exception import CupoLlenoException  # Excepciones propias
 from model.membresia_vencida_exception import MembresiaVencidaException
-from model.detalle_clase_reservada import DetalleClaseReservada  # Detalle de inscripción
 from model.inscripcion_mensual import InscripcionMensual  # Inscripción mensual
+from model.detalle_clase_reservada import DetalleClaseReservada  # Detalle (creado por la inscripción)
 from model.instructor import Instructor  # Trabajadores
 from model.recepcionista import Recepcionista
 from model.trabajador import Trabajador
@@ -89,8 +89,8 @@ def test_dia_invalido():  # Solo días reales
 def test_inscripcion_agrupa_varias_clases_y_calcula_total():  # Una inscripción con varias clases
     socio = Socio("12.345.678-5", "Ana")  # Socia
     inscripcion = InscripcionMensual(socio, MES)  # Inscripción del mes
-    inscripcion.agregar_clase(DetalleClaseReservada(Yoga("lunes", time(9))))  # Yoga los lunes
-    inscripcion.agregar_clase(DetalleClaseReservada(Crossfit("miercoles", time(20))))  # Crossfit los miércoles
+    inscripcion.agregar_clase(Yoga("lunes", time(9)))  # Yoga los lunes
+    inscripcion.agregar_clase(Crossfit("miercoles", time(20)))  # Crossfit los miércoles
     assert len(inscripcion.detalles) == 2  # Dos clases bajo la misma inscripción
     assert inscripcion.calcular_total() == 15000 + 22000  # Suma de precios
     assert inscripcion.detalles[0].resumen() == "Yoga · lunes 09:00"  # Resumen del detalle
@@ -100,7 +100,7 @@ def test_cupo_lleno_lanza_excepcion_y_no_agrega():  # Requerimiento 5
     crossfit = Crossfit("viernes", time(18, 30), inscritos=10)  # Crossfit ya lleno (10 vendibles)
     inscripcion = InscripcionMensual(Socio("12.345.678-5", "Ana"), MES)  # Inscripción
     with pytest.raises(CupoLlenoException) as info:  # Debe lanzar la excepción propia
-        inscripcion.agregar_clase(DetalleClaseReservada(crossfit))  # Intento de reservar
+        inscripcion.agregar_clase(crossfit)  # Intento de reservar
     assert info.value.clase is crossfit  # La excepción guarda la clase
     assert "cupo maximo" in str(info.value)  # Mensaje del UML
     assert inscripcion.detalles == ()  # No se agregó nada
@@ -110,9 +110,9 @@ def test_cupo_lleno_lanza_excepcion_y_no_agrega():  # Requerimiento 5
 def test_no_se_reserva_dos_veces_la_misma_clase():  # Evita duplicados
     yoga = Yoga("lunes", time(9))  # Clase
     inscripcion = InscripcionMensual(Socio("12.345.678-5", "Ana"), MES)  # Inscripción
-    inscripcion.agregar_clase(DetalleClaseReservada(yoga))  # Primera reserva
+    inscripcion.agregar_clase(yoga)  # Primera reserva
     with pytest.raises(ValueError):  # La segunda debe fallar
-        inscripcion.agregar_clase(DetalleClaseReservada(yoga))  # Reserva repetida
+        inscripcion.agregar_clase(yoga)  # Reserva repetida
 
 
 def test_lista_de_detalles_protegida():  # Encapsulamiento: no se puede alterar desde afuera
@@ -204,7 +204,7 @@ def test_cobrar_mensualidad_renueva_membresia_y_evita_doble_cobro():  # Cobro de
     recepcionista = Recepcionista("22.222.222-2", "Vale", hash_())  # Recepcionista
     socio = Socio("12.345.678-5", "Ana")  # Socia pendiente de pago
     inscripcion = InscripcionMensual(socio, MES)  # Inscripción del mes
-    inscripcion.agregar_clase(DetalleClaseReservada(Yoga("lunes", time(9))))  # Reserva Yoga
+    inscripcion.agregar_clase(Yoga("lunes", time(9)))  # Reserva Yoga
     assert recepcionista.cobrar_mensualidad(inscripcion) == 15000  # Cobra el total
     assert inscripcion.pagada and socio.puede_ingresar()  # Queda pagada y puede ingresar
     with pytest.raises(ValueError):  # Segundo cobro rechazado
@@ -240,3 +240,29 @@ def test_venta_descuenta_stock_y_valida():  # Venta en mesón
     assert whey.vender(2) == 90000 and whey.stock == 1  # Vende 2 y queda 1
     with pytest.raises(ValueError):  # No hay stock suficiente
         whey.vender(5)  # Intento de vender de más
+
+
+# ---------------- Evaluación Sumativa 2: setter, super() y composición ----------------
+
+def test_setter_del_rut_valida_y_no_cambia_si_es_invalido():  # La validación vive en el SETTER
+    socio = Socio("12.345.678-5", "Ana")  # Socia válida
+    with pytest.raises(ValueError):  # Asignar un RUT inválido...
+        socio.rut = "12.345.678-9"  # ...pasa por el setter y se rechaza
+    assert socio.rut == "12345678-5"  # El RUT anterior se mantiene intacto
+    socio.rut = "15.678.432-k"  # Un RUT válido sí se acepta
+    assert socio.rut == "15678432-K"  # Y queda normalizado
+
+
+def test_subtipos_definen_constructor_que_llama_a_super():  # Cada subtipo tiene su propio __init__
+    import inspect  # Para leer el código fuente de los constructores
+    for subtipo in (Yoga, Spinning, Crossfit, Instructor, Recepcionista):  # Recorre los subtipos
+        assert "__init__" in subtipo.__dict__  # El constructor está definido en el propio subtipo
+        assert "super().__init__(" in inspect.getsource(subtipo.__init__)  # Y llama al de la clase base
+
+
+def test_composicion_la_inscripcion_crea_el_detalle():  # La parte se crea dentro del todo
+    yoga = Yoga("lunes", time(9))  # Clase que ya existe (agregación)
+    inscripcion = InscripcionMensual(Socio("12.345.678-5", "Ana"), MES)  # El todo
+    detalle = inscripcion.agregar_clase(yoga)  # Se entrega la CLASE, no un detalle
+    assert isinstance(detalle, DetalleClaseReservada)  # El detalle lo creó la inscripción
+    assert inscripcion.detalles[0] is detalle and detalle.clase is yoga  # Queda dentro del todo y apunta a la clase existente

@@ -5,6 +5,8 @@ Se compran en dólares, por eso el precio en pesos se recalcula con el valor
 del dólar del día usando actualizar_precio() (requerimiento 6).
 """
 
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
+
 
 class Suplemento:  # Define la clase Suplemento
     """

@@ -1,3 +1,4 @@
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 from datetime import date, time  # Importa fecha y hora para convertir datos de la BD
 from dao.dao import Dao  # Importa la clase base Dao
 from dao.clase_dao import ClaseDao  # Importa ClaseDao para revisar cupos contra la BD
@@ -5,7 +6,6 @@ from dao.socio_dao import SocioDao  # Importa SocioDao para reconstruir al socio
 from dao.membresia_dao import MembresiaDao  # Importa MembresiaDao para guardar la renovación al pagar
 from dao.detalle_clase_reservada_dao import DetalleClaseReservadaDao  # Importa el DAO de los detalles
 from model.inscripcion_mensual import InscripcionMensual  # Importa la clase del modelo
-from model.detalle_clase_reservada import DetalleClaseReservada  # Importa el detalle del modelo
 from model.cupo_lleno_exception import CupoLlenoException  # Importa la excepción de cupo lleno
 
 
@@ -133,7 +133,7 @@ class InscripcionMensualDao(Dao):  # Define la clase InscripcionMensualDao que h
         clase_dao = ClaseDao(self.conexion)  # DAO para leer cada clase
         for d in DetalleClaseReservadaDao(self.conexion).listar_por_inscripcion(inscripcion_id):  # Recorre los detalles guardados
             clase = clase_dao.buscar_por_id(d["clase_id"], fila["mes"])  # Lee la clase con los inscritos de ese mes
-            inscripcion.cargar_detalle(DetalleClaseReservada(clase, d["dia"], time.fromisoformat(d["hora"])))  # Agrega el detalle sin recontar cupo
+            inscripcion.cargar_detalle(clase, d["dia"], time.fromisoformat(d["hora"]))  # Agrega el detalle sin recontar cupo
         return inscripcion  # Retorna la inscripción completa
 
     def listar(self, mes: str) -> list[InscripcionMensual]:  # Lista las inscripciones de un mes

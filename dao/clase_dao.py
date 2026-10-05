@@ -1,3 +1,4 @@
+from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 from datetime import date, time  # Importa fecha y hora para convertir datos de la BD
 from dao.dao import Dao  # Importa la clase base Dao
 from model.clase import DIAS_SEMANA  # Importa el orden de los días para ordenar el horario

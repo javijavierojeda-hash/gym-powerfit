@@ -1,0 +1,373 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="PowerFit v2 (ES2)" id="azH8rOBU4JRxCiJDsH5I">
+    <mxGraphModel dx="4928" dy="1554" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2100" pageHeight="1340" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="tra" parent="1" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Trabajador" vertex="1">
+          <mxGeometry height="174.0" width="240" x="520" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="tra_a" parent="tra" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="- rut: str&#10;- nombre: str&#10;- password_hash: str&#10;+ rut: str {property, setter valida}" vertex="1">
+          <mxGeometry height="80" width="240" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="tra_l" parent="tra" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="240" y="106.0" as="geometry" />
+        </mxCell>
+        <mxCell id="tra_m" parent="tra" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ rol(): str {abstract}&#10;+ generar_hash(password: str): str {static}&#10;+ login(password: str): bool" vertex="1">
+          <mxGeometry height="60" width="240" y="114.0" as="geometry" />
+        </mxCell>
+        <mxCell id="ins" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Instructor" vertex="1">
+          <mxGeometry height="126.0" width="290" x="300" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="ins_a" parent="ins" style="text;align=left;html=1;" value="" vertex="1">
+          <mxGeometry height="12" width="290" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="ins_l" parent="ins" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="290" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="ins_m" parent="ins" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ __init__(rut, nombre, password_hash)&#10;+ crear_clase(tipo, dia, hora): Clase&#10;+ dictar_clase(c: Clase): void&#10;+ marcar_asistencia(c: Clase, s: Socio): void" vertex="1">
+          <mxGeometry height="80" width="290" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="rec" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Recepcionista" vertex="1">
+          <mxGeometry height="126.0" width="350" x="660" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="rec_a" parent="rec" style="text;align=left;html=1;" value="" vertex="1">
+          <mxGeometry height="12" width="350" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="rec_l" parent="rec" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="350" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="rec_m" parent="rec" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ __init__(rut, nombre, password_hash)&#10;+ inscribir_socio(rut: str, nombre: str): Socio&#10;+ cobrar_mensualidad(i: InscripcionMensual): int&#10;+ vender_suplemento(s: Suplemento, cant: int): int" vertex="1">
+          <mxGeometry height="80" width="350" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="cla" parent="1" style="swimlane;fontStyle=3;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Clase" vertex="1">
+          <mxGeometry height="244.0" width="270" x="1420" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cla_a" parent="cla" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="- id: int&#10;- dia: str&#10;- hora: time&#10;- duracion_min: int&#10;- cupo_maximo: int&#10;- precio_mensual: int&#10;- inscritos: int&#10;- instructor_rut: str" vertex="1">
+          <mxGeometry height="150" width="270" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="cla_l" parent="cla" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="270" y="176.0" as="geometry" />
+        </mxCell>
+        <mxCell id="cla_m" parent="cla" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ cupos_disponibles(): int {abstract}&#10;+ esta_llena(): bool&#10;+ registrar_inscrito(): void" vertex="1">
+          <mxGeometry height="60" width="270" y="184.0" as="geometry" />
+        </mxCell>
+        <mxCell id="yog" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Yoga" vertex="1">
+          <mxGeometry height="88.0" width="210" x="1180" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="yog_a" parent="yog" style="text;html=1;" value="" vertex="1">
+          <mxGeometry height="12" width="210" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="yog_l" parent="yog" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="210" y="38" as="geometry" />
+        </mxCell>
+        <mxCell id="yog_m" parent="yog" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ __init__(dia, hora, ...)&#10;+ cupos_disponibles(): int" vertex="1">
+          <mxGeometry height="42" width="210" y="46" as="geometry" />
+        </mxCell>
+        <mxCell id="spi" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Spinning" vertex="1">
+          <mxGeometry height="100.0" width="210" x="1440" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="spi_a" parent="spi" style="text;html=1;" value="- bicicletas_operativas: int" vertex="1">
+          <mxGeometry height="24" width="210" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="spi_l" parent="spi" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="210" y="50.0" as="geometry" />
+        </mxCell>
+        <mxCell id="spi_m" parent="spi" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ __init__(dia, hora, ...)&#10;+ cupos_disponibles(): int" vertex="1">
+          <mxGeometry height="42" width="210" y="58.0" as="geometry" />
+        </mxCell>
+        <mxCell id="cro" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Crossfit" vertex="1">
+          <mxGeometry height="100.0" width="210" x="1700" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="cro_a" parent="cro" style="text;html=1;" value="+ CUPOS_RESERVADOS: int = 2" vertex="1">
+          <mxGeometry height="24" width="210" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="cro_l" parent="cro" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="210" y="50.0" as="geometry" />
+        </mxCell>
+        <mxCell id="cro_m" parent="cro" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ __init__(dia, hora, ...)&#10;+ cupos_disponibles(): int" vertex="1">
+          <mxGeometry height="42" width="210" y="58.0" as="geometry" />
+        </mxCell>
+        <mxCell id="soc" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Socio" vertex="1">
+          <mxGeometry height="156.0" width="300" x="80" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="soc_a" parent="soc" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="- rut: str&#10;- nombre: str&#10;- membresia: Membresia&#10;+ rut: str {property, setter valida}" vertex="1">
+          <mxGeometry height="80" width="300" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="soc_l" parent="soc" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="300" y="106.0" as="geometry" />
+        </mxCell>
+        <mxCell id="soc_m" parent="soc" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ validar_rut(rut: str): bool&#10;+ puede_ingresar(): bool" vertex="1">
+          <mxGeometry height="42" width="300" y="114.0" as="geometry" />
+        </mxCell>
+        <mxCell id="mem" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Membresia" vertex="1">
+          <mxGeometry height="154.0" width="300" x="80" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="mem_a" parent="mem" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="- fecha_inicio: date&#10;- fecha_vencimiento: date&#10;- estado: str" vertex="1">
+          <mxGeometry height="60" width="300" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="mem_l" parent="mem" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="300" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="mem_m" parent="mem" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ esta_vigente(): bool&#10;+ dias_restantes(): int&#10;+ renovar_hasta(fecha: date): void" vertex="1">
+          <mxGeometry height="60" width="300" y="94" as="geometry" />
+        </mxCell>
+        <mxCell id="inm" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="InscripcionMensual" vertex="1">
+          <mxGeometry height="209.0" width="320" x="620" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="inm_a" parent="inm" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="- id: int&#10;- mes: str&#10;- fecha: date&#10;- pagada: bool&#10;- socio: Socio&#10;- detalles: list[DetalleClaseReservada]" vertex="1">
+          <mxGeometry height="115" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="inm_l" parent="inm" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="320" y="141.0" as="geometry" />
+        </mxCell>
+        <mxCell id="inm_m" parent="inm" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ agregar_clase(c: Clase): DetalleClaseReservada&#10;+ calcular_total(): int&#10;+ marcar_pagada(): void" vertex="1">
+          <mxGeometry height="60" width="320" y="149.0" as="geometry" />
+        </mxCell>
+        <mxCell id="det" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="DetalleClaseReservada" vertex="1">
+          <mxGeometry height="136.0" width="320" x="620" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="det_a" parent="det" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="- clase: Clase&#10;- dia: str&#10;- hora: time" vertex="1">
+          <mxGeometry height="60" width="320" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="det_l" parent="det" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="320" y="86" as="geometry" />
+        </mxCell>
+        <mxCell id="det_m" parent="det" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ subtotal: int {property}&#10;+ resumen(): str" vertex="1">
+          <mxGeometry height="42" width="320" y="94" as="geometry" />
+        </mxCell>
+        <mxCell id="sup" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="Suplemento" vertex="1">
+          <mxGeometry height="172.0" width="300" x="1180" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="sup_a" parent="sup" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="- codigo: str&#10;- nombre: str&#10;- stock: int&#10;- precio_usd: float&#10;- precio_clp: int" vertex="1">
+          <mxGeometry height="96" width="300" y="26" as="geometry" />
+        </mxCell>
+        <mxCell id="sup_l" parent="sup" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="300" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="sup_m" parent="sup" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ actualizar_precio(valor_dolar: float): void&#10;+ vender(cantidad: int): int" vertex="1">
+          <mxGeometry height="42" width="300" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="excCupo" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="&lt;&lt;exception&gt;&gt;&#10;CupoLlenoException" vertex="1">
+          <mxGeometry height="165" width="340" x="980" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="excCupo_a" parent="excCupo" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="- mensaje: str = &quot;La clase ya alcanzo su cupo maximo&quot;&#10;- clase: Clase" vertex="1">
+          <mxGeometry height="66" width="340" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="excCupo_l" parent="excCupo" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="340" y="106" as="geometry" />
+        </mxCell>
+        <mxCell id="excCupo_m" parent="excCupo" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ __init__(clase: Clase)&#10;+ __str__(): str" vertex="1">
+          <mxGeometry height="46" width="340" y="114" as="geometry" />
+        </mxCell>
+        <mxCell id="excMem" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;whiteSpace=wrap;html=1;collapsible=0;" value="&lt;&lt;exception&gt;&gt;&#10;MembresiaVencidaException" vertex="1">
+          <mxGeometry height="180" width="360" x="120" y="1060" as="geometry" />
+        </mxCell>
+        <mxCell id="excMem_a" parent="excMem" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="- mensaje: str = &quot;La membresia del socio esta vencida&quot;&#10;- socio: Socio&#10;- fecha_vencimiento: date" vertex="1">
+          <mxGeometry height="84" width="360" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="excMem_l" parent="excMem" style="line;strokeWidth=1;html=1;" vertex="1">
+          <mxGeometry height="8" width="360" y="124" as="geometry" />
+        </mxCell>
+        <mxCell id="excMem_m" parent="excMem" style="text;align=left;verticalAlign=top;spacingLeft=6;html=1;whiteSpace=wrap;" value="+ __init__(socio: Socio)&#10;+ __str__(): str" vertex="1">
+          <mxGeometry height="46" width="360" y="132" as="geometry" />
+        </mxCell>
+        <mxCell id="excBase" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fontStyle=2;align=center;verticalAlign=middle;" value="&lt;&lt;built-in&gt;&gt;&#10;Exception" vertex="1">
+          <mxGeometry height="46" width="240" x="620" y="1090" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="ins" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.17;entryY=1;entryDx=0;entryDy=0;" target="tra" value="es un(a)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="445" y="230" />
+              <mxPoint x="560" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="rec" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" target="tra" value="es un(a)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="835" y="230" />
+              <mxPoint x="700" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="yog" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.22;entryY=1;entryDx=0;entryDy=0;" target="cla" value="es un(a)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1285" y="272" />
+              <mxPoint x="1480" y="272" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="spi" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="cla" value="es un(a)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1545" y="272" />
+              <mxPoint x="1555" y="272" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="cro" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.78;entryY=1;entryDx=0;entryDy=0;" target="cla" value="es un(a)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1805" y="272" />
+              <mxPoint x="1630" y="272" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="ins" style="endArrow=none;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="cla" value="dicta">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="445" y="470" />
+              <mxPoint x="1405" y="470" />
+              <mxPoint x="1405" y="126" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6s" connectable="0" parent="e6" style="edgeLabel;html=1;resizable=0;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="10" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6t" connectable="0" parent="e6" style="edgeLabel;html=1;resizable=0;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="-30" y="-36" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="rec" style="endArrow=none;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="inm" value="registra">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="835" y="540" />
+              <mxPoint x="780" y="540" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7s" connectable="0" parent="e7" style="edgeLabel;html=1;resizable=0;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="10" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7t" connectable="0" parent="e7" style="edgeLabel;html=1;resizable=0;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="10" y="-30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="rec" style="endArrow=none;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.4;entryDx=0;entryDy=0;" target="sup" value="vende">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1100" y="333" />
+              <mxPoint x="1100" y="662" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8s" connectable="0" parent="e8" style="edgeLabel;html=1;resizable=0;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="10" y="-23" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8t" connectable="0" parent="e8" style="edgeLabel;html=1;resizable=0;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="-20" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="soc" style="endArrow=none;startArrow=diamondThin;startFill=1;startSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="mem" value="tiene">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9s" connectable="0" parent="e9" style="edgeLabel;html=1;resizable=0;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9t" connectable="0" parent="e9" style="edgeLabel;html=1;resizable=0;" value="1" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="12" y="-30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="soc" style="endArrow=diamondThin;endFill=0;endSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="inm" value="agrega (genera)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="668" />
+              <mxPoint x="500" y="677" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10s" connectable="0" parent="e10" style="edgeLabel;html=1;resizable=0;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="10" y="-28" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10t" connectable="0" parent="e10" style="edgeLabel;html=1;resizable=0;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="-30" y="-27" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="inm" style="endArrow=none;startArrow=diamondThin;startFill=1;startSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="det" value="agrupa">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11s" connectable="0" parent="e11" style="edgeLabel;html=1;resizable=0;" value="1" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint x="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11t" connectable="0" parent="e11" style="edgeLabel;html=1;resizable=0;" value="1..*" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="10" y="-30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="det" style="endArrow=none;startArrow=diamondThin;startFill=0;startSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="cla" value="agrega (reserva)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="901" />
+              <mxPoint x="960" y="820" />
+              <mxPoint x="1950" y="820" />
+              <mxPoint x="1950" y="126" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12s" connectable="0" parent="e12" style="edgeLabel;html=1;resizable=0;" value="0..*" vertex="1">
+          <mxGeometry relative="1" x="-1" as="geometry">
+            <mxPoint y="-21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12t" connectable="0" parent="e12" style="edgeLabel;html=1;resizable=0;" value="1" vertex="1">
+          <mxGeometry relative="1" x="1" as="geometry">
+            <mxPoint x="10" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="inm" style="endArrow=open;dashed=1;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.6;exitDx=0;exitDy=0;entryX=0;entryY=0.4;entryDx=0;entryDy=0;" target="excCupo" value="«lanza» si el&lt;div&gt;cupo esta lleno&lt;/div&gt;">
+          <mxGeometry relative="1" x="-0.3595" y="50" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="960" y="692" />
+              <mxPoint x="960" y="926" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="1" source="soc" style="endArrow=open;dashed=1;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" target="excMem" value="«lanza» si la&lt;div&gt;membresia esta&lt;/div&gt;&lt;div&gt;vencida&lt;/div&gt;">
+          <mxGeometry relative="1" x="0.02" y="-60" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="40" y="695" />
+              <mxPoint x="40" y="1114" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="1" source="excCupo" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.1;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="excBase" value="es un(a)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1014" y="1113" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="excMem" style="endArrow=block;endFill=0;endSize=14;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="excBase" value="es un(a)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="535" y="1150" />
+              <mxPoint x="535" y="1113" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

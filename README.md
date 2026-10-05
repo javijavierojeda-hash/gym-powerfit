@@ -9,6 +9,29 @@ Prototipo funcional para la asignatura **Programación Orientada a Objeto Seguro
 
 ---
 
+## 📝 Evaluación Sumativa N°2 — Revisión del modelo de clases
+
+**Ejecutar la demostración** (solo usa la librería estándar de Python 3.7 o superior; no requiere instalar nada, ni internet, ni base de datos):
+
+```bash
+git clone https://github.com/javijavierojeda-hash/gym-powerfit.git
+cd gym-powerfit
+python main.py
+```
+
+| Requisito de la pauta | Dónde está en el código | Qué muestra `main.py` |
+|---|---|---|
+| Clases del modelo, una por archivo | `model/` (11 clases + 2 excepciones) | — |
+| Tres subtipos con `super().__init__()` y método sobrescrito | `model/yoga.py`, `model/spinning.py`, `model/crossfit.py` → `cupos_disponibles()` | Requisito 1: los tres subtipos responden distinto al mismo método |
+| Atributo privado con `property` y validación en el setter | `model/socio.py` → `@rut.setter` (módulo 11) | Requisito 2: RUT válido, RUT inválido rechazado y cambio inválido rechazado |
+| Composición (crea la parte dentro del todo) | `Socio.__init__` crea su `Membresia`; `InscripcionMensual.agregar_clase()` crea cada `DetalleClaseReservada` | Requisito 3: la transacción con sus líneas de detalle y total |
+| Agregación (recibe un objeto que ya existe) | `InscripcionMensual(socio, ...)` y `DetalleClaseReservada(clase, ...)` | Requisito 3 |
+| Dos excepciones propias lanzadas desde su método | `CupoLlenoException` ← `InscripcionMensual.agregar_clase()`; `MembresiaVencidaException` ← `Socio.puede_ingresar()` | Requisito 4: ambas provocadas y capturadas con `try/except` |
+
+**Diagrama de clases actualizado:** [`docs/diagrama/diagrama_clases.png`](docs/diagrama/diagrama_clases.png) (editable: `docs/diagrama/DIAGRAMA_UML_POWERFIT_v2.drawio`; versión original de la ES1: `DIAGRAMA_UML_POWERFIT_v1_ES1.drawio`).
+
+![Diagrama de clases](docs/diagrama/diagrama_clases.png)
+
 ## ¿Qué hace?
 
 | # | Requerimiento del negocio | Cómo se resolvió |
@@ -112,3 +135,11 @@ gym-powerfit/
 - **Pruebas:** 70 pruebas con pytest (modelo, DAO y web).
 - **Documentación:** código comentado línea por línea y documentos en `docs/`.
 - **Manual de Usuario** en Word y PDF (17 páginas con capturas) y estado "Pendiente de pago" para socios que aún no pagan su primera mensualidad.
+
+### 5 de Octubre de 2026 — Evaluación Sumativa N°2
+- **Validación en el setter:** el RUT de `Socio` y `Trabajador` se valida en `@rut.setter` (antes estaba en el constructor), como la `patente` del `Vehiculo` del profesor.
+- **`super().__init__()` explícito** en `Yoga`, `Crossfit`, `Instructor` y `Recepcionista`.
+- **Composición real:** `InscripcionMensual.agregar_clase(clase)` crea el `DetalleClaseReservada` dentro de la inscripción, y desde ahí se lanza `CupoLlenoException`.
+- **Agregación** marcada en el diagrama: `InscripcionMensual ◇ Socio` y `DetalleClaseReservada ◇ Clase`.
+- **Diagrama v2** en `docs/diagrama/` (PNG + .drawio) y `main.py` reescrito con los 4 requisitos rotulados (clase y método de cada uno).
+- Compatibilidad con Python 3.7+ (`from __future__ import annotations`) y 3 pruebas nuevas (73 en total).

@@ -1,0 +1,137 @@
+---
+title: PowerFit - Diagrama de clases UML (v2, Evaluación Sumativa N°2)
+---
+classDiagram
+direction TB
+
+class Trabajador {
+  <<abstract>>
+  -rut: str
+  -nombre: str
+  -password_hash: str
+  +rut: str «property + setter valida»
+  +rol()* str
+  +generar_hash(password: str)$ str
+  +login(password: str) bool
+}
+class Instructor {
+  +#95;#95;init#95;#95;(rut, nombre, password_hash)
+  +crear_clase(tipo, dia, hora) Clase
+  +dictar_clase(c: Clase) void
+  +marcar_asistencia(c: Clase, s: Socio) void
+}
+class Recepcionista {
+  +#95;#95;init#95;#95;(rut, nombre, password_hash)
+  +inscribir_socio(rut: str, nombre: str) Socio
+  +cobrar_mensualidad(i: InscripcionMensual) int
+  +vender_suplemento(s: Suplemento, cant: int) int
+}
+
+class Clase {
+  <<abstract>>
+  -id: int
+  -dia: str
+  -hora: time
+  -duracion_min: int
+  -cupo_maximo: int
+  -precio_mensual: int
+  -inscritos: int
+  -instructor_rut: str
+  +cupos_disponibles()* int
+  +esta_llena() bool
+  +registrar_inscrito() void
+}
+class Yoga {
+  +#95;#95;init#95;#95;(dia, hora, ...)
+  +cupos_disponibles() int
+}
+class Spinning {
+  -bicicletas_operativas: int
+  +#95;#95;init#95;#95;(dia, hora, ..., bicicletas_operativas)
+  +cupos_disponibles() int
+}
+class Crossfit {
+  +CUPOS_RESERVADOS: int = 2
+  +#95;#95;init#95;#95;(dia, hora, ...)
+  +cupos_disponibles() int
+}
+
+class Socio {
+  -rut: str
+  -nombre: str
+  -membresia: Membresia
+  +rut: str «property + setter valida»
+  +validar_rut(rut: str)$ bool
+  +puede_ingresar() bool
+}
+class Membresia {
+  -fecha_inicio: date
+  -fecha_vencimiento: date
+  +estado: str «property»
+  +esta_vigente() bool
+  +dias_restantes() int
+  +renovar_hasta(fecha: date) void
+}
+class InscripcionMensual {
+  -id: int
+  -mes: str
+  -fecha: date
+  -pagada: bool
+  -socio: Socio
+  -detalles: list~DetalleClaseReservada~
+  +agregar_clase(c: Clase) DetalleClaseReservada
+  +calcular_total() int
+  +marcar_pagada() void
+}
+class DetalleClaseReservada {
+  -clase: Clase
+  -dia: str
+  -hora: time
+  +subtotal: int «property»
+  +resumen() str
+}
+class Suplemento {
+  -codigo: str
+  -nombre: str
+  -stock: int
+  -precio_usd: float
+  -precio_clp: int
+  +actualizar_precio(valor_dolar: float) void
+  +vender(cantidad: int) int
+}
+class CupoLlenoException {
+  <<exception>>
+  -mensaje: str
+  -clase: Clase
+  +#95;#95;str#95;#95;() str
+}
+class MembresiaVencidaException {
+  <<exception>>
+  -mensaje: str
+  -socio: Socio
+  -fecha_vencimiento: date
+  +#95;#95;str#95;#95;() str
+}
+class Exception {
+  <<built-in>>
+}
+
+Trabajador <|-- Instructor : es un
+Trabajador <|-- Recepcionista : es un
+Clase <|-- Yoga : es un
+Clase <|-- Spinning : es un
+Clase <|-- Crossfit : es un
+Exception <|-- CupoLlenoException : es un
+Exception <|-- MembresiaVencidaException : es un
+
+Socio "1" *-- "1" Membresia : tiene
+InscripcionMensual "1" *-- "1..*" DetalleClaseReservada : agrupa
+InscripcionMensual "0..*" o-- "1" Socio : agrega (genera)
+DetalleClaseReservada "0..*" o-- "1" Clase : agrega (reserva)
+
+Instructor "1" --> "0..*" Clase : dicta
+Recepcionista "1" --> "0..*" InscripcionMensual : registra
+Recepcionista "1" --> "0..*" Suplemento : vende
+
+InscripcionMensual ..> CupoLlenoException : «lanza» si el cupo está lleno
+Socio ..> MembresiaVencidaException : «lanza» si la membresía venció

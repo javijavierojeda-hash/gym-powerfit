@@ -34,7 +34,7 @@ python main.py
 
 ## 📐 Metodología de Desarrollo Ágil — Unidad 3
 
-Requerimientos (Reunión 1, acta, RF/RNF), diagrama de casos de uso y 77 mockups con flujo navegable: **[docs/agil](docs/agil/)** · [Prototipo navegable](https://javijavierojeda-hash.github.io/gym-powerfit/agil/prototipo/) · [Informe PDF](docs/agil/Informe_U3_PowerFit.pdf)
+Requerimientos (Reunión 1, acta, RF/RNF), diagrama de casos de uso y 77 mockups con flujo navegable: **[docs/agil](docs/agil/)** · [Prototipo navegable](https://raw.githack.com/javijavierojeda-hash/gym-powerfit/main/docs/agil/prototipo/index.html) · [Informe PDF](docs/agil/Informe_U3_PowerFit.pdf)
 
 ## ¿Qué hace?
 

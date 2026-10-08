@@ -8,7 +8,7 @@ Levantamiento de requerimientos, casos de uso y mockups del sistema PowerFit.
 | Diagrama de casos de uso (UML) | [`casos_de_uso.png`](casos_de_uso.png) · editable [`casos_de_uso.svg`](casos_de_uso.svg) |
 | Mockups (77 pantallas PNG) | [`mockups/`](mockups/) |
 | Mapa del flujo (hotspots con coordenadas, para Marvel App) | [`mockups/mapa_flujo.csv`](mockups/mapa_flujo.csv) |
-| Prototipo navegable (flujo de trabajo) | https://javijavierojeda-hash.github.io/gym-powerfit/agil/prototipo/ |
+| Prototipo navegable (flujo de trabajo) | https://raw.githack.com/javijavierojeda-hash/gym-powerfit/main/docs/agil/prototipo/index.html (también en GitHub Pages: https://javijavierojeda-hash.github.io/gym-powerfit/agil/prototipo/) |
 | Tablero Jira | Proyecto SCRUM · épica SCRUM-25 (tareas SCRUM-26 a SCRUM-37) |
 
 ## Contenido del informe

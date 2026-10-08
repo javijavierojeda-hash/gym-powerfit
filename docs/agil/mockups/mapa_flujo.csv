@@ -1,0 +1,852 @@
+﻿Pantalla;Nombre;Caso de uso;Elemento (hotspot);x;y;ancho;alto;Destino;Nombre destino;Navegación común
+M01;Inicio de sesión — formulario vacío;CU-01;Campo «RUT»;740;328;360;44;M03;Inicio de sesión — formulario con datos (recepcionista);no
+M01;Inicio de sesión — formulario vacío;CU-01;Campo «Contraseña»;740;409;360;44;M05;Inicio de sesión — datos con contraseña incorrecta;no
+M01;Inicio de sesión — formulario vacío;CU-01;Enlace «¿Olvidaste tu contraseña?»;930;464;170;16;M10;Recuperar contraseña — formulario vacío;no
+M01;Inicio de sesión — formulario vacío;CU-01;Botón «Ingresar»;740;498;360;42;M02;Inicio de sesión — campos obligatorios sin completar;no
+M02;Inicio de sesión — campos obligatorios sin completar;CU-01;Campo «RUT»;740;307;360;44;M04;Inicio de sesión — formulario con datos (instructora);no
+M02;Inicio de sesión — campos obligatorios sin completar;CU-01;Campo «Contraseña»;740;409;360;44;M03;Inicio de sesión — formulario con datos (recepcionista);no
+M02;Inicio de sesión — campos obligatorios sin completar;CU-01;Enlace «¿Olvidaste tu contraseña?»;930;485;170;16;M10;Recuperar contraseña — formulario vacío;no
+M03;Inicio de sesión — formulario con datos (recepcionista);CU-01;Campo «RUT»;740;328;360;44;M01;Inicio de sesión — formulario vacío;no
+M03;Inicio de sesión — formulario con datos (recepcionista);CU-01;Enlace «¿Olvidaste tu contraseña?»;930;464;170;16;M10;Recuperar contraseña — formulario vacío;no
+M03;Inicio de sesión — formulario con datos (recepcionista);CU-01;Botón «Ingresar»;740;498;360;42;M08;Inicio de sesión correcto — panel de la recepcionista;no
+M04;Inicio de sesión — formulario con datos (instructora);CU-01;Campo «RUT»;740;328;360;44;M01;Inicio de sesión — formulario vacío;no
+M04;Inicio de sesión — formulario con datos (instructora);CU-01;Enlace «¿Olvidaste tu contraseña?»;930;464;170;16;M10;Recuperar contraseña — formulario vacío;no
+M04;Inicio de sesión — formulario con datos (instructora);CU-01;Botón «Ingresar»;740;498;360;42;M62;Inicio de sesión correcto — panel de la instructora;no
+M05;Inicio de sesión — datos con contraseña incorrecta;CU-01;Campo «RUT»;740;328;360;44;M01;Inicio de sesión — formulario vacío;no
+M05;Inicio de sesión — datos con contraseña incorrecta;CU-01;Enlace «¿Olvidaste tu contraseña?»;930;464;170;16;M10;Recuperar contraseña — formulario vacío;no
+M05;Inicio de sesión — datos con contraseña incorrecta;CU-01;Botón «Ingresar»;740;498;360;42;M06;Inicio de sesión incorrecto;no
+M06;Inicio de sesión incorrecto;CU-01;Campo «RUT»;740;364;360;44;M03;Inicio de sesión — formulario con datos (recepcionista);no
+M06;Inicio de sesión incorrecto;CU-01;Campo «Contraseña»;740;445;360;44;M03;Inicio de sesión — formulario con datos (recepcionista);no
+M06;Inicio de sesión incorrecto;CU-01;Enlace «¿Olvidaste tu contraseña?»;930;521;170;16;M10;Recuperar contraseña — formulario vacío;no
+M06;Inicio de sesión incorrecto;CU-01;Botón «Ingresar»;740;555;360;42;M07;Cuenta bloqueada por 5 intentos fallidos;no
+M07;Cuenta bloqueada por 5 intentos fallidos;CU-03;Campo «RUT»;740;383;360;44;M01;Inicio de sesión — formulario vacío;no
+M07;Cuenta bloqueada por 5 intentos fallidos;CU-03;Enlace «¿Olvidaste tu contraseña?»;930;519;170;16;M10;Recuperar contraseña — formulario vacío;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Botón cerrar ×;1218;99;19;34;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Botón «Nuevo socio»;285;249;143;42;M25;Registrar socio — formulario vacío;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Botón «Nueva inscripción»;438;249;181;42;M30;Inscripción mensual — formulario vacío;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Botón «Control de ingreso»;285;301;184;42;M45;Control de ingreso — vacío;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Botón «Vender suplemento»;479;301;191;42;M52;Suplementos — listado con dólar del día;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Ícono Editar clase;1161;296;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Ícono Editar clase;1161;355;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Ícono Editar clase;1161;414;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Botón «Cobrar»;1096;600;66;32;M38;Cobro de mensualidad — sin selección;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Botón «Cobrar»;1096;655;66;32;M38;Cobro de mensualidad — sin selección;no
+M08;Inicio de sesión correcto — panel de la recepcionista;CU-01;Botón «Cobrar»;1096;710;66;32;M38;Cobro de mensualidad — sin selección;no
+M09;Sesión cerrada correctamente;CU-04;Campo «RUT»;740;375;360;44;M03;Inicio de sesión — formulario con datos (recepcionista);no
+M09;Sesión cerrada correctamente;CU-04;Campo «Contraseña»;740;456;360;44;M05;Inicio de sesión — datos con contraseña incorrecta;no
+M09;Sesión cerrada correctamente;CU-04;Enlace «¿Olvidaste tu contraseña?»;930;511;170;16;M10;Recuperar contraseña — formulario vacío;no
+M09;Sesión cerrada correctamente;CU-04;Botón «Ingresar»;740;545;360;42;M02;Inicio de sesión — campos obligatorios sin completar;no
+M10;Recuperar contraseña — formulario vacío;CU-02;Campo «RUT»;740;379;360;44;M11;Recuperar contraseña — formulario con datos;no
+M10;Recuperar contraseña — formulario vacío;CU-02;Campo «Correo registrado»;740;460;360;44;M12;Recuperar contraseña — datos que no coinciden;no
+M10;Recuperar contraseña — formulario vacío;CU-02;Botón «Enviar enlace de recuperación»;740;519;360;42;M11;Recuperar contraseña — formulario con datos;no
+M10;Recuperar contraseña — formulario vacío;CU-02;Enlace «← Volver a iniciar sesión»;841;579;159;16;M01;Inicio de sesión — formulario vacío;no
+M11;Recuperar contraseña — formulario con datos;CU-02;Campo «RUT»;740;379;360;44;M10;Recuperar contraseña — formulario vacío;no
+M11;Recuperar contraseña — formulario con datos;CU-02;Botón «Enviar enlace de recuperación»;740;519;360;42;M13;Recuperar contraseña — enlace enviado;no
+M11;Recuperar contraseña — formulario con datos;CU-02;Enlace «← Volver a iniciar sesión»;841;579;159;16;M01;Inicio de sesión — formulario vacío;no
+M12;Recuperar contraseña — datos que no coinciden;CU-02;Campo «RUT»;740;379;360;44;M10;Recuperar contraseña — formulario vacío;no
+M12;Recuperar contraseña — datos que no coinciden;CU-02;Botón «Enviar enlace de recuperación»;740;519;360;42;M14;Recuperar contraseña — error;no
+M12;Recuperar contraseña — datos que no coinciden;CU-02;Enlace «← Volver a iniciar sesión»;841;579;159;16;M01;Inicio de sesión — formulario vacío;no
+M13;Recuperar contraseña — enlace enviado;CU-02;Botón «Volver a iniciar sesión»;740;513;360;42;M01;Inicio de sesión — formulario vacío;no
+M14;Recuperar contraseña — error;CU-02;Campo «RUT»;740;423;360;44;M11;Recuperar contraseña — formulario con datos;no
+M14;Recuperar contraseña — error;CU-02;Campo «Correo registrado»;740;504;360;44;M11;Recuperar contraseña — formulario con datos;no
+M14;Recuperar contraseña — error;CU-02;Botón «Enviar enlace de recuperación»;740;584;360;42;M11;Recuperar contraseña — formulario con datos;no
+M14;Recuperar contraseña — error;CU-02;Enlace «← Volver a iniciar sesión»;841;644;159;16;M01;Inicio de sesión — formulario vacío;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M15;Panel de la recepcionista (Inicio) con sidebar;General;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Botón «Nuevo socio»;285;249;143;42;M25;Registrar socio — formulario vacío;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Botón «Nueva inscripción»;438;249;181;42;M30;Inscripción mensual — formulario vacío;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Botón «Control de ingreso»;285;301;184;42;M45;Control de ingreso — vacío;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Botón «Vender suplemento»;479;301;191;42;M52;Suplementos — listado con dólar del día;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Ícono Editar clase;1161;296;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Ícono Editar clase;1161;355;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Ícono Editar clase;1161;414;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Botón «Cobrar»;1096;600;66;32;M38;Cobro de mensualidad — sin selección;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Botón «Cobrar»;1096;655;66;32;M38;Cobro de mensualidad — sin selección;no
+M15;Panel de la recepcionista (Inicio) con sidebar;General;Botón «Cobrar»;1096;710;66;32;M38;Cobro de mensualidad — sin selección;no
+M16;Sidebar contraído (solo íconos);General;Ícono del menú lateral;14;82;44;44;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M16;Sidebar contraído (solo íconos);General;Ícono del menú lateral;14;129;44;44;M20;Listado de socios;sí
+M16;Sidebar contraído (solo íconos);General;Ícono del menú lateral;14;176;44;44;M30;Inscripción mensual — formulario vacío;sí
+M16;Sidebar contraído (solo íconos);General;Ícono del menú lateral;14;223;44;44;M38;Cobro de mensualidad — sin selección;sí
+M16;Sidebar contraído (solo íconos);General;Ícono del menú lateral;14;270;44;44;M45;Control de ingreso — vacío;sí
+M16;Sidebar contraído (solo íconos);General;Ícono del menú lateral;14;317;44;44;M52;Suplementos — listado con dólar del día;sí
+M16;Sidebar contraído (solo íconos);General;Botón menú ☰;100;16;36;36;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M16;Sidebar contraído (solo íconos);General;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M16;Sidebar contraído (solo íconos);General;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M16;Sidebar contraído (solo íconos);General;Botón «Nuevo socio»;121;249;143;42;M25;Registrar socio — formulario vacío;no
+M16;Sidebar contraído (solo íconos);General;Botón «Nueva inscripción»;274;249;181;42;M30;Inscripción mensual — formulario vacío;no
+M16;Sidebar contraído (solo íconos);General;Botón «Control de ingreso»;121;301;184;42;M45;Control de ingreso — vacío;no
+M16;Sidebar contraído (solo íconos);General;Botón «Vender suplemento»;315;301;191;42;M52;Suplementos — listado con dólar del día;no
+M16;Sidebar contraído (solo íconos);General;Ícono Editar clase;1147;296;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M16;Sidebar contraído (solo íconos);General;Ícono Editar clase;1147;355;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M16;Sidebar contraído (solo íconos);General;Ícono Editar clase;1147;414;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M16;Sidebar contraído (solo íconos);General;Botón «Cobrar»;1070;600;66;32;M38;Cobro de mensualidad — sin selección;no
+M16;Sidebar contraído (solo íconos);General;Botón «Cobrar»;1070;655;66;32;M38;Cobro de mensualidad — sin selección;no
+M16;Sidebar contraído (solo íconos);General;Botón «Cobrar»;1070;710;66;32;M38;Cobro de mensualidad — sin selección;no
+M17;Menú de usuario desplegado;CU-04;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M17;Menú de usuario desplegado;CU-04;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M17;Menú de usuario desplegado;CU-04;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M17;Menú de usuario desplegado;CU-04;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M17;Menú de usuario desplegado;CU-04;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M17;Menú de usuario desplegado;CU-04;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M17;Menú de usuario desplegado;CU-04;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M17;Menú de usuario desplegado;CU-04;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M17;Menú de usuario desplegado;CU-04;Menú de usuario (avatar);1073;11;179;46;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M17;Menú de usuario desplegado;CU-04;Opción «Cerrar sesión»;1009;129;236;35;M18;Confirmación de cierre de sesión;sí
+M17;Menú de usuario desplegado;CU-04;Botón «Nuevo socio»;285;249;143;42;M25;Registrar socio — formulario vacío;no
+M17;Menú de usuario desplegado;CU-04;Botón «Nueva inscripción»;438;249;181;42;M30;Inscripción mensual — formulario vacío;no
+M17;Menú de usuario desplegado;CU-04;Botón «Control de ingreso»;285;301;184;42;M45;Control de ingreso — vacío;no
+M17;Menú de usuario desplegado;CU-04;Botón «Vender suplemento»;479;301;191;42;M52;Suplementos — listado con dólar del día;no
+M17;Menú de usuario desplegado;CU-04;Ícono Editar clase;1161;296;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M17;Menú de usuario desplegado;CU-04;Ícono Editar clase;1161;355;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M17;Menú de usuario desplegado;CU-04;Ícono Editar clase;1161;414;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M17;Menú de usuario desplegado;CU-04;Botón «Cobrar»;1096;600;66;32;M38;Cobro de mensualidad — sin selección;no
+M17;Menú de usuario desplegado;CU-04;Botón «Cobrar»;1096;655;66;32;M38;Cobro de mensualidad — sin selección;no
+M17;Menú de usuario desplegado;CU-04;Botón «Cobrar»;1096;710;66;32;M38;Cobro de mensualidad — sin selección;no
+M18;Confirmación de cierre de sesión;CU-04;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M18;Confirmación de cierre de sesión;CU-04;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M18;Confirmación de cierre de sesión;CU-04;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M18;Confirmación de cierre de sesión;CU-04;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M18;Confirmación de cierre de sesión;CU-04;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M18;Confirmación de cierre de sesión;CU-04;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M18;Confirmación de cierre de sesión;CU-04;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M18;Confirmación de cierre de sesión;CU-04;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M18;Confirmación de cierre de sesión;CU-04;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M18;Confirmación de cierre de sesión;CU-04;Botón «Nuevo socio»;285;249;143;42;M25;Registrar socio — formulario vacío;no
+M18;Confirmación de cierre de sesión;CU-04;Botón «Nueva inscripción»;438;249;181;42;M30;Inscripción mensual — formulario vacío;no
+M18;Confirmación de cierre de sesión;CU-04;Botón «Control de ingreso»;285;301;184;42;M45;Control de ingreso — vacío;no
+M18;Confirmación de cierre de sesión;CU-04;Botón «Vender suplemento»;479;301;191;42;M52;Suplementos — listado con dólar del día;no
+M18;Confirmación de cierre de sesión;CU-04;Ícono Editar clase;1161;296;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M18;Confirmación de cierre de sesión;CU-04;Ícono Editar clase;1161;355;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M18;Confirmación de cierre de sesión;CU-04;Ícono Editar clase;1161;414;36;36;M19;Acceso denegado: la recepcionista no puede modificar clases;no
+M18;Confirmación de cierre de sesión;CU-04;Botón «Cobrar»;1096;600;66;32;M38;Cobro de mensualidad — sin selección;no
+M18;Confirmación de cierre de sesión;CU-04;Botón «Cobrar»;1096;655;66;32;M38;Cobro de mensualidad — sin selección;no
+M18;Confirmación de cierre de sesión;CU-04;Botón «Cobrar»;1096;710;66;32;M38;Cobro de mensualidad — sin selección;no
+M18;Confirmación de cierre de sesión;CU-04;Clic fuera del cuadro;0;0;1280;800;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M18;Confirmación de cierre de sesión;CU-04;Botón «Cancelar»;525;448;95;42;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M18;Confirmación de cierre de sesión;CU-04;Botón «Cerrar sesión»;630;448;125;42;M09;Sesión cerrada correctamente;no
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M19;Acceso denegado: la recepcionista no puede modificar clases;CU-17;Botón «Volver al inicio»;679;337;157;42;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M20;Listado de socios;CU-07;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M20;Listado de socios;CU-07;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M20;Listado de socios;CU-07;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M20;Listado de socios;CU-07;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M20;Listado de socios;CU-07;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M20;Listado de socios;CU-07;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M20;Listado de socios;CU-07;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M20;Listado de socios;CU-07;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M20;Listado de socios;CU-07;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M20;Listado de socios;CU-07;Campo «Buscar por RUT o nombre…»;283;109;330;44;M23;Listado de socios — búsqueda por nombre;no
+M20;Listado de socios;CU-07;Combobox «Estado: Todos»;625;109;220;44;M21;Listado de socios — combobox de estado desplegado;no
+M20;Listado de socios;CU-07;Botón «Nuevo socio»;1090;110;143;42;M25;Registrar socio — formulario vacío;no
+M20;Listado de socios;CU-07;Botón «Ver ficha»;1085;214;78;32;M24;Ficha del socio;no
+M20;Listado de socios;CU-07;Botón «Ver ficha»;1085;269;78;32;M29;Registrar socio — socio creado con éxito;no
+M20;Listado de socios;CU-07;Botón «Ver ficha»;1085;324;78;32;M24;Ficha del socio;no
+M20;Listado de socios;CU-07;Botón «Ver ficha»;1085;379;78;32;M24;Ficha del socio;no
+M20;Listado de socios;CU-07;Botón «Ver ficha»;1085;434;78;32;M24;Ficha del socio;no
+M20;Listado de socios;CU-07;Botón «Ver ficha»;1085;489;78;32;M24;Ficha del socio;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M21;Listado de socios — combobox de estado desplegado;CU-07;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M21;Listado de socios — combobox de estado desplegado;CU-07;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M21;Listado de socios — combobox de estado desplegado;CU-07;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M21;Listado de socios — combobox de estado desplegado;CU-07;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M21;Listado de socios — combobox de estado desplegado;CU-07;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M21;Listado de socios — combobox de estado desplegado;CU-07;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M21;Listado de socios — combobox de estado desplegado;CU-07;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M21;Listado de socios — combobox de estado desplegado;CU-07;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M21;Listado de socios — combobox de estado desplegado;CU-07;Campo «Buscar por RUT o nombre…»;283;109;330;44;M23;Listado de socios — búsqueda por nombre;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Combobox «Estado: Todos»;625;109;220;44;M20;Listado de socios;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Opción «Todos»;632;166;206;35;M20;Listado de socios;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Opción «Vigente»;632;201;206;39;M20;Listado de socios;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Opción «Vencida»;632;240;206;39;M22;Listado de socios filtrado por «Vencida»;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Opción «Pendiente de pago»;632;279;206;39;M20;Listado de socios;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Botón «Nuevo socio»;1090;110;143;42;M25;Registrar socio — formulario vacío;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Botón «Ver ficha»;1085;214;78;32;M24;Ficha del socio;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Botón «Ver ficha»;1085;269;78;32;M29;Registrar socio — socio creado con éxito;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Botón «Ver ficha»;1085;324;78;32;M24;Ficha del socio;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Botón «Ver ficha»;1085;379;78;32;M24;Ficha del socio;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Botón «Ver ficha»;1085;434;78;32;M24;Ficha del socio;no
+M21;Listado de socios — combobox de estado desplegado;CU-07;Botón «Ver ficha»;1085;489;78;32;M24;Ficha del socio;no
+M22;Listado de socios filtrado por «Vencida»;CU-07;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M22;Listado de socios filtrado por «Vencida»;CU-07;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M22;Listado de socios filtrado por «Vencida»;CU-07;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M22;Listado de socios filtrado por «Vencida»;CU-07;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M22;Listado de socios filtrado por «Vencida»;CU-07;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M22;Listado de socios filtrado por «Vencida»;CU-07;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M22;Listado de socios filtrado por «Vencida»;CU-07;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M22;Listado de socios filtrado por «Vencida»;CU-07;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M22;Listado de socios filtrado por «Vencida»;CU-07;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M22;Listado de socios filtrado por «Vencida»;CU-07;Campo «Buscar por RUT o nombre…»;283;109;330;44;M23;Listado de socios — búsqueda por nombre;no
+M22;Listado de socios filtrado por «Vencida»;CU-07;Combobox «Estado: Vencida»;625;109;220;44;M21;Listado de socios — combobox de estado desplegado;no
+M22;Listado de socios filtrado por «Vencida»;CU-07;Quitar filtro;971;123;13;17;M20;Listado de socios;no
+M22;Listado de socios filtrado por «Vencida»;CU-07;Botón «Nuevo socio»;1090;110;143;42;M25;Registrar socio — formulario vacío;no
+M22;Listado de socios filtrado por «Vencida»;CU-07;Botón «Cobrar»;1048;214;89;32;M38;Cobro de mensualidad — sin selección;no
+M22;Listado de socios filtrado por «Vencida»;CU-07;Botón «Cobrar»;1048;269;89;32;M38;Cobro de mensualidad — sin selección;no
+M23;Listado de socios — búsqueda por nombre;CU-07;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M23;Listado de socios — búsqueda por nombre;CU-07;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M23;Listado de socios — búsqueda por nombre;CU-07;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M23;Listado de socios — búsqueda por nombre;CU-07;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M23;Listado de socios — búsqueda por nombre;CU-07;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M23;Listado de socios — búsqueda por nombre;CU-07;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M23;Listado de socios — búsqueda por nombre;CU-07;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M23;Listado de socios — búsqueda por nombre;CU-07;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M23;Listado de socios — búsqueda por nombre;CU-07;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M23;Listado de socios — búsqueda por nombre;CU-07;Campo «Ana»;283;109;330;44;M20;Listado de socios;no
+M23;Listado de socios — búsqueda por nombre;CU-07;Combobox «Estado: Todos»;625;109;220;44;M21;Listado de socios — combobox de estado desplegado;no
+M23;Listado de socios — búsqueda por nombre;CU-07;Botón «Nuevo socio»;1090;110;143;42;M25;Registrar socio — formulario vacío;no
+M23;Listado de socios — búsqueda por nombre;CU-07;Botón «Ver ficha»;1050;214;78;32;M24;Ficha del socio;no
+M24;Ficha del socio;CU-07;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M24;Ficha del socio;CU-07;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M24;Ficha del socio;CU-07;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M24;Ficha del socio;CU-07;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M24;Ficha del socio;CU-07;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M24;Ficha del socio;CU-07;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M24;Ficha del socio;CU-07;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M24;Ficha del socio;CU-07;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M24;Ficha del socio;CU-07;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M24;Ficha del socio;CU-07;Botón «Volver a socios»;264;90;162;42;M20;Listado de socios;no
+M24;Ficha del socio;CU-07;Botón «Nueva inscripción»;863;90;181;42;M30;Inscripción mensual — formulario vacío;no
+M24;Ficha del socio;CU-07;Botón «Cobrar mensualidad»;1056;90;196;42;M38;Cobro de mensualidad — sin selección;no
+M25;Registrar socio — formulario vacío;CU-05;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M25;Registrar socio — formulario vacío;CU-05;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M25;Registrar socio — formulario vacío;CU-05;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M25;Registrar socio — formulario vacío;CU-05;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M25;Registrar socio — formulario vacío;CU-05;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M25;Registrar socio — formulario vacío;CU-05;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M25;Registrar socio — formulario vacío;CU-05;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M25;Registrar socio — formulario vacío;CU-05;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M25;Registrar socio — formulario vacío;CU-05;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M25;Registrar socio — formulario vacío;CU-05;Campo «RUT»;289;170;348;44;M27;Registrar socio — formulario con datos (RUT válido);no
+M25;Registrar socio — formulario vacío;CU-05;Botón «Cancelar»;766;403;95;42;M20;Listado de socios;no
+M25;Registrar socio — formulario vacío;CU-05;Botón «Guardar socio»;870;403;129;42;M26;Registrar socio — campos obligatorios;no
+M26;Registrar socio — campos obligatorios;CU-05;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M26;Registrar socio — campos obligatorios;CU-05;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M26;Registrar socio — campos obligatorios;CU-05;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M26;Registrar socio — campos obligatorios;CU-05;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M26;Registrar socio — campos obligatorios;CU-05;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M26;Registrar socio — campos obligatorios;CU-05;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M26;Registrar socio — campos obligatorios;CU-05;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M26;Registrar socio — campos obligatorios;CU-05;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M26;Registrar socio — campos obligatorios;CU-05;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M26;Registrar socio — campos obligatorios;CU-05;Campo «RUT»;289;248;348;44;M27;Registrar socio — formulario con datos (RUT válido);no
+M26;Registrar socio — campos obligatorios;CU-05;Botón «Cancelar»;766;481;95;42;M20;Listado de socios;no
+M26;Registrar socio — campos obligatorios;CU-05;Botón «Guardar socio»;870;481;129;42;M26;Registrar socio — campos obligatorios;no
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Campo «RUT»;289;170;348;44;M28;Registrar socio — error: RUT inválido;no
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Botón «Cancelar»;766;403;95;42;M20;Listado de socios;no
+M27;Registrar socio — formulario con datos (RUT válido);CU-05;Botón «Guardar socio»;870;403;129;42;M29;Registrar socio — socio creado con éxito;no
+M28;Registrar socio — error: RUT inválido;CU-06;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M28;Registrar socio — error: RUT inválido;CU-06;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M28;Registrar socio — error: RUT inválido;CU-06;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M28;Registrar socio — error: RUT inválido;CU-06;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M28;Registrar socio — error: RUT inválido;CU-06;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M28;Registrar socio — error: RUT inválido;CU-06;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M28;Registrar socio — error: RUT inválido;CU-06;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M28;Registrar socio — error: RUT inválido;CU-06;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M28;Registrar socio — error: RUT inválido;CU-06;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M28;Registrar socio — error: RUT inválido;CU-06;Campo «RUT»;289;170;348;44;M27;Registrar socio — formulario con datos (RUT válido);no
+M28;Registrar socio — error: RUT inválido;CU-06;Botón «Cancelar»;766;418;95;42;M20;Listado de socios;no
+M29;Registrar socio — socio creado con éxito;CU-05;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M29;Registrar socio — socio creado con éxito;CU-05;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M29;Registrar socio — socio creado con éxito;CU-05;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M29;Registrar socio — socio creado con éxito;CU-05;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M29;Registrar socio — socio creado con éxito;CU-05;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M29;Registrar socio — socio creado con éxito;CU-05;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M29;Registrar socio — socio creado con éxito;CU-05;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M29;Registrar socio — socio creado con éxito;CU-05;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M29;Registrar socio — socio creado con éxito;CU-05;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M29;Registrar socio — socio creado con éxito;CU-05;Botón cerrar ×;1218;99;19;50;M20;Listado de socios;no
+M29;Registrar socio — socio creado con éxito;CU-05;Botón «Volver a socios»;264;90;162;42;M20;Listado de socios;no
+M29;Registrar socio — socio creado con éxito;CU-05;Botón «Inscribir en clases»;1070;90;182;42;M30;Inscripción mensual — formulario vacío;no
+M30;Inscripción mensual — formulario vacío;CU-08;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M30;Inscripción mensual — formulario vacío;CU-08;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M30;Inscripción mensual — formulario vacío;CU-08;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M30;Inscripción mensual — formulario vacío;CU-08;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M30;Inscripción mensual — formulario vacío;CU-08;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M30;Inscripción mensual — formulario vacío;CU-08;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M30;Inscripción mensual — formulario vacío;CU-08;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M30;Inscripción mensual — formulario vacío;CU-08;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M30;Inscripción mensual — formulario vacío;CU-08;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M30;Inscripción mensual — formulario vacío;CU-08;Combobox «Socio»;285;166;444;44;M31;Inscripción mensual — combobox de socio desplegado;no
+M30;Inscripción mensual — formulario vacío;CU-08;Botón «Cancelar»;959;355;95;42;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Combobox «Socio»;285;166;444;44;M31;Inscripción mensual — combobox de socio desplegado;no
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Opción «Ana Pérez 12.345.678-5 · Vigente»;292;265;430;52;M32;Inscripción mensual — socio seleccionado;no
+M31;Inscripción mensual — combobox de socio desplegado;CU-08;Botón «Cancelar»;959;355;95;42;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M32;Inscripción mensual — socio seleccionado;CU-08;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M32;Inscripción mensual — socio seleccionado;CU-08;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M32;Inscripción mensual — socio seleccionado;CU-08;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M32;Inscripción mensual — socio seleccionado;CU-08;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M32;Inscripción mensual — socio seleccionado;CU-08;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M32;Inscripción mensual — socio seleccionado;CU-08;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M32;Inscripción mensual — socio seleccionado;CU-08;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M32;Inscripción mensual — socio seleccionado;CU-08;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M32;Inscripción mensual — socio seleccionado;CU-08;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M32;Inscripción mensual — socio seleccionado;CU-08;Combobox «Clase»;285;328;308;44;M33;Inscripción mensual — combobox de clases con cupos;no
+M32;Inscripción mensual — socio seleccionado;CU-08;Botón «Cancelar»;959;355;95;42;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Opción «Yoga Lunes 09:00 · 60 min · $15.000 8 cupos d»;292;385;456;56;M34;Inscripción mensual — una clase en el detalle;no
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Opción «Crossfit Miércoles 20:00 · 50 min · $22.000 S»;292;497;456;56;M36;Inscripción mensual — error: cupo lleno;no
+M33;Inscripción mensual — combobox de clases con cupos;CU-09;Botón «Cancelar»;959;355;95;42;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M34;Inscripción mensual — una clase en el detalle;CU-08;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M34;Inscripción mensual — una clase en el detalle;CU-08;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M34;Inscripción mensual — una clase en el detalle;CU-08;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M34;Inscripción mensual — una clase en el detalle;CU-08;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M34;Inscripción mensual — una clase en el detalle;CU-08;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M34;Inscripción mensual — una clase en el detalle;CU-08;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M34;Inscripción mensual — una clase en el detalle;CU-08;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M34;Inscripción mensual — una clase en el detalle;CU-08;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M34;Inscripción mensual — una clase en el detalle;CU-08;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M34;Inscripción mensual — una clase en el detalle;CU-08;Combobox «Clase»;285;328;287;44;M33;Inscripción mensual — combobox de clases con cupos;no
+M34;Inscripción mensual — una clase en el detalle;CU-08;Botón «Agregar»;586;328;114;42;M35;Inscripción mensual — dos clases y total calculado;no
+M34;Inscripción mensual — una clase en el detalle;CU-08;Ícono Quitar clase;1171;191;36;36;M32;Inscripción mensual — socio seleccionado;no
+M34;Inscripción mensual — una clase en el detalle;CU-08;Botón «Cancelar»;959;308;95;42;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M34;Inscripción mensual — una clase en el detalle;CU-08;Botón «Guardar inscripción»;1064;308;167;42;M37;Inscripción mensual — guardada con éxito;no
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M35;Inscripción mensual — dos clases y total calculado;CU-08;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Combobox «Clase»;285;328;308;44;M33;Inscripción mensual — combobox de clases con cupos;no
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Ícono Quitar clase;1176;191;36;36;M34;Inscripción mensual — una clase en el detalle;no
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Ícono Quitar clase;1176;250;36;36;M34;Inscripción mensual — una clase en el detalle;no
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Botón «Cancelar»;959;367;95;42;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M35;Inscripción mensual — dos clases y total calculado;CU-08;Botón «Guardar inscripción»;1064;367;167;42;M37;Inscripción mensual — guardada con éxito;no
+M36;Inscripción mensual — error: cupo lleno;CU-09;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M36;Inscripción mensual — error: cupo lleno;CU-09;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M36;Inscripción mensual — error: cupo lleno;CU-09;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M36;Inscripción mensual — error: cupo lleno;CU-09;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M36;Inscripción mensual — error: cupo lleno;CU-09;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M36;Inscripción mensual — error: cupo lleno;CU-09;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M36;Inscripción mensual — error: cupo lleno;CU-09;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M36;Inscripción mensual — error: cupo lleno;CU-09;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M36;Inscripción mensual — error: cupo lleno;CU-09;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M36;Inscripción mensual — error: cupo lleno;CU-09;Botón cerrar ×;694;158;20;20;M32;Inscripción mensual — socio seleccionado;no
+M36;Inscripción mensual — error: cupo lleno;CU-09;Combobox «Clase»;285;438;238;44;M33;Inscripción mensual — combobox de clases con cupos;no
+M36;Inscripción mensual — error: cupo lleno;CU-09;Botón «Cancelar»;959;355;95;42;M15;Panel de la recepcionista (Inicio) con sidebar;no
+M37;Inscripción mensual — guardada con éxito;CU-08;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M37;Inscripción mensual — guardada con éxito;CU-08;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M37;Inscripción mensual — guardada con éxito;CU-08;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M37;Inscripción mensual — guardada con éxito;CU-08;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M37;Inscripción mensual — guardada con éxito;CU-08;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M37;Inscripción mensual — guardada con éxito;CU-08;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M37;Inscripción mensual — guardada con éxito;CU-08;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M37;Inscripción mensual — guardada con éxito;CU-08;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M37;Inscripción mensual — guardada con éxito;CU-08;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M37;Inscripción mensual — guardada con éxito;CU-08;Botón «Nueva inscripción»;589;362;181;42;M30;Inscripción mensual — formulario vacío;no
+M37;Inscripción mensual — guardada con éxito;CU-08;Botón «Cobrar ahora»;780;362;148;42;M39;Cobro de mensualidad — inscripción seleccionada;no
+M38;Cobro de mensualidad — sin selección;CU-10;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M38;Cobro de mensualidad — sin selección;CU-10;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M38;Cobro de mensualidad — sin selección;CU-10;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M38;Cobro de mensualidad — sin selección;CU-10;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M38;Cobro de mensualidad — sin selección;CU-10;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M38;Cobro de mensualidad — sin selección;CU-10;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M38;Cobro de mensualidad — sin selección;CU-10;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M38;Cobro de mensualidad — sin selección;CU-10;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M38;Cobro de mensualidad — sin selección;CU-10;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M38;Cobro de mensualidad — sin selección;CU-10;Selector de fila (círculo);295;197;18;18;M39;Cobro de mensualidad — inscripción seleccionada;no
+M38;Cobro de mensualidad — sin selección;CU-10;Botón «Cobrar»;765;306;66;32;M44;Cobro de mensualidad — error: inscripción ya pagada;no
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Botón «Cobrar»;765;306;66;32;M44;Cobro de mensualidad — error: inscripción ya pagada;no
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Combobox «Medio de pago»;898;316;333;44;M40;Cobro de mensualidad — combobox de medio de pago;no
+M39;Cobro de mensualidad — inscripción seleccionada;CU-10;Botón «Cancelar»;956;378;95;42;M38;Cobro de mensualidad — sin selección;no
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Botón «Cobrar»;765;306;66;32;M44;Cobro de mensualidad — error: inscripción ya pagada;no
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Combobox «Medio de pago»;898;316;333;44;M39;Cobro de mensualidad — inscripción seleccionada;no
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Opción «Tarjeta de débito»;905;408;319;35;M41;Cobro de mensualidad — datos completos;no
+M40;Cobro de mensualidad — combobox de medio de pago;CU-10;Botón «Cancelar»;956;378;95;42;M38;Cobro de mensualidad — sin selección;no
+M41;Cobro de mensualidad — datos completos;CU-10;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M41;Cobro de mensualidad — datos completos;CU-10;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M41;Cobro de mensualidad — datos completos;CU-10;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M41;Cobro de mensualidad — datos completos;CU-10;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M41;Cobro de mensualidad — datos completos;CU-10;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M41;Cobro de mensualidad — datos completos;CU-10;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M41;Cobro de mensualidad — datos completos;CU-10;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M41;Cobro de mensualidad — datos completos;CU-10;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M41;Cobro de mensualidad — datos completos;CU-10;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M41;Cobro de mensualidad — datos completos;CU-10;Botón «Cobrar»;765;306;66;32;M44;Cobro de mensualidad — error: inscripción ya pagada;no
+M41;Cobro de mensualidad — datos completos;CU-10;Combobox «Medio de pago»;898;316;333;44;M40;Cobro de mensualidad — combobox de medio de pago;no
+M41;Cobro de mensualidad — datos completos;CU-10;Botón «Cancelar»;956;378;95;42;M38;Cobro de mensualidad — sin selección;no
+M41;Cobro de mensualidad — datos completos;CU-10;Botón «Confirmar cobro»;1061;378;170;42;M42;Cobro registrado y membresía renovada;no
+M42;Cobro registrado y membresía renovada;CU-11;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M42;Cobro registrado y membresía renovada;CU-11;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M42;Cobro registrado y membresía renovada;CU-11;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M42;Cobro registrado y membresía renovada;CU-11;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M42;Cobro registrado y membresía renovada;CU-11;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M42;Cobro registrado y membresía renovada;CU-11;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M42;Cobro registrado y membresía renovada;CU-11;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M42;Cobro registrado y membresía renovada;CU-11;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M42;Cobro registrado y membresía renovada;CU-11;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M42;Cobro registrado y membresía renovada;CU-11;Botón «Volver a cobros»;583;340;164;42;M38;Cobro de mensualidad — sin selección;no
+M42;Cobro registrado y membresía renovada;CU-11;Botón «Ver comprobante»;757;340;176;42;M43;Comprobante de pago;no
+M43;Comprobante de pago;CU-10;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M43;Comprobante de pago;CU-10;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M43;Comprobante de pago;CU-10;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M43;Comprobante de pago;CU-10;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M43;Comprobante de pago;CU-10;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M43;Comprobante de pago;CU-10;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M43;Comprobante de pago;CU-10;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M43;Comprobante de pago;CU-10;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M43;Comprobante de pago;CU-10;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M43;Comprobante de pago;CU-10;Clic fuera del cuadro;0;0;1280;800;M42;Cobro registrado y membresía renovada;no
+M43;Comprobante de pago;CU-10;Botón cerrar ×;834;174;22;22;M42;Cobro registrado y membresía renovada;no
+M43;Comprobante de pago;CU-10;Botón «Cerrar»;653;584;77;42;M38;Cobro de mensualidad — sin selección;no
+M43;Comprobante de pago;CU-10;Botón «Imprimir»;741;584;115;42;M38;Cobro de mensualidad — sin selección;no
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Botón cerrar ×;1217;104;20;20;M38;Cobro de mensualidad — sin selección;no
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Selector de fila (círculo);295;275;18;18;M39;Cobro de mensualidad — inscripción seleccionada;no
+M44;Cobro de mensualidad — error: inscripción ya pagada;CU-10;Botón «Cobrar»;765;384;66;32;M44;Cobro de mensualidad — error: inscripción ya pagada;no
+M45;Control de ingreso — vacío;CU-12;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M45;Control de ingreso — vacío;CU-12;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M45;Control de ingreso — vacío;CU-12;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M45;Control de ingreso — vacío;CU-12;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M45;Control de ingreso — vacío;CU-12;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M45;Control de ingreso — vacío;CU-12;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M45;Control de ingreso — vacío;CU-12;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M45;Control de ingreso — vacío;CU-12;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M45;Control de ingreso — vacío;CU-12;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M45;Control de ingreso — vacío;CU-12;Campo «RUT del socio (ej: 12.345.678-5)»;287;196;327;44;M46;Control de ingreso — RUT ingresado (socia al día);no
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Campo «12.345.678-5»;287;196;327;44;M45;Control de ingreso — vacío;no
+M46;Control de ingreso — RUT ingresado (socia al día);CU-12;Botón «Verificar ingreso»;628;196;171;44;M47;Control de ingreso — ingreso permitido;no
+M47;Control de ingreso — ingreso permitido;CU-13;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M47;Control de ingreso — ingreso permitido;CU-13;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M47;Control de ingreso — ingreso permitido;CU-13;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M47;Control de ingreso — ingreso permitido;CU-13;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M47;Control de ingreso — ingreso permitido;CU-13;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M47;Control de ingreso — ingreso permitido;CU-13;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M47;Control de ingreso — ingreso permitido;CU-13;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M47;Control de ingreso — ingreso permitido;CU-13;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M47;Control de ingreso — ingreso permitido;CU-13;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M47;Control de ingreso — ingreso permitido;CU-13;Campo «12.345.678-5»;287;196;327;44;M45;Control de ingreso — vacío;no
+M47;Control de ingreso — ingreso permitido;CU-13;Botón «Registrar siguiente»;360;382;186;42;M48;Control de ingreso — RUT ingresado (socio vencido);no
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Campo «19.283.746-4»;287;196;327;44;M45;Control de ingreso — vacío;no
+M48;Control de ingreso — RUT ingresado (socio vencido);CU-12;Botón «Verificar ingreso»;628;196;171;44;M49;Control de ingreso — rechazado por membresía vencida;no
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Campo «19.283.746-4»;287;196;327;44;M45;Control de ingreso — vacío;no
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Botón «Siguiente socio»;360;382;138;42;M50;Control de ingreso — RUT de persona no registrada;no
+M49;Control de ingreso — rechazado por membresía vencida;CU-13;Botón «Cobrar mensualidad»;508;382;196;42;M38;Cobro de mensualidad — sin selección;no
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M50;Control de ingreso — RUT de persona no registrada;CU-12;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Campo «9.876.543-3»;287;196;327;44;M45;Control de ingreso — vacío;no
+M50;Control de ingreso — RUT de persona no registrada;CU-12;Botón «Verificar ingreso»;628;196;171;44;M51;Control de ingreso — RUT no registrado;no
+M51;Control de ingreso — RUT no registrado;CU-12;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M51;Control de ingreso — RUT no registrado;CU-12;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M51;Control de ingreso — RUT no registrado;CU-12;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M51;Control de ingreso — RUT no registrado;CU-12;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M51;Control de ingreso — RUT no registrado;CU-12;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M51;Control de ingreso — RUT no registrado;CU-12;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M51;Control de ingreso — RUT no registrado;CU-12;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M51;Control de ingreso — RUT no registrado;CU-12;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M51;Control de ingreso — RUT no registrado;CU-12;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M51;Control de ingreso — RUT no registrado;CU-12;Campo «9.876.543-3»;287;196;327;44;M45;Control de ingreso — vacío;no
+M51;Control de ingreso — RUT no registrado;CU-12;Botón «Intentar de nuevo»;360;379;152;42;M45;Control de ingreso — vacío;no
+M51;Control de ingreso — RUT no registrado;CU-12;Botón «Registrar socio»;522;379;160;42;M25;Registrar socio — formulario vacío;no
+M52;Suplementos — listado con dólar del día;CU-14;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M52;Suplementos — listado con dólar del día;CU-14;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M52;Suplementos — listado con dólar del día;CU-14;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M52;Suplementos — listado con dólar del día;CU-14;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M52;Suplementos — listado con dólar del día;CU-14;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M52;Suplementos — listado con dólar del día;CU-14;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M52;Suplementos — listado con dólar del día;CU-14;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M52;Suplementos — listado con dólar del día;CU-14;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M52;Suplementos — listado con dólar del día;CU-14;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M52;Suplementos — listado con dólar del día;CU-14;Botón «Actualizar dólar»;869;109;166;42;M53;Suplementos — error: API del dólar no disponible;no
+M52;Suplementos — listado con dólar del día;CU-14;Botón «Nuevo suplemento»;1047;109;186;42;M54;Registrar suplemento — formulario vacío;no
+M52;Suplementos — listado con dólar del día;CU-14;Botón «Vender»;1095;212;91;32;M58;Vender suplemento — formulario vacío;no
+M53;Suplementos — error: API del dólar no disponible;CU-16;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M53;Suplementos — error: API del dólar no disponible;CU-16;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M53;Suplementos — error: API del dólar no disponible;CU-16;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M53;Suplementos — error: API del dólar no disponible;CU-16;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M53;Suplementos — error: API del dólar no disponible;CU-16;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M53;Suplementos — error: API del dólar no disponible;CU-16;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M53;Suplementos — error: API del dólar no disponible;CU-16;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M53;Suplementos — error: API del dólar no disponible;CU-16;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M53;Suplementos — error: API del dólar no disponible;CU-16;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M53;Suplementos — error: API del dólar no disponible;CU-16;Botón cerrar ×;1217;104;20;20;M52;Suplementos — listado con dólar del día;no
+M53;Suplementos — error: API del dólar no disponible;CU-16;Botón «Actualizar dólar»;869;187;166;42;M53;Suplementos — error: API del dólar no disponible;no
+M53;Suplementos — error: API del dólar no disponible;CU-16;Botón «Nuevo suplemento»;1047;187;186;42;M54;Registrar suplemento — formulario vacío;no
+M53;Suplementos — error: API del dólar no disponible;CU-16;Botón «Vender»;1095;290;91;32;M58;Vender suplemento — formulario vacío;no
+M54;Registrar suplemento — formulario vacío;CU-15;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M54;Registrar suplemento — formulario vacío;CU-15;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M54;Registrar suplemento — formulario vacío;CU-15;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M54;Registrar suplemento — formulario vacío;CU-15;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M54;Registrar suplemento — formulario vacío;CU-15;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M54;Registrar suplemento — formulario vacío;CU-15;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M54;Registrar suplemento — formulario vacío;CU-15;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M54;Registrar suplemento — formulario vacío;CU-15;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M54;Registrar suplemento — formulario vacío;CU-15;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M54;Registrar suplemento — formulario vacío;CU-15;Campo «Código»;285;166;251;44;M55;Registrar suplemento — datos y precio CLP calculado;no
+M54;Registrar suplemento — formulario vacío;CU-15;Campo «Costo en dólares (USD)»;285;328;516;44;M56;Registrar suplemento — error: precio inválido;no
+M54;Registrar suplemento — formulario vacío;CU-15;Botón «Cancelar»;525;411;95;42;M52;Suplementos — listado con dólar del día;no
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Campo «Costo en dólares (USD)»;285;328;516;44;M56;Registrar suplemento — error: precio inválido;no
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Botón «Cancelar»;525;411;95;42;M52;Suplementos — listado con dólar del día;no
+M55;Registrar suplemento — datos y precio CLP calculado;CU-15;Botón «Guardar suplemento»;629;411;172;42;M57;Registrar suplemento — guardado con éxito;no
+M56;Registrar suplemento — error: precio inválido;CU-15;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M56;Registrar suplemento — error: precio inválido;CU-15;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M56;Registrar suplemento — error: precio inválido;CU-15;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M56;Registrar suplemento — error: precio inválido;CU-15;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M56;Registrar suplemento — error: precio inválido;CU-15;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M56;Registrar suplemento — error: precio inválido;CU-15;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M56;Registrar suplemento — error: precio inválido;CU-15;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M56;Registrar suplemento — error: precio inválido;CU-15;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M56;Registrar suplemento — error: precio inválido;CU-15;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M56;Registrar suplemento — error: precio inválido;CU-15;Campo «Costo en dólares (USD)»;285;328;516;44;M55;Registrar suplemento — datos y precio CLP calculado;no
+M56;Registrar suplemento — error: precio inválido;CU-15;Botón «Cancelar»;525;411;95;42;M52;Suplementos — listado con dólar del día;no
+M57;Registrar suplemento — guardado con éxito;CU-15;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M57;Registrar suplemento — guardado con éxito;CU-15;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M57;Registrar suplemento — guardado con éxito;CU-15;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M57;Registrar suplemento — guardado con éxito;CU-15;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M57;Registrar suplemento — guardado con éxito;CU-15;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M57;Registrar suplemento — guardado con éxito;CU-15;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M57;Registrar suplemento — guardado con éxito;CU-15;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M57;Registrar suplemento — guardado con éxito;CU-15;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M57;Registrar suplemento — guardado con éxito;CU-15;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M57;Registrar suplemento — guardado con éxito;CU-15;Botón cerrar ×;1218;99;19;50;M52;Suplementos — listado con dólar del día;no
+M57;Registrar suplemento — guardado con éxito;CU-15;Botón «Actualizar dólar»;869;109;166;42;M53;Suplementos — error: API del dólar no disponible;no
+M57;Registrar suplemento — guardado con éxito;CU-15;Botón «Nuevo suplemento»;1047;109;186;42;M54;Registrar suplemento — formulario vacío;no
+M57;Registrar suplemento — guardado con éxito;CU-15;Botón «Vender»;1095;212;91;32;M58;Vender suplemento — formulario vacío;no
+M58;Vender suplemento — formulario vacío;CU-14;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M58;Vender suplemento — formulario vacío;CU-14;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M58;Vender suplemento — formulario vacío;CU-14;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M58;Vender suplemento — formulario vacío;CU-14;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M58;Vender suplemento — formulario vacío;CU-14;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M58;Vender suplemento — formulario vacío;CU-14;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M58;Vender suplemento — formulario vacío;CU-14;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M58;Vender suplemento — formulario vacío;CU-14;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M58;Vender suplemento — formulario vacío;CU-14;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M58;Vender suplemento — formulario vacío;CU-14;Botón «Actualizar dólar»;869;109;166;42;M53;Suplementos — error: API del dólar no disponible;no
+M58;Vender suplemento — formulario vacío;CU-14;Botón «Nuevo suplemento»;1047;109;186;42;M54;Registrar suplemento — formulario vacío;no
+M58;Vender suplemento — formulario vacío;CU-14;Botón «Vender»;1095;212;91;32;M58;Vender suplemento — formulario vacío;no
+M58;Vender suplemento — formulario vacío;CU-14;Clic fuera del cuadro;0;0;1280;800;M52;Suplementos — listado con dólar del día;no
+M58;Vender suplemento — formulario vacío;CU-14;Botón cerrar ×;829;236;22;22;M52;Suplementos — listado con dólar del día;no
+M58;Vender suplemento — formulario vacío;CU-14;Campo «Cantidad»;429;400;422;44;M59;Vender suplemento — cantidad ingresada;no
+M58;Vender suplemento — formulario vacío;CU-14;Botón «Cancelar»;603;522;95;42;M52;Suplementos — listado con dólar del día;no
+M59;Vender suplemento — cantidad ingresada;CU-14;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M59;Vender suplemento — cantidad ingresada;CU-14;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M59;Vender suplemento — cantidad ingresada;CU-14;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M59;Vender suplemento — cantidad ingresada;CU-14;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M59;Vender suplemento — cantidad ingresada;CU-14;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M59;Vender suplemento — cantidad ingresada;CU-14;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M59;Vender suplemento — cantidad ingresada;CU-14;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M59;Vender suplemento — cantidad ingresada;CU-14;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M59;Vender suplemento — cantidad ingresada;CU-14;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M59;Vender suplemento — cantidad ingresada;CU-14;Botón «Actualizar dólar»;869;109;166;42;M53;Suplementos — error: API del dólar no disponible;no
+M59;Vender suplemento — cantidad ingresada;CU-14;Botón «Nuevo suplemento»;1047;109;186;42;M54;Registrar suplemento — formulario vacío;no
+M59;Vender suplemento — cantidad ingresada;CU-14;Botón «Vender»;1095;212;91;32;M58;Vender suplemento — formulario vacío;no
+M59;Vender suplemento — cantidad ingresada;CU-14;Clic fuera del cuadro;0;0;1280;800;M52;Suplementos — listado con dólar del día;no
+M59;Vender suplemento — cantidad ingresada;CU-14;Botón cerrar ×;829;236;22;22;M52;Suplementos — listado con dólar del día;no
+M59;Vender suplemento — cantidad ingresada;CU-14;Campo «Cantidad»;429;400;422;44;M60;Vender suplemento — error: stock insuficiente;no
+M59;Vender suplemento — cantidad ingresada;CU-14;Botón «Cancelar»;603;522;95;42;M52;Suplementos — listado con dólar del día;no
+M59;Vender suplemento — cantidad ingresada;CU-14;Botón «Confirmar venta»;707;522;144;42;M61;Vender suplemento — venta registrada;no
+M60;Vender suplemento — error: stock insuficiente;CU-14;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M60;Vender suplemento — error: stock insuficiente;CU-14;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M60;Vender suplemento — error: stock insuficiente;CU-14;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M60;Vender suplemento — error: stock insuficiente;CU-14;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M60;Vender suplemento — error: stock insuficiente;CU-14;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M60;Vender suplemento — error: stock insuficiente;CU-14;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M60;Vender suplemento — error: stock insuficiente;CU-14;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M60;Vender suplemento — error: stock insuficiente;CU-14;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M60;Vender suplemento — error: stock insuficiente;CU-14;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M60;Vender suplemento — error: stock insuficiente;CU-14;Botón «Actualizar dólar»;869;109;166;42;M53;Suplementos — error: API del dólar no disponible;no
+M60;Vender suplemento — error: stock insuficiente;CU-14;Botón «Nuevo suplemento»;1047;109;186;42;M54;Registrar suplemento — formulario vacío;no
+M60;Vender suplemento — error: stock insuficiente;CU-14;Botón «Vender»;1095;212;91;32;M58;Vender suplemento — formulario vacío;no
+M60;Vender suplemento — error: stock insuficiente;CU-14;Clic fuera del cuadro;0;0;1280;800;M52;Suplementos — listado con dólar del día;no
+M60;Vender suplemento — error: stock insuficiente;CU-14;Botón cerrar ×;829;226;22;22;M52;Suplementos — listado con dólar del día;no
+M60;Vender suplemento — error: stock insuficiente;CU-14;Campo «Cantidad»;429;390;422;44;M59;Vender suplemento — cantidad ingresada;no
+M60;Vender suplemento — error: stock insuficiente;CU-14;Botón «Cancelar»;603;533;95;42;M52;Suplementos — listado con dólar del día;no
+M61;Vender suplemento — venta registrada;CU-14;Menú «Inicio»;14;104;208;38;M15;Panel de la recepcionista (Inicio) con sidebar;sí
+M61;Vender suplemento — venta registrada;CU-14;Menú «Socios»;14;145;208;38;M20;Listado de socios;sí
+M61;Vender suplemento — venta registrada;CU-14;Menú «Inscripciones»;14;186;208;38;M30;Inscripción mensual — formulario vacío;sí
+M61;Vender suplemento — venta registrada;CU-14;Menú «Cobros»;14;227;208;38;M38;Cobro de mensualidad — sin selección;sí
+M61;Vender suplemento — venta registrada;CU-14;Menú «Control de ingreso»;14;268;208;38;M45;Control de ingreso — vacío;sí
+M61;Vender suplemento — venta registrada;CU-14;Menú «Suplementos»;14;309;208;38;M52;Suplementos — listado con dólar del día;sí
+M61;Vender suplemento — venta registrada;CU-14;Botón menú ☰;264;16;36;36;M16;Sidebar contraído (solo íconos);sí
+M61;Vender suplemento — venta registrada;CU-14;«Dólar hoy $950,32»;899;18;160;31;M52;Suplementos — listado con dólar del día;sí
+M61;Vender suplemento — venta registrada;CU-14;Menú de usuario (avatar);1073;11;179;46;M17;Menú de usuario desplegado;sí
+M61;Vender suplemento — venta registrada;CU-14;Botón cerrar ×;1218;99;19;50;M52;Suplementos — listado con dólar del día;no
+M61;Vender suplemento — venta registrada;CU-14;Botón «Actualizar dólar»;869;109;166;42;M53;Suplementos — error: API del dólar no disponible;no
+M61;Vender suplemento — venta registrada;CU-14;Botón «Nuevo suplemento»;1047;109;186;42;M54;Registrar suplemento — formulario vacío;no
+M61;Vender suplemento — venta registrada;CU-14;Botón «Vender»;1095;212;91;32;M58;Vender suplemento — formulario vacío;no
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Botón cerrar ×;1218;99;19;34;M63;Panel de la instructora (Inicio) con sidebar;no
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Botón «Tomar asistencia»;542;269;174;42;M73;Nómina de la clase;no
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Botón «Ver nómina»;605;360;111;42;M73;Nómina de la clase;no
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Botón «Crear clase»;787;249;136;42;M66;Crear clase — formulario vacío;no
+M62;Inicio de sesión correcto — panel de la instructora;CU-01;Botón «Mis clases»;933;249;130;42;M65;Mis clases — listado con cupos por tipo;no
+M63;Panel de la instructora (Inicio) con sidebar;General;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M63;Panel de la instructora (Inicio) con sidebar;General;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M63;Panel de la instructora (Inicio) con sidebar;General;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M63;Panel de la instructora (Inicio) con sidebar;General;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M63;Panel de la instructora (Inicio) con sidebar;General;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M63;Panel de la instructora (Inicio) con sidebar;General;Botón «Tomar asistencia»;542;269;174;42;M73;Nómina de la clase;no
+M63;Panel de la instructora (Inicio) con sidebar;General;Botón «Ver nómina»;605;360;111;42;M73;Nómina de la clase;no
+M63;Panel de la instructora (Inicio) con sidebar;General;Botón «Crear clase»;787;249;136;42;M66;Crear clase — formulario vacío;no
+M63;Panel de la instructora (Inicio) con sidebar;General;Botón «Mis clases»;933;249;130;42;M65;Mis clases — listado con cupos por tipo;no
+M64;Menú de usuario de la instructora;CU-04;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M64;Menú de usuario de la instructora;CU-04;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M64;Menú de usuario de la instructora;CU-04;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M64;Menú de usuario de la instructora;CU-04;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M64;Menú de usuario de la instructora;CU-04;Menú de usuario (avatar);1084;11;168;46;M63;Panel de la instructora (Inicio) con sidebar;sí
+M64;Menú de usuario de la instructora;CU-04;Opción «Cerrar sesión»;1009;129;236;35;M09;Sesión cerrada correctamente;sí
+M64;Menú de usuario de la instructora;CU-04;Botón «Tomar asistencia»;542;269;174;42;M73;Nómina de la clase;no
+M64;Menú de usuario de la instructora;CU-04;Botón «Ver nómina»;605;360;111;42;M73;Nómina de la clase;no
+M64;Menú de usuario de la instructora;CU-04;Botón «Crear clase»;787;249;136;42;M66;Crear clase — formulario vacío;no
+M64;Menú de usuario de la instructora;CU-04;Botón «Mis clases»;933;249;130;42;M65;Mis clases — listado con cupos por tipo;no
+M65;Mis clases — listado con cupos por tipo;CU-17;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M65;Mis clases — listado con cupos por tipo;CU-17;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M65;Mis clases — listado con cupos por tipo;CU-17;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M65;Mis clases — listado con cupos por tipo;CU-17;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M65;Mis clases — listado con cupos por tipo;CU-17;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M65;Mis clases — listado con cupos por tipo;CU-17;Botón «Crear clase»;1097;109;136;42;M66;Crear clase — formulario vacío;no
+M65;Mis clases — listado con cupos por tipo;CU-17;Botón «Ver nómina»;1099;212;93;32;M73;Nómina de la clase;no
+M65;Mis clases — listado con cupos por tipo;CU-17;Botón «Ver nómina»;1099;267;93;32;M73;Nómina de la clase;no
+M65;Mis clases — listado con cupos por tipo;CU-17;Botón «Ver nómina»;1099;322;93;32;M73;Nómina de la clase;no
+M65;Mis clases — listado con cupos por tipo;CU-17;Botón «Ver nómina»;1099;377;93;32;M73;Nómina de la clase;no
+M66;Crear clase — formulario vacío;CU-17;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M66;Crear clase — formulario vacío;CU-17;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M66;Crear clase — formulario vacío;CU-17;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M66;Crear clase — formulario vacío;CU-17;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M66;Crear clase — formulario vacío;CU-17;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M66;Crear clase — formulario vacío;CU-17;Combobox «Tipo de clase»;285;166;516;44;M67;Crear clase — combobox de tipo desplegado;no
+M66;Crear clase — formulario vacío;CU-17;Botón «Cancelar»;569;324;95;42;M65;Mis clases — listado con cupos por tipo;no
+M67;Crear clase — combobox de tipo desplegado;CU-17;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M67;Crear clase — combobox de tipo desplegado;CU-17;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M67;Crear clase — combobox de tipo desplegado;CU-17;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M67;Crear clase — combobox de tipo desplegado;CU-17;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M67;Crear clase — combobox de tipo desplegado;CU-17;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M67;Crear clase — combobox de tipo desplegado;CU-17;Combobox «Tipo de clase»;285;166;516;44;M66;Crear clase — formulario vacío;no
+M67;Crear clase — combobox de tipo desplegado;CU-17;Opción «Crossfit 12 cupos (2 reservados para clases d»;292;335;502;56;M68;Crear clase — tipo seleccionado (reglas visibles);no
+M67;Crear clase — combobox de tipo desplegado;CU-17;Botón «Cancelar»;569;324;95;42;M65;Mis clases — listado con cupos por tipo;no
+M68;Crear clase — tipo seleccionado (reglas visibles);CU-17;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M68;Crear clase — tipo seleccionado (reglas visibles);CU-17;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M68;Crear clase — tipo seleccionado (reglas visibles);CU-17;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M68;Crear clase — tipo seleccionado (reglas visibles);CU-17;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M68;Crear clase — tipo seleccionado (reglas visibles);CU-17;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M68;Crear clase — tipo seleccionado (reglas visibles);CU-17;Combobox «Tipo de clase»;285;166;516;44;M67;Crear clase — combobox de tipo desplegado;no
+M68;Crear clase — tipo seleccionado (reglas visibles);CU-17;Combobox «Día de la semana»;285;247;251;44;M69;Crear clase — combobox de día desplegado;no
+M68;Crear clase — tipo seleccionado (reglas visibles);CU-17;Botón «Cancelar»;569;324;95;42;M65;Mis clases — listado con cupos por tipo;no
+M69;Crear clase — combobox de día desplegado;CU-17;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M69;Crear clase — combobox de día desplegado;CU-17;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M69;Crear clase — combobox de día desplegado;CU-17;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M69;Crear clase — combobox de día desplegado;CU-17;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M69;Crear clase — combobox de día desplegado;CU-17;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M69;Crear clase — combobox de día desplegado;CU-17;Combobox «Tipo de clase»;285;166;516;44;M67;Crear clase — combobox de tipo desplegado;no
+M69;Crear clase — combobox de día desplegado;CU-17;Combobox «Día de la semana»;285;247;251;44;M68;Crear clase — tipo seleccionado (reglas visibles);no
+M69;Crear clase — combobox de día desplegado;CU-17;Opción «Lunes Ya tienes Yoga a las 09:00»;292;304;237;52;M71;Crear clase — error: horario ocupado;no
+M69;Crear clase — combobox de día desplegado;CU-17;Opción «Viernes»;292;461;237;35;M70;Crear clase — formulario con datos;no
+M69;Crear clase — combobox de día desplegado;CU-17;Botón «Cancelar»;569;324;95;42;M65;Mis clases — listado con cupos por tipo;no
+M70;Crear clase — formulario con datos;CU-17;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M70;Crear clase — formulario con datos;CU-17;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M70;Crear clase — formulario con datos;CU-17;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M70;Crear clase — formulario con datos;CU-17;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M70;Crear clase — formulario con datos;CU-17;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M70;Crear clase — formulario con datos;CU-17;Combobox «Tipo de clase»;285;166;516;44;M67;Crear clase — combobox de tipo desplegado;no
+M70;Crear clase — formulario con datos;CU-17;Combobox «Día de la semana»;285;247;251;44;M69;Crear clase — combobox de día desplegado;no
+M70;Crear clase — formulario con datos;CU-17;Botón «Cancelar»;569;324;95;42;M65;Mis clases — listado con cupos por tipo;no
+M70;Crear clase — formulario con datos;CU-17;Botón «Guardar clase»;673;324;128;42;M72;Crear clase — clase creada con éxito;no
+M71;Crear clase — error: horario ocupado;CU-17;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M71;Crear clase — error: horario ocupado;CU-17;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M71;Crear clase — error: horario ocupado;CU-17;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M71;Crear clase — error: horario ocupado;CU-17;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M71;Crear clase — error: horario ocupado;CU-17;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M71;Crear clase — error: horario ocupado;CU-17;Botón cerrar ×;766;158;20;20;M68;Crear clase — tipo seleccionado (reglas visibles);no
+M71;Crear clase — error: horario ocupado;CU-17;Combobox «Tipo de clase»;285;260;516;44;M67;Crear clase — combobox de tipo desplegado;no
+M71;Crear clase — error: horario ocupado;CU-17;Combobox «Día de la semana»;285;341;251;44;M69;Crear clase — combobox de día desplegado;no
+M71;Crear clase — error: horario ocupado;CU-17;Botón «Cancelar»;569;439;95;42;M65;Mis clases — listado con cupos por tipo;no
+M72;Crear clase — clase creada con éxito;CU-17;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M72;Crear clase — clase creada con éxito;CU-17;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M72;Crear clase — clase creada con éxito;CU-17;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M72;Crear clase — clase creada con éxito;CU-17;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M72;Crear clase — clase creada con éxito;CU-17;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M72;Crear clase — clase creada con éxito;CU-17;Botón cerrar ×;1218;99;19;34;M65;Mis clases — listado con cupos por tipo;no
+M72;Crear clase — clase creada con éxito;CU-17;Botón «Crear clase»;1097;109;136;42;M66;Crear clase — formulario vacío;no
+M72;Crear clase — clase creada con éxito;CU-17;Botón «Ver nómina»;1099;212;93;32;M73;Nómina de la clase;no
+M72;Crear clase — clase creada con éxito;CU-17;Botón «Ver nómina»;1099;267;93;32;M73;Nómina de la clase;no
+M72;Crear clase — clase creada con éxito;CU-17;Botón «Ver nómina»;1099;322;93;32;M73;Nómina de la clase;no
+M72;Crear clase — clase creada con éxito;CU-17;Botón «Ver nómina»;1099;377;93;32;M73;Nómina de la clase;no
+M72;Crear clase — clase creada con éxito;CU-17;Botón «Ver nómina»;1099;432;93;32;M73;Nómina de la clase;no
+M73;Nómina de la clase;CU-18;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M73;Nómina de la clase;CU-18;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M73;Nómina de la clase;CU-18;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M73;Nómina de la clase;CU-18;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M73;Nómina de la clase;CU-18;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M73;Nómina de la clase;CU-18;Combobox «Yoga Lunes 09:00 · hoy»;283;109;330;44;M74;Nómina — combobox de clase desplegado;no
+M73;Nómina de la clase;CU-18;Botón «Marcar todos»;911;110;149;42;M75;Registrar asistencia — alumnos marcados;no
+M73;Nómina de la clase;CU-18;Casilla de asistencia;293;214;78;19;M75;Registrar asistencia — alumnos marcados;no
+M73;Nómina de la clase;CU-18;Casilla de asistencia;293;256;78;19;M75;Registrar asistencia — alumnos marcados;no
+M73;Nómina de la clase;CU-18;Casilla de asistencia;293;298;78;19;M75;Registrar asistencia — alumnos marcados;no
+M73;Nómina de la clase;CU-18;Casilla de asistencia;293;340;78;19;M75;Registrar asistencia — alumnos marcados;no
+M73;Nómina de la clase;CU-18;Casilla de asistencia;293;382;78;19;M75;Registrar asistencia — alumnos marcados;no
+M73;Nómina de la clase;CU-18;Casilla de asistencia;293;424;78;19;M75;Registrar asistencia — alumnos marcados;no
+M73;Nómina de la clase;CU-18;Casilla de asistencia;293;466;78;19;M75;Registrar asistencia — alumnos marcados;no
+M73;Nómina de la clase;CU-18;Casilla de asistencia;293;508;78;19;M75;Registrar asistencia — alumnos marcados;no
+M74;Nómina — combobox de clase desplegado;CU-18;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M74;Nómina — combobox de clase desplegado;CU-18;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M74;Nómina — combobox de clase desplegado;CU-18;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M74;Nómina — combobox de clase desplegado;CU-18;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M74;Nómina — combobox de clase desplegado;CU-18;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M74;Nómina — combobox de clase desplegado;CU-18;Combobox «Yoga Lunes 09:00 · hoy»;283;109;330;44;M73;Nómina de la clase;no
+M74;Nómina — combobox de clase desplegado;CU-18;Opción «Yoga Lunes 09:00 Hoy · 8 inscritos»;290;166;316;56;M73;Nómina de la clase;no
+M74;Nómina — combobox de clase desplegado;CU-18;Opción «Spinning Martes 18:00 Asistencia ya registrad»;290;222;316;56;M77;Registrar asistencia — error: ya registrada;no
+M74;Nómina — combobox de clase desplegado;CU-18;Botón «Marcar todos»;911;110;149;42;M75;Registrar asistencia — alumnos marcados;no
+M74;Nómina — combobox de clase desplegado;CU-18;Casilla de asistencia;293;214;78;19;M75;Registrar asistencia — alumnos marcados;no
+M74;Nómina — combobox de clase desplegado;CU-18;Casilla de asistencia;293;256;78;19;M75;Registrar asistencia — alumnos marcados;no
+M74;Nómina — combobox de clase desplegado;CU-18;Casilla de asistencia;293;298;78;19;M75;Registrar asistencia — alumnos marcados;no
+M74;Nómina — combobox de clase desplegado;CU-18;Casilla de asistencia;293;340;78;19;M75;Registrar asistencia — alumnos marcados;no
+M74;Nómina — combobox de clase desplegado;CU-18;Casilla de asistencia;293;382;78;19;M75;Registrar asistencia — alumnos marcados;no
+M74;Nómina — combobox de clase desplegado;CU-18;Casilla de asistencia;293;424;78;19;M75;Registrar asistencia — alumnos marcados;no
+M74;Nómina — combobox de clase desplegado;CU-18;Casilla de asistencia;293;466;78;19;M75;Registrar asistencia — alumnos marcados;no
+M74;Nómina — combobox de clase desplegado;CU-18;Casilla de asistencia;293;508;78;19;M75;Registrar asistencia — alumnos marcados;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M75;Registrar asistencia — alumnos marcados;CU-19;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M75;Registrar asistencia — alumnos marcados;CU-19;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M75;Registrar asistencia — alumnos marcados;CU-19;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M75;Registrar asistencia — alumnos marcados;CU-19;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M75;Registrar asistencia — alumnos marcados;CU-19;Combobox «Yoga Lunes 09:00 · hoy»;283;109;330;44;M74;Nómina — combobox de clase desplegado;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Botón «Marcar todos»;911;110;149;42;M75;Registrar asistencia — alumnos marcados;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Botón «Guardar asistencia»;1072;110;161;42;M76;Registrar asistencia — guardada con éxito;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Casilla de asistencia;293;215;78;19;M73;Nómina de la clase;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Casilla de asistencia;293;259;78;19;M73;Nómina de la clase;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Casilla de asistencia;293;303;78;19;M73;Nómina de la clase;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Casilla de asistencia;293;347;78;19;M73;Nómina de la clase;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Casilla de asistencia;293;391;78;19;M73;Nómina de la clase;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Casilla de asistencia;293;435;78;19;M73;Nómina de la clase;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Casilla de asistencia;293;479;78;19;M73;Nómina de la clase;no
+M75;Registrar asistencia — alumnos marcados;CU-19;Casilla de asistencia;293;523;78;19;M73;Nómina de la clase;no
+M76;Registrar asistencia — guardada con éxito;CU-19;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M76;Registrar asistencia — guardada con éxito;CU-19;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M76;Registrar asistencia — guardada con éxito;CU-19;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M76;Registrar asistencia — guardada con éxito;CU-19;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M76;Registrar asistencia — guardada con éxito;CU-19;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M76;Registrar asistencia — guardada con éxito;CU-19;Botón cerrar ×;1218;99;19;34;M63;Panel de la instructora (Inicio) con sidebar;no
+M76;Registrar asistencia — guardada con éxito;CU-19;Combobox «Yoga Lunes 09:00 · hoy»;283;109;330;44;M74;Nómina — combobox de clase desplegado;no
+M76;Registrar asistencia — guardada con éxito;CU-19;Botón «Marcar todos»;911;110;149;42;M75;Registrar asistencia — alumnos marcados;no
+M77;Registrar asistencia — error: ya registrada;CU-19;Menú «Inicio»;14;104;208;38;M63;Panel de la instructora (Inicio) con sidebar;sí
+M77;Registrar asistencia — error: ya registrada;CU-19;Menú «Mis clases»;14;145;208;38;M65;Mis clases — listado con cupos por tipo;sí
+M77;Registrar asistencia — error: ya registrada;CU-19;Menú «Crear clase»;14;186;208;38;M66;Crear clase — formulario vacío;sí
+M77;Registrar asistencia — error: ya registrada;CU-19;Menú «Asistencia»;14;227;208;38;M73;Nómina de la clase;sí
+M77;Registrar asistencia — error: ya registrada;CU-19;Menú de usuario (avatar);1084;11;168;46;M64;Menú de usuario de la instructora;sí
+M77;Registrar asistencia — error: ya registrada;CU-19;Botón cerrar ×;1217;104;20;20;M73;Nómina de la clase;no
+M77;Registrar asistencia — error: ya registrada;CU-19;Combobox «Yoga Lunes 09:00 · hoy»;283;187;330;44;M74;Nómina — combobox de clase desplegado;no
+M77;Registrar asistencia — error: ya registrada;CU-19;Botón «Marcar todos»;911;188;149;42;M75;Registrar asistencia — alumnos marcados;no

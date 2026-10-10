@@ -84,7 +84,7 @@ Otros comandos:
 ```bash
 python main.py          # Demo por consola de los 6 requerimientos (estilo del profe)
 python seed.py          # Carga datos de ejemplo (no duplica si ya existen)
-python -m pytest        # Ejecuta las 70 pruebas automáticas
+python -m pytest        # Ejecuta las 76 pruebas automáticas
 ```
 
 Para empezar de cero, borra `powerfit.db` y vuelve a ejecutar `python app.py`.
@@ -97,7 +97,7 @@ gym-powerfit/
 ├── dao/              # Acceso a datos (patrón DAO sobre SQLite), un DAO por tabla
 ├── services/         # Servicios externos: dólar del día (mindicador.cl)
 ├── web/              # Aplicación Flask: rutas, seguridad, plantillas HTML, CSS y JS
-├── tests/            # 70 pruebas automáticas (pytest)
+├── tests/            # 76 pruebas automáticas (pytest)
 ├── docs/             # Backlog, arquitectura, seguridad, despliegue y capturas
 ├── conectar.py       # Conexión a SQLite (igual que el profe)
 ├── main.py           # Demo por consola (igual que el profe)
@@ -112,6 +112,7 @@ gym-powerfit/
 - 🔐 [Seguridad](docs/SEGURIDAD.md): cada control y dónde está en el código.
 - 🚀 [Despliegue](docs/DESPLIEGUE.md): servidor local y publicación en PythonAnywhere.
 - 📋 [Backlog Jira](docs/BACKLOG_JIRA.md): épicas, historias y sprints.
+- 💡 [Propuestas de mejora a futuro](docs/MEJORAS_FUTURAS.md): portal del socio, reservas y lista de espera (documentadas, no implementadas).
 - 🤖 [Prompts maestros](PROMPTS_MAESTROS.md): secuencia para recrear o extender el proyecto con IA.
 
 ---
@@ -147,3 +148,8 @@ gym-powerfit/
 - **Agregación** marcada en el diagrama: `InscripcionMensual ◇ Socio` y `DetalleClaseReservada ◇ Clase`.
 - **Diagrama v2** en `docs/diagrama/` (PNG + .drawio) y `main.py` reescrito con los 4 requisitos rotulados (clase y método de cada uno).
 - Compatibilidad con Python 3.7+ (`from __future__ import annotations`) y 3 pruebas nuevas (73 en total).
+
+### 10 de Octubre de 2026 — Mejora de usabilidad del RUT
+- **RUT sin puntos:** los campos de RUT (login, registro de socio, inscripción y control de ingreso) muestran el ejemplo `12345678-5`. Mientras se escribe se eliminan los puntos; al salir del campo se agrega el guion y se avisa si el dígito verificador no corresponde. El servidor sigue validando con el algoritmo módulo 11.
+- **3 pruebas nuevas** (76 en total).
+- **Propuestas de mejora a futuro** documentadas en [`docs/MEJORAS_FUTURAS.md`](docs/MEJORAS_FUTURAS.md): portal del socio, reserva y cancelación de clases, y lista de espera con oferta de cupo.

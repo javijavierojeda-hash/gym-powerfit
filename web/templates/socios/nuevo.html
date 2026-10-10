@@ -7,8 +7,8 @@
   <form method="post">
     {{ csrf() }}
     <div class="campo">
-      <label for="rut">RUT</label>
-      <input id="rut" name="rut" value="{{ datos.rut }}" placeholder="12.345.678-5" maxlength="12" required autofocus>
+      <label for="rut">RUT <span class="ayuda" data-rut-ayuda>sin puntos · ej: 12345678-5</span></label>
+      <input id="rut" name="rut" value="{{ datos.rut }}" placeholder="12345678-5" maxlength="12" required autofocus autocomplete="off" data-rut>
     </div>
     <div class="campo">
       <label for="nombre">Nombre completo</label>

@@ -109,6 +109,9 @@ input, select {
 }
 input:focus, select:focus { outline: 2px solid var(--acento); border-color: transparent; }
 .campo { margin-bottom: 1rem; }
+.ayuda { font-weight: 400; color: var(--texto-suave); }   /* Pista junto a la etiqueta (ej: formato del RUT) */
+.ayuda.mal { color: var(--error); font-weight: 600; }      /* La pista se vuelve mensaje de error */
+input.mal { border-color: var(--error); }                  /* Campo con un dato inválido */
 .fila-form { display: flex; gap: .75rem; align-items: flex-end; flex-wrap: wrap; }
 .fila-form .campo { flex: 1; min-width: 160px; margin-bottom: 0; }
 .en-linea { display: inline; }

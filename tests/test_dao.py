@@ -5,6 +5,8 @@ Pruebas de la capa de datos (DAO) con una BD en memoria.
 import sqlite3  # Para reconocer errores de integridad
 from datetime import date, time  # Tipos de fecha y hora
 import pytest  # Framework de pruebas
+import requests  # Tipos de error de la librería requests
+import conectar  # Conexión a la BD
 from dao.clase_dao import ClaseDao  # DAOs a probar
 from dao.crossfit_dao import CrossfitDao
 from dao.esquema import crear_esquema
@@ -24,6 +26,8 @@ from model.suplemento import Suplemento
 from model.trabajador import Trabajador
 from model.validaciones import calcular_dv
 from services.dolar_service import DolarService, VALOR_POR_DEFECTO  # Servicio del dólar
+
+_API_REAL = DolarService._obtener_json_desde_api  # Método real (se guarda antes de que conftest lo reemplace)
 
 MES = date.today().strftime("%Y-%m")  # Mes actual
 
@@ -152,3 +156,67 @@ def test_dolar_usa_api_valida_y_luego_respaldo(conexion):  # Servicio del dólar
 def test_dolar_rechaza_datos_invalidos_de_la_api(valor):  # No se confía en datos externos
     servicio = DolarService(None, obtener_json=lambda: {"serie": [{"valor": valor}]})  # API con dato malo
     assert servicio.obtener_cotizacion().valor == VALOR_POR_DEFECTO  # Se descarta y usa el valor por defecto
+
+
+# ---------------- Evaluación Sumativa N°3 ----------------
+
+def test_socio_crud_completo_con_correo_y_telefono(conexion):  # Crear, leer, actualizar y eliminar
+    dao = SocioDao(conexion)  # DAO de socios
+    dao.insertar(Socio("12.345.678-5", "Pedro Soto", correo="pedro@correo.cl", telefono="912345678"))  # Crear
+    socio = dao.buscar_por_rut("12345678-5")  # Leer
+    assert (socio.correo, socio.telefono) == ("pedro@correo.cl", "912345678")  # Se guardaron los datos de contacto
+    socio.correo, socio.telefono = "nuevo@correo.cl", "+56 9 8765 4321"  # Cambios (pasan por los setters)
+    dao.actualizar(socio)  # Actualizar
+    assert dao.buscar_por_rut("12345678-5").telefono == "987654321"  # Se guardó normalizado
+    assert dao.eliminar("12.345.678-5") is True and dao.buscar_por_rut("12345678-5") is None  # Eliminar
+    assert dao.eliminar("12.345.678-5") is False  # Eliminar algo que no existe no falla
+
+
+def test_tabla_socios_antigua_se_actualiza_sin_perder_datos():  # Migración de una BD de la versión anterior
+    conn = conectar.crear_conexion(":memory:")  # BD nueva en memoria
+    conn.execute("CREATE TABLE socios(rut TEXT PRIMARY KEY, nombre TEXT NOT NULL)")  # Tabla como en la ES2 (sin correo)
+    conn.execute("INSERT INTO socios VALUES ('12345678-5', 'Ana')")  # Un dato antiguo
+    crear_esquema(conn)  # Debe agregar las columnas que faltan
+    columnas = {f["name"] for f in conn.execute("PRAGMA table_info(socios)")}  # Columnas actuales
+    assert {"correo", "telefono"} <= columnas  # Se agregaron
+    assert conn.execute("SELECT nombre FROM socios").fetchone()["nombre"] == "Ana"  # El dato antiguo sigue ahí
+    conn.close()  # Cierra
+
+
+@pytest.mark.parametrize("falla, mensaje", [  # Cada problema de la API se informa con su causa
+    (requests.exceptions.Timeout, "no respondio en 5 segundos"),
+    (requests.exceptions.ConnectionError, "no hay conexion"),
+    (ValueError, "respuesta inesperada"),
+])
+def test_dolar_informa_la_causa_de_cada_falla(monkeypatch, falla, mensaje):  # Continuidad cuando la API falla
+    def api(self):  # API simulada que falla
+        raise falla("falla simulada")  # Lanza el error indicado
+    monkeypatch.setattr(DolarService, "_obtener_json_desde_api", api)  # Reemplaza la llamada real
+    cotizacion = DolarService(None).obtener_cotizacion()  # No debe lanzar ningún error
+    assert cotizacion.valor == VALOR_POR_DEFECTO and mensaje in cotizacion.aviso  # Sigue funcionando e informa el motivo
+
+
+def test_dolar_respuesta_sin_serie_es_inesperada():  # JSON con otra estructura
+    cotizacion = DolarService(None, obtener_json=lambda: {"error": "x"}).obtener_cotizacion()  # Falta "serie"
+    assert "respuesta inesperada" in cotizacion.aviso  # Se informa
+
+
+def test_api_usa_requests_con_timeout(monkeypatch):  # La consulta real usa requests.get con tiempo máximo
+    llamadas = {}  # Registra cómo se llamó a requests.get
+
+    class Respuesta:  # Respuesta HTTP simulada
+        def raise_for_status(self):  # 200 OK: no lanza nada
+            pass
+
+        def json(self):  # Cuerpo de la respuesta
+            return {"serie": [{"fecha": "2026-10-10", "valor": 950.0}]}
+
+    def get_falso(url, headers=None, timeout=None):  # Reemplazo de requests.get
+        llamadas.update(url=url, timeout=timeout)  # Guarda los argumentos
+        return Respuesta()  # Retorna la respuesta simulada
+
+    monkeypatch.setattr(DolarService, "_obtener_json_desde_api", _API_REAL)  # Vuelve a usar el método real...
+    monkeypatch.setattr("services.dolar_service.requests.get", get_falso)  # ...pero con requests.get simulado
+    DolarService.limpiar_cache()  # Sin caché
+    assert DolarService(None).obtener_valor() == 950.0  # Usa el valor obtenido
+    assert llamadas == {"url": "https://mindicador.cl/api/dolar", "timeout": 5.0}  # Con la URL y el timeout esperados

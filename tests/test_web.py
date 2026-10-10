@@ -40,7 +40,7 @@ def test_formularios_aceptan_rut_sin_puntos(recepcion):  # Registro de socio y c
     r = recepcion.post("/socios/nuevo", data={"rut": "112223339", "nombre": "Sin Puntos", "csrf_token": t}, follow_redirects=True)  # Sin puntos ni guion
     assert r.status_code == 200 and "Sin Puntos" in r.text  # La ficha se creó con el RUT normalizado
     t = token(recepcion.get("/ingreso/").text)  # Token CSRF
-    assert "Puede ingresar" in recepcion.post("/ingreso/", data={"rut": "12345678-5", "csrf_token": t}).text  # Ana, al día
+    assert "Puede ingresar" in recepcion.post("/ingreso/", data={"rut": "12987654-9", "csrf_token": t}).text  # Ana, al día (RUT de los datos de ejemplo)
 
 
 def test_campos_rut_indican_formato_sin_puntos(cliente):  # La pista del formulario ya no muestra puntos

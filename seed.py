@@ -35,7 +35,7 @@ PASSWORD_RECEPCION = "Recepcion123!"  # Contraseña de la recepcionista de ejemp
 
 # Números de RUT de ejemplo (el dígito verificador se calcula con módulo 11)
 _SOCIOS = [
-    (12345678, "Ana Perez"), (15678432, "Pedro Gonzalez"), (17234987, "Carla Diaz"),
+    (12987654, "Ana Perez"), (15678432, "Pedro Gonzalez"), (17234987, "Carla Diaz"),
     (18456123, "Matias Fuentes"), (19876543, "Josefa Morales"), (20123456, "Benjamin Rojas"),
     (16345789, "Isidora Silva"), (14987321, "Tomas Contreras"), (21456789, "Martina Lopez"),
     (13579246, "Vicente Araya"), (24681357, "Florencia Castro"), (19283746, "Agustin Reyes"),

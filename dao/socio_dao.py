@@ -17,14 +17,23 @@ class SocioDao(Dao):  # Define la clase SocioDao que hereda de Dao
         Crea la tabla 'socios' si no existe:
         - rut: TEXT PRIMARY KEY (RUT normalizado 12345678-5)
         - nombre: TEXT NOT NULL
+        - correo y telefono: TEXT (opcionales, "" si no se ingresan)
+        Si la tabla ya existía de una versión anterior (sin correo ni
+        teléfono), agrega esas columnas sin borrar los datos.
         """
         sql = """
         CREATE TABLE IF NOT EXISTS socios(
             rut TEXT PRIMARY KEY,
-            nombre TEXT NOT NULL
+            nombre TEXT NOT NULL,
+            correo TEXT NOT NULL DEFAULT '',
+            telefono TEXT NOT NULL DEFAULT ''
         )
         """
         self.cursor.execute(sql)  # Ejecuta la consulta SQL para crear la tabla
+        columnas = {fila["name"] for fila in self.cursor.execute("PRAGMA table_info(socios)")}  # Columnas que ya existen
+        for columna in ("correo", "telefono"):  # Columnas agregadas en la Evaluación Sumativa N°3
+            if columna not in columnas:  # Si una base de datos antigua no la tiene...
+                self.cursor.execute(f"ALTER TABLE socios ADD COLUMN {columna} TEXT NOT NULL DEFAULT ''")  # ...la agrega (nombre fijo del código, no del usuario)
         self.conexion.commit()  # Confirma los cambios en la base de datos
 
     def insertar(self, socio: Socio) -> None:  # Guarda un socio nuevo con su membresía
@@ -34,8 +43,8 @@ class SocioDao(Dao):  # Define la clase SocioDao que hereda de Dao
         """
         with self.transaccion():  # Todo o nada
             self.cursor.execute(  # Inserta el socio
-                "INSERT INTO socios(rut, nombre) VALUES (?, ?)",  # Consulta parametrizada
-                (socio.rut, socio.nombre),  # RUT normalizado y nombre
+                "INSERT INTO socios(rut, nombre, correo, telefono) VALUES (?, ?, ?, ?)",  # Consulta parametrizada
+                (socio.rut, socio.nombre, socio.correo, socio.telefono),  # Datos ya validados por los setters
             )
             MembresiaDao(self.conexion).insertar(socio)  # Inserta la membresía dentro de la MISMA transacción
 
@@ -45,7 +54,7 @@ class SocioDao(Dao):  # Define la clase SocioDao que hereda de Dao
 
     def buscar_por_rut(self, rut: str) -> Socio | None:  # Busca un socio por su RUT
         sql = """
-        SELECT s.rut, s.nombre, m.fecha_inicio, m.fecha_vencimiento
+        SELECT s.rut, s.nombre, s.correo, s.telefono, m.fecha_inicio, m.fecha_vencimiento
         FROM socios s
         JOIN membresias m ON m.socio_rut = s.rut
         WHERE s.rut = ?
@@ -55,7 +64,7 @@ class SocioDao(Dao):  # Define la clase SocioDao que hereda de Dao
 
     def listar(self, filtro: str = "") -> list[Socio]:  # Lista socios, opcionalmente filtrando por nombre o RUT
         sql = """
-        SELECT s.rut, s.nombre, m.fecha_inicio, m.fecha_vencimiento
+        SELECT s.rut, s.nombre, s.correo, s.telefono, m.fecha_inicio, m.fecha_vencimiento
         FROM socios s
         JOIN membresias m ON m.socio_rut = s.rut
         WHERE s.nombre LIKE ? OR s.rut LIKE ?
@@ -64,9 +73,27 @@ class SocioDao(Dao):  # Define la clase SocioDao que hereda de Dao
         patron = f"%{filtro.strip().replace('.', '')}%"  # Arma el patrón LIKE (se quitan puntos para buscar RUT)
         return [self._construir(f) for f in self.cursor.execute(sql, (patron, patron)).fetchall()]  # Parámetros: nunca se concatena SQL
 
-    def actualizar_nombre(self, socio: Socio) -> None:  # Guarda el cambio de nombre de un socio
+    def actualizar(self, socio: Socio) -> None:  # Guarda los cambios de nombre, correo y teléfono
+        """
+        Actualiza los datos de contacto del socio. Los valores ya pasaron por
+        los setters del modelo, así que llegan validados.
+        """
         with self.transaccion():  # Abre una transacción
-            self.cursor.execute("UPDATE socios SET nombre = ? WHERE rut = ?", (socio.nombre, socio.rut))  # Consulta parametrizada
+            self.cursor.execute(  # Actualiza la fila del socio
+                "UPDATE socios SET nombre = ?, correo = ?, telefono = ? WHERE rut = ?",  # Consulta parametrizada
+                (socio.nombre, socio.correo, socio.telefono, socio.rut),  # Datos validados y RUT normalizado
+            )
+
+    def eliminar(self, rut: str) -> bool:  # Elimina un socio y todo lo que depende de él
+        """
+        Borra al socio. Por las llaves foráneas con ON DELETE CASCADE también
+        se borran su membresía, sus inscripciones (con sus detalles) y sus
+        asistencias, así no quedan datos huérfanos.
+        Retorna True si existía y se eliminó.
+        """
+        with self.transaccion():  # Todo o nada
+            self.cursor.execute("DELETE FROM socios WHERE rut = ?", (limpiar_rut(rut),))  # Consulta parametrizada
+            return self.cursor.rowcount > 0  # rowcount indica cuántas filas se borraron
 
     def _construir(self, fila) -> Socio:  # Convierte una fila en un objeto Socio con su membresía
         return Socio(  # Crea el socio con las fechas guardadas de su membresía
@@ -74,4 +101,6 @@ class SocioDao(Dao):  # Define la clase SocioDao que hereda de Dao
             fila["nombre"],  # Nombre
             date.fromisoformat(fila["fecha_inicio"]),  # Convierte el texto ISO a fecha
             date.fromisoformat(fila["fecha_vencimiento"]),  # Convierte el texto ISO a fecha
+            fila["correo"],  # Correo ("" si no tiene)
+            fila["telefono"],  # Teléfono ("" si no tiene)
         )

@@ -7,6 +7,7 @@ que las pide por nombre en sus parámetros.
 
 import re  # Para extraer el token CSRF del HTML
 import pytest  # Framework de pruebas
+import requests  # Para simular la caída de la API con su propio tipo de error
 import conectar  # Conexión a la BD
 from dao.esquema import crear_esquema  # Crea las tablas
 from services.dolar_service import DolarService  # Servicio del dólar (se aísla de internet)
@@ -16,7 +17,7 @@ from web import seguridad  # Para reiniciar el contador de intentos de login
 @pytest.fixture(autouse=True)  # autouse: se aplica a TODAS las pruebas automáticamente
 def sin_internet(monkeypatch):  # Evita que las pruebas dependan de la API real del dólar
     def api_caida(self):  # Función falsa que simula que la API no responde
-        raise OSError("sin conexion en pruebas")  # Lanza un error de red
+        raise requests.exceptions.ConnectionError("sin conexion en pruebas")  # Lanza el mismo error que requests sin internet
     monkeypatch.setattr(DolarService, "_obtener_json_desde_api", api_caida)  # Reemplaza la llamada real
     DolarService.limpiar_cache()  # Parte cada prueba sin caché
     seguridad._intentos.clear()  # Parte cada prueba sin intentos fallidos acumulados

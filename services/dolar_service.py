@@ -2,8 +2,11 @@
 Servicio que obtiene el valor del dólar del día (requerimiento 6).
 
 Fuente: API pública chilena mindicador.cl (datos del Banco Central).
-Diseño seguro y tolerante a fallos:
-- Timeout corto: si la API no responde, la página no se queda "colgada".
+La consulta usa la librería requests y queda TODA en esta clase (no
+repartida por el código). Diseño seguro y tolerante a fallos:
+- Timeout corto: si la API no responde, el programa no se queda "colgado".
+- Cada falla se informa con su causa: sin conexión, demora o respuesta
+  inesperada (no se esconde con un except genérico).
 - Validación: solo se acepta un número positivo y en un rango razonable.
 - Caché de 1 hora en memoria: no se consulta la API en cada venta.
 - Respaldo: si la API falla, se usa el último valor guardado en la BD
@@ -12,10 +15,9 @@ Diseño seguro y tolerante a fallos:
 
 from __future__ import annotations  # Permite usar anotaciones modernas (str | None) también en Python 3.7 a 3.9
 
-import json  # Librería estándar para interpretar la respuesta JSON de la API
 import time  # Librería estándar para medir cuánto dura la caché
-import urllib.request  # Librería estándar para hacer peticiones HTTP (sin instalar nada extra)
 from dataclasses import dataclass  # Permite crear clases de datos simples
+import requests  # Librería para consumir APIs por HTTP (pip install requests)
 from dao.indicador_dao import IndicadorDao  # DAO para guardar/leer el último valor conocido
 
 URL_API = "https://mindicador.cl/api/dolar"  # Dirección de la API del dólar
@@ -30,6 +32,7 @@ class Cotizacion:  # Resultado de consultar el dólar
     valor: float  # Valor del dólar en pesos chilenos
     fuente: str  # De dónde salió: "api", "respaldo" o "por defecto"
     fecha: str  # Fecha del dato
+    aviso: str = ""  # Si no se pudo usar la API: el motivo, para informarlo al usuario
 
 
 class DolarService:  # Define el servicio del dólar
@@ -64,9 +67,21 @@ class DolarService:  # Define el servicio del dólar
             cotizacion = self._interpretar(datos)  # Extrae y valida el valor
             self._guardar_respaldo(cotizacion.valor)  # Guarda el valor en la BD para usarlo si la API falla después
             duracion = DURACION_CACHE_SEG  # Un valor real se guarda en caché por 1 hora
-        except Exception:  # Si falla la red, el JSON o la validación...
-            cotizacion = self._respaldo()  # ...usa el último valor conocido o el valor por defecto
-            duracion = DURACION_CACHE_FALLO_SEG  # ...y reintenta en 10 minutos
+        except requests.exceptions.Timeout:  # La API tardó más que el tiempo máximo de espera
+            cotizacion = self._respaldo(f"la API del dolar no respondio en {self.__timeout:.0f} segundos")  # Informa la demora
+            duracion = DURACION_CACHE_FALLO_SEG  # Reintenta en 10 minutos
+        except requests.exceptions.ConnectionError:  # No hay internet o no se encontró el servidor
+            cotizacion = self._respaldo("no hay conexion con la API del dolar (revise internet)")  # Informa la falta de conexión
+            duracion = DURACION_CACHE_FALLO_SEG  # Reintenta en 10 minutos
+        except requests.exceptions.HTTPError as error:  # La API respondió con un error (404, 500, ...)
+            cotizacion = self._respaldo(f"la API del dolar respondio con error HTTP {error.response.status_code if error.response is not None else ''}".strip())  # Informa el código
+            duracion = DURACION_CACHE_FALLO_SEG  # Reintenta en 10 minutos
+        except (ValueError, KeyError, IndexError, TypeError):  # JSON inválido, sin "serie", vacío o con un valor que no es número
+            cotizacion = self._respaldo("la API del dolar entrego una respuesta inesperada")  # Informa la respuesta rara
+            duracion = DURACION_CACHE_FALLO_SEG  # Reintenta en 10 minutos
+        except requests.exceptions.RequestException:  # Cualquier otro problema de la petición HTTP
+            cotizacion = self._respaldo("fallo la consulta a la API del dolar")  # Informa el problema
+            duracion = DURACION_CACHE_FALLO_SEG  # Reintenta en 10 minutos
         DolarService._cache = {"cotizacion": cotizacion, "expira": time.monotonic() + duracion}  # Actualiza la caché
         return cotizacion  # Retorna la cotización obtenida
 
@@ -76,9 +91,13 @@ class DolarService:  # Define el servicio del dólar
     # ---------- Métodos internos ----------
 
     def _obtener_json_desde_api(self) -> dict:  # Hace la petición HTTP real a la API
-        peticion = urllib.request.Request(URL_API, headers={"User-Agent": "PowerFit/1.0"})  # Arma la petición con un identificador
-        with urllib.request.urlopen(peticion, timeout=self.__timeout) as respuesta:  # Abre la conexión con timeout
-            return json.loads(respuesta.read().decode("utf-8"))  # Lee, decodifica y convierte el JSON a diccionario
+        respuesta = requests.get(  # Petición GET con la librería requests
+            URL_API,  # Dirección fija de la API (no la escribe el usuario)
+            headers={"User-Agent": "PowerFit/1.0"},  # Identifica al programa ante el servidor
+            timeout=self.__timeout,  # Tiempo máximo de espera: nunca se queda esperando para siempre
+        )
+        respuesta.raise_for_status()  # Si la API respondió 4xx o 5xx, lanza HTTPError
+        return respuesta.json()  # Convierte el JSON a diccionario (ValueError si no es JSON válido)
 
     @staticmethod
     def _interpretar(datos: dict) -> Cotizacion:  # Extrae y VALIDA el valor desde el JSON
@@ -99,9 +118,9 @@ class DolarService:  # Define el servicio del dólar
         if self.__conexion is not None:  # Solo si hay una conexión disponible
             IndicadorDao(self.__conexion).guardar("dolar", valor)  # Guarda o reemplaza el valor 'dolar'
 
-    def _respaldo(self) -> Cotizacion:  # Obtiene un valor cuando la API no está disponible
+    def _respaldo(self, motivo: str = "") -> Cotizacion:  # Obtiene un valor cuando la API no está disponible
         if self.__conexion is not None:  # Si hay BD...
             guardado = IndicadorDao(self.__conexion).obtener("dolar")  # ...busca el último valor guardado
             if guardado:  # Si existe...
-                return Cotizacion(guardado[0], "respaldo", guardado[1][:10])  # ...lo usa como respaldo
-        return Cotizacion(VALOR_POR_DEFECTO, "por defecto", "")  # Último recurso: el valor por defecto
+                return Cotizacion(guardado[0], "respaldo", guardado[1][:10], motivo)  # ...lo usa como respaldo y guarda el motivo
+        return Cotizacion(VALOR_POR_DEFECTO, "por defecto", "", motivo)  # Último recurso: el valor por defecto

@@ -266,3 +266,24 @@ def test_composicion_la_inscripcion_crea_el_detalle():  # La parte se crea dentr
     detalle = inscripcion.agregar_clase(yoga)  # Se entrega la CLASE, no un detalle
     assert isinstance(detalle, DetalleClaseReservada)  # El detalle lo creó la inscripción
     assert inscripcion.detalles[0] is detalle and detalle.clase is yoga  # Queda dentro del todo y apunta a la clase existente
+
+
+# ---------------- Evaluación Sumativa N°3: datos de contacto del socio ----------------
+
+@pytest.mark.parametrize("correo", ["sin-arroba", "a@b", "a b@correo.cl", "x" * 96 + "@a.cl"])  # Formato o largo inválido
+def test_setter_del_correo_rechaza_formatos_invalidos(correo):  # Validación en el setter
+    socio = Socio("12.345.678-5", "Ana")  # Socia válida
+    with pytest.raises(ValueError):  # El setter debe rechazarlo
+        socio.correo = correo  # Asignación directa: pasa por el setter
+    assert socio.correo == ""  # El valor anterior no cambió
+
+
+@pytest.mark.parametrize("telefono", ["12345", "812345678", "9123456789", "9abc45678"])  # No es celular chileno
+def test_setter_del_telefono_rechaza_formatos_invalidos(telefono):  # Validación en el setter
+    with pytest.raises(ValueError):  # El constructor usa el setter
+        Socio("12.345.678-5", "Ana", telefono=telefono)  # La ficha no se crea
+
+
+def test_correo_y_telefono_se_normalizan():  # Formatos aceptados
+    socio = Socio("12.345.678-5", "Ana", correo=" Ana@Correo.CL ", telefono="+56 9 1234-5678")  # Con mayúsculas, espacios y prefijo
+    assert (socio.correo, socio.telefono) == ("ana@correo.cl", "912345678")  # Se guardan limpios

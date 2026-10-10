@@ -11,8 +11,8 @@
       <form method="post" novalidate>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="campo">
-          <label for="rut">RUT</label>
-          <input id="rut" name="rut" value="{{ rut }}" placeholder="12.345.678-5" autocomplete="username" maxlength="12" required autofocus>
+          <label for="rut">RUT <span class="ayuda" data-rut-ayuda>sin puntos · ej: 12345678-5</span></label>
+          <input id="rut" name="rut" value="{{ rut }}" placeholder="12345678-5" autocomplete="username" maxlength="12" required autofocus data-rut>
         </div>
         <div class="campo">
           <label for="password">Contraseña</label>

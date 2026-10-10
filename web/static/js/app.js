@@ -27,6 +27,42 @@ document.addEventListener("DOMContentLoaded", () => {           // Espera a que 
     });
   });
 
+  // ---------- RUT: se escribe sin puntos y el sistema lo ordena solo ----------
+  // Es solo comodidad: el servidor SIEMPRE vuelve a validar el RUT (módulo 11).
+  const calcularDv = (cuerpo) => {                               // Dígito verificador con el algoritmo módulo 11
+    let suma = 0, multiplicador = 2;                             // La serie parte en 2
+    for (const digito of [...cuerpo].reverse()) {                // Recorre los dígitos de derecha a izquierda
+      suma += Number(digito) * multiplicador;                    // Suma cada dígito por su multiplicador
+      multiplicador = multiplicador < 7 ? multiplicador + 1 : 2; // Serie 2,3,4,5,6,7 que se repite
+    }
+    const resto = 11 - (suma % 11);                              // Fórmula del módulo 11
+    return resto === 11 ? "0" : resto === 10 ? "K" : String(resto); // 11 -> 0, 10 -> K
+  };
+  document.querySelectorAll("input[data-rut]").forEach((campo) => { // Cada campo marcado como RUT
+    const ayuda = campo.closest(".campo")?.querySelector("[data-rut-ayuda]"); // Pista de la etiqueta (si existe)
+    const textoAyuda = ayuda ? ayuda.textContent : "";           // Texto original de la pista
+    const mostrar = (error) => {                                 // Muestra u oculta el error
+      campo.classList.toggle("mal", Boolean(error));             // Borde rojo si hay error
+      if (ayuda) {                                               // La pista pasa a ser el mensaje de error
+        ayuda.textContent = error || textoAyuda;                 // Error o pista original
+        ayuda.classList.toggle("mal", Boolean(error));           // Rojo solo si hay error
+      }
+    };
+    campo.addEventListener("input", () => {                      // Mientras se escribe...
+      const limpio = campo.value.toUpperCase().replace(/[^0-9K-]/g, ""); // ...quita puntos, espacios y letras (salvo K)
+      if (limpio !== campo.value) campo.value = limpio;          // Solo reescribe si cambió (no mueve el cursor de más)
+      mostrar("");                                               // Mientras escribe no se muestra error
+    });
+    campo.addEventListener("blur", () => {                       // Al salir del campo...
+      const sinGuion = campo.value.replace(/-/g, "");            // Quita los guiones que haya
+      if (!sinGuion) { mostrar(""); return; }                    // Campo vacío: nada que revisar
+      campo.value = sinGuion.length > 1 ? `${sinGuion.slice(0, -1)}-${sinGuion.slice(-1)}` : sinGuion; // Pone el guion antes del DV
+      const [cuerpo, dv] = campo.value.split("-");               // Separa cuerpo y dígito verificador
+      const valido = /^\d{7,8}$/.test(cuerpo || "") && calcularDv(cuerpo) === dv; // Formato y DV correctos
+      mostrar(valido ? "" : "inválido: revisa el dígito verificador"); // Avisa antes de enviar
+    });
+  });
+
   // ---------- Muestra el campo de bicicletas solo para Spinning ----------
   const tipo = document.querySelector("select[name=tipo]");      // Selector del tipo de clase (formulario de clases)
   const bicis = document.querySelector("[data-bicicletas]");     // Campo de bicicletas operativas

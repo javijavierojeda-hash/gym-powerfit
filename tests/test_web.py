@@ -29,6 +29,25 @@ def test_login_correcto_e_incorrecto(cliente):  # Login
     assert iniciar_sesion(cliente, "22.222.222-2", "Recepcion123!").status_code == 302  # Clave correcta: redirige al panel
 
 
+def test_login_acepta_rut_sin_puntos(cliente):  # Mejora: el RUT se puede escribir sin puntos ni guion
+    assert iniciar_sesion(cliente, "22222222-2", "Recepcion123!").status_code == 302  # Sin puntos
+    cliente.post("/logout", data={"csrf_token": token(cliente.get("/").text)})  # Cierra la sesión
+    assert iniciar_sesion(cliente, "222222222", "Recepcion123!").status_code == 302  # Sin puntos ni guion
+
+
+def test_formularios_aceptan_rut_sin_puntos(recepcion):  # Registro de socio y control de ingreso
+    t = token(recepcion.get("/socios/nuevo").text)  # Token CSRF
+    r = recepcion.post("/socios/nuevo", data={"rut": "112223339", "nombre": "Sin Puntos", "csrf_token": t}, follow_redirects=True)  # Sin puntos ni guion
+    assert r.status_code == 200 and "Sin Puntos" in r.text  # La ficha se creó con el RUT normalizado
+    t = token(recepcion.get("/ingreso/").text)  # Token CSRF
+    assert "Puede ingresar" in recepcion.post("/ingreso/", data={"rut": "12345678-5", "csrf_token": t}).text  # Ana, al día
+
+
+def test_campos_rut_indican_formato_sin_puntos(cliente):  # La pista del formulario ya no muestra puntos
+    html = cliente.get("/login").text  # Página de login
+    assert 'placeholder="12345678-5"' in html and "data-rut" in html and "sin puntos" in html  # Ejemplo sin puntos
+
+
 def test_mensaje_de_error_generico(cliente):  # No revela si el RUT existe
     r1 = iniciar_sesion(cliente, "22.222.222-2", "mala-clave")  # RUT existente
     r2 = iniciar_sesion(cliente, "12.345.678-5", "mala-clave")  # RUT que no es trabajador

@@ -39,6 +39,8 @@ class Cotizacion:  # Resultado de consultar el dólar
     fecha: str  # Fecha del dato
     aviso: str = ""  # Si hubo problemas con alguna API: el motivo, para informarlo al usuario
     origen: str = ""  # Nombre de la API que entregó el valor (ej: "mindicador.cl")
+    fallos: tuple = ()  # Las APIs que fallaron antes, en orden: ((nombre, motivo), ...)
+    plan: str = ""  # Qué plan entregó el valor: "A" (mindicador.cl), "B" o "C" (APIs de respaldo)
 
 
 def _validar_valor(valor) -> float:  # Revisa que el dato externo sea un número razonable
@@ -129,7 +131,8 @@ class DolarService:  # Define el servicio del dólar
                 fallos.append((fuente.nombre, "fallo la consulta a la API"))  # Informa el problema
             else:  # Una API respondió bien: no se prueban las demás
                 aviso = "; ".join(f"{n}: {m}" for n, m in fallos)  # Qué APIs anteriores fallaron (si alguna)
-                cotizacion = Cotizacion(valor, "api", fecha, f"{aviso}; se uso {fuente.nombre}" if aviso else "", fuente.nombre)  # Valor real
+                cotizacion = Cotizacion(valor, "api", fecha, f"{aviso}; se uso {fuente.nombre}" if aviso else "", fuente.nombre,  # Valor real
+                                        tuple(fallos), "ABC"[FUENTES.index(fuente)])  # Y qué plan lo entregó (A, B o C)
                 self._guardar_respaldo(valor)  # Guarda el valor en la BD para usarlo si todas las APIs fallan después
                 break  # Termina la búsqueda
         if cotizacion is not None:  # Si alguna API entregó el valor...
@@ -138,7 +141,7 @@ class DolarService:  # Define el servicio del dólar
             motivos = {m for _, m in fallos}  # Motivos distintos
             aviso = (f"{motivos.pop()}; se probaron {len(fallos)} fuentes" if len(motivos) == 1 and len(fallos) > 1  # Todas fallaron igual
                      else "; ".join(f"{n}: {m}" for n, m in fallos))  # Fallaron distinto: se detalla cada una
-            cotizacion = self._respaldo(aviso)  # ...usa el último valor conocido o el valor por defecto
+            cotizacion = self._respaldo(aviso, tuple(fallos))  # ...usa el último valor conocido o el valor por defecto
             duracion = DURACION_CACHE_FALLO_SEG  # ...y reintenta en 10 minutos
         DolarService._cache = {"cotizacion": cotizacion, "expira": time.monotonic() + duracion}  # Actualiza la caché
         return cotizacion  # Retorna la cotización obtenida
@@ -161,9 +164,9 @@ class DolarService:  # Define el servicio del dólar
         if self.__conexion is not None:  # Solo si hay una conexión disponible
             IndicadorDao(self.__conexion).guardar("dolar", valor)  # Guarda o reemplaza el valor 'dolar'
 
-    def _respaldo(self, motivo: str = "") -> Cotizacion:  # Obtiene un valor cuando la API no está disponible
+    def _respaldo(self, motivo: str = "", fallos: tuple = ()) -> Cotizacion:  # Obtiene un valor cuando la API no está disponible
         if self.__conexion is not None:  # Si hay BD...
             guardado = IndicadorDao(self.__conexion).obtener("dolar")  # ...busca el último valor guardado
             if guardado:  # Si existe...
-                return Cotizacion(guardado[0], "respaldo", guardado[1][:10], motivo)  # ...lo usa como respaldo y guarda el motivo
-        return Cotizacion(VALOR_POR_DEFECTO, "por defecto", "", motivo)  # Último recurso: el valor por defecto
+                return Cotizacion(guardado[0], "respaldo", guardado[1][:10], motivo, "", fallos)  # ...lo usa como respaldo y guarda el motivo
+        return Cotizacion(VALOR_POR_DEFECTO, "por defecto", "", motivo, "", fallos)  # Último recurso: el valor por defecto

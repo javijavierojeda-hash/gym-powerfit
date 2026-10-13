@@ -105,7 +105,12 @@ Toda entrada se valida **antes de usarse** en `consola/entradas.py` y en los set
 
 ### 3.4 Consumo seguro de la API
 - La consulta está en **una sola clase**, `services/dolar_service.py`, y usa `requests.get(..., timeout=5)`.
-- **Tres APIs públicas, en orden:** primero **mindicador.cl** (la del enunciado) y, solo si falla, `cl.dolarapi.com` y `open.er-api.com`. Los sitios gratuitos a veces se caen, y así el programa no se queda sin el valor del día. La pantalla indica de cuál API salió el valor y cuáles fallaron.
+- **Tres planes, en orden:** **plan A** = mindicador.cl (la del enunciado); si falla, **plan B** = `cl.dolarapi.com`; y si también falla, **plan C** = `open.er-api.com`. Los sitios gratuitos a veces se caen, y así el programa no se queda sin el valor del día. La pantalla indica qué plan funcionó y por qué fallaron los anteriores, por ejemplo:
+  ```
+  Dolar observado: $976,40 · fuente: API cl.dolarapi.com (plan B) · fecha 2026-10-13
+    [!] Plan A (mindicador.cl) no funciono: no hay conexion con la API (revise internet).
+        Se activo el plan B y se uso cl.dolarapi.com. El programa sigue funcionando.
+  ```
 - Cada falla se informa al usuario con su causa y el programa **sigue funcionando**. Si ninguna API responde, usa el último valor guardado:
   - sin conexión (`ConnectionError`);
   - demora (`Timeout`);

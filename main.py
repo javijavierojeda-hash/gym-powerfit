@@ -417,15 +417,25 @@ def control_ingreso(conexion, usuario) -> None:  # Regla 2: no entra un socio co
         error(f"INGRESO IMPEDIDO: {e}. Debe pagar su mensualidad.")  # Informa y el programa sigue
 
 
-def obtener_dolar(conexion):  # Consulta el dólar del día e informa si la API falló
+def obtener_dolar(conexion):  # Consulta el dólar del día e informa qué plan se usó y cuáles fallaron
+    """
+    Plan A: mindicador.cl · Plan B: cl.dolarapi.com · Plan C: open.er-api.com.
+    Si un plan falla se avisa por qué y se activa el siguiente.
+    """
     DolarService.limpiar_cache()  # En la consola cada consulta va a la API: así se ve el valor real de este momento
-    cotizacion = DolarService(conexion).obtener_cotizacion()  # API mindicador.cl (requests, timeout de 5 s)
-    if cotizacion.fuente == "api":  # Valor real del día
-        print(f"Dolar observado: {dolar(cotizacion.valor)} · fuente: API {cotizacion.origen} · fecha {cotizacion.fecha}")  # Muestra el valor y de qué API salió
-        if cotizacion.aviso:  # Si la API principal falló y respondió una de respaldo...
-            print(f"      Aviso: {cotizacion.aviso}.")  # ...se informa cuál falló y cuál se usó
-    else:  # La API falló: se informa el motivo
-        error(f"No se pudo obtener el dolar del dia: {cotizacion.aviso}.")  # Motivo (sin conexión, demora o respuesta inesperada)
+    cotizacion = DolarService(conexion).obtener_cotizacion()  # Prueba los planes en orden (requests, timeout de 5 s)
+    if cotizacion.fuente == "api":  # Algún plan entregó el valor real del día
+        plan = f" (plan {cotizacion.plan})" if cotizacion.fallos else ""  # Solo se nombra el plan si hubo que usar un respaldo
+        print(f"Dolar observado: {dolar(cotizacion.valor)} · fuente: API {cotizacion.origen}{plan} · fecha {cotizacion.fecha}")  # Muestra el valor y de qué API salió
+        for letra, (nombre, motivo) in zip("ABC", cotizacion.fallos):  # Los planes que fallaron antes, en orden
+            error(f"Plan {letra} ({nombre}) no funciono: {motivo}.")  # Por qué falló cada uno
+        if cotizacion.fallos:  # Si hubo que usar un respaldo...
+            print(f"      Se activo el plan {cotizacion.plan} y se uso {cotizacion.origen}. El programa sigue funcionando.")  # ...se informa
+    else:  # Fallaron todos los planes: se informa cada motivo
+        titulo_error = f"fallaron los {len(cotizacion.fallos)} planes de consulta" if len(cotizacion.fallos) > 1 else cotizacion.aviso  # Resumen
+        error(f"No se pudo obtener el dolar del dia: {titulo_error}.")  # Informa
+        for letra, (nombre, motivo) in zip("ABC", cotizacion.fallos if len(cotizacion.fallos) > 1 else ()):  # Detalle de cada plan
+            print(f"      Plan {letra} ({nombre}): {motivo}.")  # Motivo de cada fallo
         origen = f"ultimo valor guardado ({cotizacion.fecha})" if cotizacion.fuente == "respaldo" else "valor por defecto"  # De dónde sale el valor
         print(f"      Se usa el {origen}: {dolar(cotizacion.valor)}. El programa sigue funcionando.")  # El sistema continúa
     return cotizacion  # Retorna la cotización usada

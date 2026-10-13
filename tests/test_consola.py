@@ -104,7 +104,8 @@ def test_p16_precio_con_el_dolar_del_dia(bd_temporal, monkeypatch, capsys):  # P
 
 def test_p17_sin_internet_avisa_y_sigue(bd_temporal, monkeypatch, capsys):  # P17 (la API "caída" por conftest)
     salida = ejecutar(monkeypatch, capsys, RECEPCION + ["12", "0"])  # Ver precios sin conexión
-    assert "No se pudo obtener el dolar del dia: no hay conexion con la API" in salida  # Avisa el motivo
+    assert "No se pudo obtener el dolar del dia: fallaron los 3 planes de consulta" in salida  # Avisa que fallaron los 3 planes
+    assert "Plan A (mindicador.cl): no hay conexion con la API" in salida and "Plan C (open.er-api.com)" in salida  # Y el motivo de cada uno
     assert "El programa sigue funcionando" in salida and "¡Hasta pronto!" in salida  # Y no se cae
 
 
@@ -133,3 +134,19 @@ def test_login_incorrecto_y_permisos_por_rol(bd_temporal, monkeypatch, capsys): 
     assert "Crear clase" not in salida  # La recepcionista no ve la opción de crear clases
     salida = ejecutar(monkeypatch, capsys, ["22222222-2", "x"] * 5)  # Cinco intentos fallidos
     assert "Demasiados intentos fallidos" in salida  # Se cierra por seguridad
+
+
+def test_p16_plan_b_cuando_mindicador_no_responde(bd_temporal, monkeypatch, capsys):  # mindicador.cl caída: se activa el respaldo
+    import requests  # Para simular la falla de la API principal
+    from services.dolar_service import URL_API  # Dirección de la API principal
+
+    def api(self, url=None):  # Solo mindicador.cl falla
+        if url == URL_API:  # La API principal
+            raise requests.exceptions.ConnectionError("caida")  # No hay conexión con ella
+        return {"moneda": "USD", "venta": 976.4, "fechaActualizacion": "2026-10-13T12:00:00Z"}  # Responde cl.dolarapi.com
+    monkeypatch.setattr(DolarService, "_obtener_json_desde_api", api)  # Reemplaza la llamada HTTP real
+    salida = ejecutar(monkeypatch, capsys, RECEPCION + ["12", "0"])  # Ver precios de suplementos
+    assert "fuente: API cl.dolarapi.com (plan B)" in salida  # Informa que se usó el plan B
+    assert "Plan A (mindicador.cl) no funciono: no hay conexion con la API" in salida  # Y por qué falló el A
+    assert "Se activo el plan B y se uso cl.dolarapi.com" in salida  # Y que el respaldo tomó el control
+    assert "45.00   x  976.40 =     $43.938" in salida  # Los precios usan el dólar del respaldo

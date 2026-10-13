@@ -16,7 +16,7 @@ from web import seguridad  # Para reiniciar el contador de intentos de login
 
 @pytest.fixture(autouse=True)  # autouse: se aplica a TODAS las pruebas automáticamente
 def sin_internet(monkeypatch):  # Evita que las pruebas dependan de la API real del dólar
-    def api_caida(self):  # Función falsa que simula que la API no responde
+    def api_caida(self, url=None):  # Función falsa que simula que la API no responde
         raise requests.exceptions.ConnectionError("sin conexion en pruebas")  # Lanza el mismo error que requests sin internet
     monkeypatch.setattr(DolarService, "_obtener_json_desde_api", api_caida)  # Reemplaza la llamada real
     DolarService.limpiar_cache()  # Parte cada prueba sin caché

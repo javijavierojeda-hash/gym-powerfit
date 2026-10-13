@@ -421,7 +421,9 @@ def obtener_dolar(conexion):  # Consulta el dólar del día e informa si la API 
     DolarService.limpiar_cache()  # En la consola cada consulta va a la API: así se ve el valor real de este momento
     cotizacion = DolarService(conexion).obtener_cotizacion()  # API mindicador.cl (requests, timeout de 5 s)
     if cotizacion.fuente == "api":  # Valor real del día
-        print(f"Dolar observado: {dolar(cotizacion.valor)} · fuente: API mindicador.cl · fecha {cotizacion.fecha}")  # Muestra el valor
+        print(f"Dolar observado: {dolar(cotizacion.valor)} · fuente: API {cotizacion.origen} · fecha {cotizacion.fecha}")  # Muestra el valor y de qué API salió
+        if cotizacion.aviso:  # Si la API principal falló y respondió una de respaldo...
+            print(f"      Aviso: {cotizacion.aviso}.")  # ...se informa cuál falló y cuál se usó
     else:  # La API falló: se informa el motivo
         error(f"No se pudo obtener el dolar del dia: {cotizacion.aviso}.")  # Motivo (sin conexión, demora o respuesta inesperada)
         origen = f"ultimo valor guardado ({cotizacion.fecha})" if cotizacion.fuente == "respaldo" else "valor por defecto"  # De dónde sale el valor

@@ -144,7 +144,7 @@ def iniciar_sesion(conexion):  # Pide RUT y contraseña; retorna el trabajador o
             rut = pedir_rut("RUT del trabajador (sin puntos): ")  # RUT validado
         except OperacionCancelada:  # Escribió 0
             return None  # Sale del programa
-        clave = pedir_clave("Contraseña: ")  # Contraseña (no se ve al escribirla)
+        clave = pedir_clave("Contraseña (no se muestra al escribir; escribala y presione Enter): ")  # Contraseña oculta: el aviso evita pensar que el teclado no responde
         trabajador = InstructorDao(conexion).buscar_por_rut(rut) or RecepcionistaDao(conexion).buscar_por_rut(rut)  # Busca en ambos roles
         if trabajador is None:  # Si el RUT no es de un trabajador...
             hashlib.pbkdf2_hmac("sha256", b"x", b"salt-ficticio", 260_000)  # ...gasta el mismo tiempo (no revela qué RUT existen)

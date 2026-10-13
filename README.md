@@ -37,7 +37,7 @@ La primera vez el programa **crea solo la base de datos** (`powerfit.db`, SQLite
 | Recepcionista (Valentina Soto) | `22222222-2` | `Recepcion123!` | Socios, inscripciones, cobros, control de ingreso y suplementos |
 | Instructora (Camila Rojas) | `11111111-1` | `Instructor123!` | Crear, modificar y eliminar clases; registrar asistencia |
 
-Cada rol ve solo sus opciones. Con la opción **C** se cambia de usuario sin cerrar el programa, y en cualquier dato se puede escribir **0** para cancelar y volver al menú.
+**Al escribir la contraseña no se ve nada en pantalla** (es a propósito, por seguridad): se escribe completa y se presiona Enter. Cada rol ve solo sus opciones. Con la opción **C** se cambia de usuario sin cerrar el programa, y en cualquier dato se puede escribir **0** para cancelar y volver al menú.
 
 ### Guía rápida para el guion de pruebas
 

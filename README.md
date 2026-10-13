@@ -30,6 +30,15 @@ python main.py
 
 La primera vez el programa **crea solo la base de datos** (`powerfit.db`, SQLite) con todas sus tablas y datos de ejemplo: trabajadores, 6 clases, 12 socios y 4 suplementos. Para empezar de cero, se borra `powerfit.db` y se ejecuta de nuevo.
 
+**Alternativa rápida en Windows (versión web, opcional).** Para ejecutar sin escribir comandos:
+1. Descargar el proyecto (botón verde **Code** → **Download ZIP**), descomprimirlo y abrir la carpeta.
+2. Hacer **doble clic en `iniciar_windows.bat`**.
+   - Si no hay Python, lo instala solo (con winget): hay que **cerrar esa ventana y volver a hacer doble clic**.
+   - La primera vez instala las librerías (alrededor de 1 minuto).
+3. Se abre el navegador en **http://localhost:5000**, con los mismos usuarios de la tabla de abajo. Para detener el servidor, se cierra la ventana negra o se presiona `Ctrl+C`.
+
+> Esta opción abre la **versión web**, que usa la misma base de datos y las mismas reglas. El **programa por consola evaluado es `python main.py`**, explicado en los pasos de arriba. Si Windows muestra "Windows protegió su PC", se elige **Más información** → **Ejecutar de todas formas**.
+
 **Inicio de sesión.** El programa pide RUT y contraseña. El RUT se puede escribir con o sin puntos.
 
 | Usuario | RUT | Contraseña | Qué puede hacer |
@@ -160,7 +169,7 @@ gym-powerfit/
 ```
 
 ### Versión web (opcional)
-`python app.py` levanta la misma lógica con interfaz web en **http://localhost:5000**, con los mismos usuarios. En Windows también se puede hacer doble clic en `iniciar_windows.bat`, que instala lo necesario. Detalles en el [Manual de Usuario](docs/Manual_de_Usuario_PowerFit.pdf).
+`python app.py` levanta la misma lógica con interfaz web en **http://localhost:5000**, con los mismos usuarios. En Windows también se puede hacer doble clic en `iniciar_windows.bat` (pasos en la sección 2). Detalles en el [Manual de Usuario](docs/Manual_de_Usuario_PowerFit.pdf).
 
 ### Requerimientos del negocio y cómo se resolvieron
 

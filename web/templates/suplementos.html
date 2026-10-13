@@ -11,10 +11,10 @@
   <div class="indicador acento">
     <div class="etiqueta">Dólar del día</div>
     <div class="valor">{{ cotizacion.valor|clp }}</div>
-    {% if cotizacion.fuente == 'api' %}<span class="chip ok">mindicador.cl · {{ cotizacion.fecha|fecha }}</span>
+    {% if cotizacion.fuente == 'api' %}<span class="chip ok">{{ cotizacion.origen or 'API del dólar' }} · {{ cotizacion.fecha|fecha }}</span>
     {% elif cotizacion.fuente == 'respaldo' %}<span class="chip alerta">Valor de respaldo ({{ cotizacion.fecha|fecha }})</span>
     {% else %}<span class="chip error">Valor por defecto (sin conexión a la API)</span>{% endif %}
-    {% if cotizacion.aviso %}<div class="suave" style="font-size:.8rem;margin-top:.35rem">No se usó la API: {{ cotizacion.aviso }}.</div>{% endif %}
+    {% if cotizacion.aviso %}<div class="suave" style="font-size:.8rem;margin-top:.35rem">Aviso: {{ cotizacion.aviso }}.</div>{% endif %}
   </div>
 </div>
 

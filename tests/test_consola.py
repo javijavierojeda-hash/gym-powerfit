@@ -96,9 +96,9 @@ def test_p15_ingreso_con_membresia_vencida(bd_temporal, monkeypatch, capsys):  #
 
 def test_p16_precio_con_el_dolar_del_dia(bd_temporal, monkeypatch, capsys):  # P16 (API simulada con valor real)
     monkeypatch.setattr(DolarService, "_obtener_json_desde_api",  # Respuesta con el formato de mindicador.cl
-                        lambda self: {"serie": [{"fecha": "2026-10-10T03:00:00.000Z", "valor": 940.5}]})
+                        lambda self, url=None: {"serie": [{"fecha": "2026-10-10T03:00:00.000Z", "valor": 940.5}]})
     salida = ejecutar(monkeypatch, capsys, RECEPCION + ["12", "0"])  # Ver precios de suplementos
-    assert "Dolar observado: $940,50 · fuente: API mindicador.cl" in salida  # Usa el valor de la API
+    assert "Dolar observado: $940,50 · fuente: API mindicador.cl" in salida  # Usa el valor de la API principal
     assert "45.00   x  940.50 =     $42.322" in salida  # Proteína: 45 USD x 940,50 = $42.322
 
 

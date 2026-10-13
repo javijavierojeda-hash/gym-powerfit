@@ -8,7 +8,7 @@ Programación Orientada a Objeto Seguro · TI3V21 · Sección 114-2B-F1 · Docen
 |---|---|
 | **Integrantes** | Javier Ojeda · Javier Concha |
 | **Negocio asignado** | **Gimnasio PowerFit**: clases de Yoga, Spinning y Crossfit; socios con membresía mensual; venta de suplementos importados |
-| **Requisitos de la ficha** | ① Tres subtipos con un método distinto: `Yoga`, `Spinning` y `Crossfit` → `cupos_disponibles()` · ② Dato con validación: RUT del socio (módulo 11, en el setter) · ③ Transacción con detalle: `InscripcionMensual` → `DetalleClaseReservada` · ④ Dos reglas: no inscribir en una clase con el cupo lleno y no dejar entrar a un socio con la membresía vencida · ⑤ Precio con indicador externo: suplementos según el **dólar del día** (API mindicador.cl) |
+| **Requisitos de la ficha** | ① Tres subtipos con un método distinto: `Yoga`, `Spinning` y `Crossfit` → `cupos_disponibles()` · ② Dato con validación: RUT del socio (módulo 11, en el setter) · ③ Transacción con detalle: `InscripcionMensual` → `DetalleClaseReservada` · ④ Dos reglas: no inscribir en una clase con el cupo lleno y no dejar entrar a un socio con la membresía vencida · ⑤ Precio con indicador externo: suplementos según el **dólar del día** (API mindicador.cl, con dos APIs de respaldo) |
 
 ## 2. Cómo instalar y ejecutar el programa
 
@@ -50,7 +50,7 @@ La primera vez el programa **crea solo la base de datos** (`powerfit.db`, SQLite
 | P12 y P13 | Recepcionista | **7** Registrar inscripción mensual: por ejemplo, N° `1,6` = Yoga lunes + Crossfit miércoles · **8** Ver detalle |
 | P14 | Recepcionista | **7** Inscribir en la clase N° 3 (Crossfit viernes 18:30, que ya está **llena**) a un socio sin inscripción, por ejemplo `24681357-4` |
 | P15 | Recepcionista | **1** Registrar socio → membresía "Ingresar fecha de vencimiento" con una fecha pasada → **11** Control de ingreso |
-| P16 y P17 | Recepcionista | **12** Suplementos: muestra el dólar usado y la fuente. Sin internet, avisa el motivo y usa el último valor guardado |
+| P16 y P17 | Recepcionista | **12** Suplementos: muestra el dólar usado y de qué API salió (compararlo con https://mindicador.cl/api/dolar). Sin internet, avisa el motivo y usa el último valor guardado |
 | P18 | Cualquiera | Escribir `99` en el menú |
 | P19 | Cualquiera | Escribir `abc` en el monto de **9** Cobrar mensualidad o en las bicicletas (cupo) al crear un Spinning |
 
@@ -105,11 +105,13 @@ Toda entrada se valida **antes de usarse** en `consola/entradas.py` y en los set
 
 ### 3.4 Consumo seguro de la API
 - La consulta está en **una sola clase**, `services/dolar_service.py`, y usa `requests.get(..., timeout=5)`.
-- Cada falla se informa al usuario con su causa y el programa **sigue funcionando** con el último valor guardado:
+- **Tres APIs públicas, en orden:** primero **mindicador.cl** (la del enunciado) y, solo si falla, `cl.dolarapi.com` y `open.er-api.com`. Los sitios gratuitos a veces se caen, y así el programa no se queda sin el valor del día. La pantalla indica de cuál API salió el valor y cuáles fallaron.
+- Cada falla se informa al usuario con su causa y el programa **sigue funcionando**. Si ninguna API responde, usa el último valor guardado:
   - sin conexión (`ConnectionError`);
   - demora (`Timeout`);
   - error HTTP (`raise_for_status`);
-  - respuesta inesperada (JSON inválido, sin `serie` o con un valor que no es número).
+  - respuesta inesperada (JSON inválido, sin los campos esperados o con un valor que no es número).
+- **Nunca se confía ciegamente en un dato externo:** el valor debe ser un número entre 100 y 5000, sea cual sea la API.
 - Las dependencias tienen la versión fijada. Se usa `requests` 2.32.5 porque desde la 2.32.4 corrige la vulnerabilidad CVE-2024-47081.
 
 ## 4. Uso de inteligencia artificial
@@ -122,6 +124,7 @@ Usamos **Claude (Anthropic), a través de Claude Code**, como asistente de progr
 | Capturar cualquier falla de la API con un solo `except Exception:` y usar el valor de respaldo en silencio | **Modificado** | Un `except` genérico esconde el motivo, y también errores de programación como un `NameError`. Se reemplazó por un `except` para cada tipo de falla, y cada uno guarda un aviso que el menú muestra ("no hay conexión…", "no respondió en 5 segundos…", "respuesta inesperada"). |
 | Validar el RUT solo en el menú, antes de crear el socio | **Descartado** | La regla debe vivir en un solo lugar: el `@rut.setter` de `Socio`. El menú crea una ficha temporal y deja que el setter valide, así la misma regla protege la consola, la web y los DAO. |
 | Leer los números con `int(input())` dentro de un `try` | **Modificado** | `int()` acepta `"-5"` y `" 7 "`, y no controla el rango. `pedir_entero()` exige solo dígitos y además revisa el mínimo y el máximo; por ejemplo, el monto recibido no puede ser menor que el total. |
+| Depender de una sola API (mindicador.cl) para el dólar | **Modificado** | Al probar el programa, mindicador.cl no cargaba (ni en el navegador). Con una sola fuente, la prueba con internet del docente podría fallar por una caída ajena. Se agregaron dos APIs públicas de respaldo, cada una con su propio lector de la respuesta y la misma validación de rango; el programa informa cuál usó y cuáles fallaron. |
 | Mantener la caché de 1 hora del dólar también en la consola | **Descartado** | Con caché, la prueba "sin internet" (P17) mostraría el valor guardado sin avisar. En la consola cada consulta va a la API; la caché se mantiene solo en la web. |
 | Borrar un socio eliminando a mano sus filas en cada tabla (membresía, inscripciones, detalles, asistencias) | **Modificado** | Se usaron las llaves foráneas con `ON DELETE CASCADE`, que ya existían, dentro de una transacción. Es una sola consulta y no se puede olvidar ninguna tabla. |
 | Dejar los datos de ejemplo tal como estaban | **Corregido por el equipo** | Al revisar el guion de pruebas vimos que la socia de ejemplo Ana Pérez tenía el RUT `12.345.678-5`, el mismo que el docente usa para crear un socio nuevo en la P02, así que esa prueba habría fallado por duplicado. Se cambió su RUT. |

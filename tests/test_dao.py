@@ -25,7 +25,7 @@ from model.socio import Socio
 from model.suplemento import Suplemento
 from model.trabajador import Trabajador
 from model.validaciones import calcular_dv
-from services.dolar_service import DolarService, VALOR_POR_DEFECTO  # Servicio del dólar
+from services.dolar_service import DolarService, VALOR_POR_DEFECTO, URL_API, URL_RESPALDO_1, URL_RESPALDO_2  # Servicio del dólar
 
 _API_REAL = DolarService._obtener_json_desde_api  # Método real (se guarda antes de que conftest lo reemplace)
 
@@ -189,7 +189,7 @@ def test_tabla_socios_antigua_se_actualiza_sin_perder_datos():  # Migración de 
     (ValueError, "respuesta inesperada"),
 ])
 def test_dolar_informa_la_causa_de_cada_falla(monkeypatch, falla, mensaje):  # Continuidad cuando la API falla
-    def api(self):  # API simulada que falla
+    def api(self, url=None):  # API simulada que falla
         raise falla("falla simulada")  # Lanza el error indicado
     monkeypatch.setattr(DolarService, "_obtener_json_desde_api", api)  # Reemplaza la llamada real
     cotizacion = DolarService(None).obtener_cotizacion()  # No debe lanzar ningún error
@@ -220,3 +220,46 @@ def test_api_usa_requests_con_timeout(monkeypatch):  # La consulta real usa requ
     DolarService.limpiar_cache()  # Sin caché
     assert DolarService(None).obtener_valor() == 950.0  # Usa el valor obtenido
     assert llamadas == {"url": "https://mindicador.cl/api/dolar", "timeout": 5.0}  # Con la URL y el timeout esperados
+
+
+# ---------------- API del dólar con respaldo (varias fuentes) ----------------
+
+_JSON_DOLARAPI = {"moneda": "USD", "compra": 976.02, "venta": 976.4, "fechaActualizacion": "2026-10-13T12:01:12.503Z"}  # Formato de cl.dolarapi.com
+_JSON_ER_API = {"result": "success", "time_last_update_unix": 1791849451, "rates": {"CLP": 977.033618}}  # Formato de open.er-api.com
+
+
+def _api_simulada(monkeypatch, respuestas: dict):  # Simula las 3 APIs: cada URL responde un JSON o lanza el error indicado
+    def api(self, url=None):  # Reemplazo de la petición real
+        respuesta = respuestas[url]  # Qué hace esta API
+        if isinstance(respuesta, type) and issubclass(respuesta, Exception):  # Si es un error...
+            raise respuesta("falla simulada")  # ...lo lanza
+        return respuesta  # Si no, retorna el JSON
+    monkeypatch.setattr(DolarService, "_obtener_json_desde_api", api)  # Reemplaza la llamada HTTP real
+
+
+def test_dolar_usa_la_segunda_api_si_la_principal_falla(monkeypatch):  # mindicador.cl caída
+    _api_simulada(monkeypatch, {URL_API: requests.exceptions.Timeout, URL_RESPALDO_1: _JSON_DOLARAPI, URL_RESPALDO_2: _JSON_ER_API})
+    cotizacion = DolarService(None).obtener_cotizacion()  # Consulta
+    assert (cotizacion.valor, cotizacion.fuente, cotizacion.origen) == (976.4, "api", "cl.dolarapi.com")  # Usó la segunda API
+    assert cotizacion.fecha == "2026-10-13" and "mindicador.cl: la API no respondio en 5 segundos" in cotizacion.aviso  # Informa qué falló
+
+
+def test_dolar_usa_la_tercera_api_si_fallan_las_dos_primeras(monkeypatch):  # Las dos primeras caídas
+    _api_simulada(monkeypatch, {URL_API: requests.exceptions.ConnectionError, URL_RESPALDO_1: {"venta": "texto"}, URL_RESPALDO_2: _JSON_ER_API})
+    cotizacion = DolarService(None).obtener_cotizacion()  # Consulta
+    assert (round(cotizacion.valor, 2), cotizacion.origen) == (977.03, "open.er-api.com")  # Usó la tercera API
+    assert "cl.dolarapi.com: la API entrego una respuesta inesperada" in cotizacion.aviso  # Informa el motivo de la segunda
+
+
+def test_dolar_si_fallan_todas_las_apis_usa_el_respaldo_guardado(conexion, monkeypatch):  # Sin ninguna API
+    DolarService(conexion, obtener_json=lambda: {"serie": [{"fecha": "2026-10-12", "valor": 930.0}]}).obtener_cotizacion()  # Guarda un valor real antes
+    DolarService.limpiar_cache()  # Sin caché
+    _api_simulada(monkeypatch, {URL_API: requests.exceptions.ConnectionError, URL_RESPALDO_1: requests.exceptions.ConnectionError, URL_RESPALDO_2: requests.exceptions.ConnectionError})
+    cotizacion = DolarService(conexion).obtener_cotizacion()  # Todas fallan
+    assert (cotizacion.valor, cotizacion.fuente) == (930.0, "respaldo")  # Usa el último valor guardado
+    assert "no hay conexion con la API" in cotizacion.aviso and "se probaron 3 fuentes" in cotizacion.aviso  # Informa
+
+
+def test_dolar_rechaza_valores_absurdos_de_cualquier_api(monkeypatch):  # No se confía en ninguna API
+    _api_simulada(monkeypatch, {URL_API: {"serie": [{"valor": -5}]}, URL_RESPALDO_1: {"venta": 99999}, URL_RESPALDO_2: {"result": "error"}})
+    assert DolarService(None).obtener_cotizacion().valor == VALOR_POR_DEFECTO  # Se descartan las tres respuestas

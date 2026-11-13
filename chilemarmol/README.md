@@ -32,7 +32,7 @@ python3 -m http.server 8080
 - Proceso horizontal fijado solo en pantallas ≥1024 px; en celular es vertical.
 
 ## Pendientes
-- Número de WhatsApp, email, Instagram y cifras reales.
+- Número de WhatsApp, email, Instagram, dirección del mapa (`SITE.address` y `SITE.mapQuery`) y cifras reales.
 - Fotos y video propios (el hero acepta video fácilmente).
 - Logo definitivo (hoy es texto).
 - Dominio y hosting (Netlify/Vercel), y mover esta carpeta a un repo propio `chilemarmol`.

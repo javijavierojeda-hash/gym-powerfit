@@ -110,6 +110,7 @@
         el("h3", { class: "project-card__title" }, [p.title]),
         el("span", { class: "project-card__info" }, [p.location + " · " + p.year]),
       ]),
+      options && options.summary ? el("p", { class: "project-card__summary" }, [p.summary]) : null,
     ]);
   }
 
@@ -192,7 +193,7 @@
         grid.appendChild(el("p", { class: "empty-state" }, ["Pronto publicaremos proyectos en esta categoría."]));
         return;
       }
-      list.forEach(function (p) { grid.appendChild(projectCard(p)); });
+      list.forEach(function (p) { grid.appendChild(projectCard(p, { summary: true })); });
 
       if (motion) {
         if (animate) {
@@ -259,10 +260,16 @@
     $("[data-detail-summary]").textContent = p.summary;
 
     var facts = $("[data-detail-facts]");
-    [["Categoría", category.name], ["Ubicación", p.location], ["Año", String(p.year)], ["Superficie", p.area], ["Servicios", p.services.join(", ")]]
+    [["Categoría", category.name], ["Ubicación", p.location], ["Año", String(p.year)], ["Superficie", p.area], ["Plazo de obra", p.duration], ["Servicios", p.services.join(", ")]]
       .forEach(function (f) {
-        facts.appendChild(el("div", null, [el("dt", { class: "label" }, [f[0]]), el("dd", null, [f[1]])]));
+        if (f[1]) facts.appendChild(el("div", null, [el("dt", { class: "label" }, [f[0]]), el("dd", null, [f[1]])]));
       });
+
+    $("[data-detail-challenge]").textContent = p.challenge || "";
+    $("[data-detail-solution]").textContent = p.solution || "";
+    $("[data-detail-result]").textContent = p.result || "";
+    var materials = $("[data-detail-materials]");
+    (p.materials || []).forEach(function (m) { materials.appendChild(el("li", null, [m])); });
 
     var gallery = $("[data-detail-gallery]");
     p.images.slice(1).forEach(function (ref, i) {
@@ -280,6 +287,115 @@
     var nextLink = $("[data-next-project]");
     nextLink.href = "proyecto.html?p=" + encodeURIComponent(next.slug);
     $("[data-next-title]").textContent = next.title;
+  }
+
+  /* ---------- Cotizador: arma un mensaje y lo envía por WhatsApp ---------- */
+  function initQuote() {
+    var form = $("[data-quote-form]");
+    if (!form) return;
+    var QUOTE = window.QUOTE || { materials: [], timing: [] };
+    var groups = {
+      tipo: CATEGORIES.map(function (c) { return c.name; }),
+      material: QUOTE.materials,
+      plazo: QUOTE.timing,
+    };
+    Object.keys(groups).forEach(function (name) {
+      var host = $('[data-chips="' + name + '"]', form);
+      groups[name].forEach(function (label, i) {
+        var id = "q-" + name + "-" + i;
+        host.appendChild(el("label", { class: "chip", for: id }, [
+          el("input", { type: "radio", name: name, id: id, value: label }),
+          el("span", null, [label]),
+        ]));
+      });
+    });
+
+    var range = $("#q-area", form);
+    var out = $("#q-area-out", form);
+    var summary = $("[data-quote-summary]", form);
+    var error = $("[data-quote-error]", form);
+
+    function value(name) {
+      var checked = form.querySelector('input[name="' + name + '"]:checked');
+      return checked ? checked.value : "";
+    }
+    function field(id) { return $("#" + id, form).value.trim(); }
+    function areaText() { return Number(range.value).toLocaleString("es-CL") + " m²"; }
+
+    // Resumen en vivo: el cliente ve exactamente lo que va a enviar
+    function paint() {
+      out.textContent = areaText();
+      summary.textContent = "";
+      [["Proyecto", value("tipo")], ["Superficie", areaText()], ["Material", value("material")], ["Plazo", value("plazo")], ["Comuna", field("q-comuna")]]
+        .forEach(function (row) {
+          summary.appendChild(el("div", null, [
+            el("dt", null, [row[0]]),
+            el("dd", { class: row[1] ? null : "is-empty" }, [row[1] || "Sin elegir"]),
+          ]));
+        });
+    }
+
+    form.addEventListener("input", function (e) {
+      if (e.target.getAttribute("aria-invalid") === "true" && e.target.value.trim()) e.target.setAttribute("aria-invalid", "false");
+      if (!error.hidden && !form.querySelector('[aria-invalid="true"]') && value("tipo")) error.hidden = true;
+      paint();
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = [];
+      if (!value("tipo")) missing.push("el tipo de proyecto");
+      [["q-name", "tu nombre"], ["q-comuna", "tu comuna"]].forEach(function (pair) {
+        var input = $("#" + pair[0], form);
+        var empty = !input.value.trim();
+        input.setAttribute("aria-invalid", String(empty));
+        if (empty) missing.push(pair[1]);
+      });
+      if (missing.length) {
+        error.hidden = false;
+        error.textContent = "Falta completar " + missing.join(", ") + ".";
+        return;
+      }
+      error.hidden = true;
+
+      var lines = [
+        "Hola Chile Mármol, quiero cotizar un proyecto:",
+        "• Proyecto: " + value("tipo"),
+        "• Superficie aprox.: " + areaText(),
+        value("material") ? "• Material: " + value("material") : null,
+        value("plazo") ? "• Plazo: " + value("plazo") : null,
+        "• Comuna: " + field("q-comuna"),
+        field("q-notes") ? "• Detalles: " + field("q-notes") : null,
+        "",
+        "Mi nombre es " + field("q-name") + ".",
+      ].filter(function (line) { return line !== null; });
+
+      var url = waLink(lines.join("\n"));
+      // Sin "noopener" en window.open (haría que siempre devuelva null);
+      // en su lugar se corta el vínculo con esta página a mano.
+      var win = window.open(url, "_blank");
+      if (win) win.opener = null;
+      else location.href = url; // el navegador bloqueó la pestaña nueva
+    });
+
+    // Si se llega con ?cat=cocinas, se preselecciona esa categoría
+    var cat = new URLSearchParams(location.search).get("cat");
+    if (categoryBySlug[cat]) {
+      $$('input[name="tipo"]', form).forEach(function (input) {
+        if (input.value === categoryBySlug[cat].name) input.checked = true;
+      });
+    }
+    paint();
+  }
+
+  /* ---------- Mapa a todo el ancho (Google Maps sin API key) ---------- */
+  function initMap() {
+    var frame = $("[data-map]");
+    if (!frame) return;
+    var query = encodeURIComponent(SITE.mapQuery || SITE.address || "Santiago, Chile");
+    frame.src = "https://www.google.com/maps?q=" + query + "&z=14&output=embed";
+    $$("[data-address]").forEach(function (n) { n.textContent = SITE.address; });
+    $$("[data-directions]").forEach(function (a) { a.href = "https://www.google.com/maps/dir/?api=1&destination=" + query; });
   }
 
   /* ---------- Header: se oculta al bajar y aparece al subir ---------- */
@@ -623,6 +739,8 @@
     renderStats();
     renderFooterCategories();
     initProjectDetail();
+    initQuote();
+    initMap();
     bindContact();
     initHeader();
     initWhatsAppFloat();

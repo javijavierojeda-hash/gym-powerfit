@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; frame-src https://www.google.com; base-uri 'self'; form-action 'self'; object-src 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Proyecto — Chile Mármol</title>
   <meta name="description" content="Proyecto de remodelación a medida por Chile Mármol.">
@@ -40,6 +40,7 @@
         <a href="index.html#servicios">Servicios</a>
         <a href="index.html#nosotros">Nosotros</a>
         <a href="index.html#contacto">Contacto</a>
+        <a href="index.html#cotizar">Cotizar</a>
       </div>
       <button class="menu-toggle label" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
         <span data-menu-label>Menú</span><span class="menu-toggle__icon" aria-hidden="true"></span>
@@ -55,6 +56,7 @@
       <li class="menu__item"><a class="menu__link" href="index.html#servicios"><small>03</small>Servicios</a></li>
       <li class="menu__item"><a class="menu__link" href="index.html#nosotros"><small>04</small>Nosotros</a></li>
       <li class="menu__item"><a class="menu__link" href="index.html#contacto"><small>05</small>Contacto</a></li>
+      <li class="menu__item"><a class="menu__link" href="index.html#cotizar"><small>06</small>Cotizar</a></li>
     </ul>
     <div class="menu__foot label">
       <a href="#" data-wa>WhatsApp</a>
@@ -86,6 +88,27 @@
       </div>
     </section>
 
+    <section class="section container story" aria-label="Cómo lo hicimos">
+      <div class="story__grid">
+        <article class="story__item" data-reveal>
+          <span class="label muted">El desafío</span>
+          <p data-detail-challenge></p>
+        </article>
+        <article class="story__item" data-reveal>
+          <span class="label muted">Nuestra solución</span>
+          <p data-detail-solution></p>
+        </article>
+        <article class="story__item" data-reveal>
+          <span class="label muted">El resultado</span>
+          <p data-detail-result></p>
+        </article>
+      </div>
+      <div class="story__materials" data-reveal>
+        <span class="label muted">Materiales</span>
+        <ul class="tags" data-detail-materials></ul>
+      </div>
+    </section>
+
     <div class="detail-gallery" data-detail-gallery></div>
 
     <a class="next-project" href="proyectos.html" data-next-project>
@@ -105,6 +128,7 @@
           <li><a href="proyectos.html">Proyectos</a></li>
           <li><a href="index.html#servicios">Servicios</a></li>
           <li><a href="index.html#contacto">Contacto</a></li>
+          <li><a href="index.html#cotizar">Cotizador</a></li>
         </ul>
       </div>
       <div>

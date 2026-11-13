@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self'; frame-src https://www.google.com; base-uri 'self'; form-action 'self'; object-src 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Chile Mármol — Remodelaciones a medida para empresas, oficinas y hogares</title>
   <meta name="description" content="Remodelamos empresas, locales comerciales, oficinas, cocinas, proyectos inmobiliarios y hogares. Diseño, ingeniería y obra a medida, con terminaciones en mármol y piedra natural.">
@@ -60,6 +60,7 @@
         <a href="index.html#servicios">Servicios</a>
         <a href="index.html#nosotros">Nosotros</a>
         <a href="index.html#contacto">Contacto</a>
+        <a href="index.html#cotizar">Cotizar</a>
       </div>
       <button class="menu-toggle label" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
         <span data-menu-label>Menú</span><span class="menu-toggle__icon" aria-hidden="true"></span>
@@ -75,6 +76,7 @@
       <li class="menu__item"><a class="menu__link" href="index.html#servicios"><small>03</small>Servicios</a></li>
       <li class="menu__item"><a class="menu__link" href="index.html#nosotros"><small>04</small>Nosotros</a></li>
       <li class="menu__item"><a class="menu__link" href="index.html#contacto"><small>05</small>Contacto</a></li>
+      <li class="menu__item"><a class="menu__link" href="index.html#cotizar"><small>06</small>Cotizar</a></li>
     </ul>
     <div class="menu__foot label">
       <a href="#" data-wa>WhatsApp</a>
@@ -225,6 +227,79 @@
         </div>
       </div>
     </section>
+
+    <!-- 10. Cotizador -->
+    <section class="section container quote-tool" id="cotizar" aria-labelledby="quote-title">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow label"><span>(07)</span><span>Cotizador</span></div>
+          <h2 class="h2" id="quote-title" data-reveal>Cotiza en <span class="script">1 minuto</span></h2>
+        </div>
+        <p class="quote-tool__intro muted">Elige lo que necesitas y te enviamos una cotización por WhatsApp. Sin compromiso.</p>
+      </div>
+
+      <form class="quote-form" data-quote-form novalidate>
+        <div class="quote-form__fields">
+          <fieldset class="q-group">
+            <legend class="label">1 · Tipo de proyecto</legend>
+            <div class="chips" data-chips="tipo"></div>
+          </fieldset>
+
+          <fieldset class="q-group">
+            <legend class="label">2 · Superficie aproximada</legend>
+            <div class="q-range">
+              <input type="range" id="q-area" name="area" min="5" max="1500" step="5" value="40" aria-describedby="q-area-out">
+              <output id="q-area-out" for="q-area" class="q-range__out">40 m²</output>
+            </div>
+          </fieldset>
+
+          <fieldset class="q-group">
+            <legend class="label">3 · Material principal</legend>
+            <div class="chips" data-chips="material"></div>
+          </fieldset>
+
+          <fieldset class="q-group">
+            <legend class="label">4 · ¿Para cuándo?</legend>
+            <div class="chips" data-chips="plazo"></div>
+          </fieldset>
+
+          <fieldset class="q-group q-group--inputs">
+            <legend class="label">5 · Tus datos</legend>
+            <label class="q-field" for="q-name"><span>Nombre</span>
+              <input id="q-name" name="name" type="text" autocomplete="name" maxlength="60" required placeholder="Ej: Camila Rojas">
+            </label>
+            <label class="q-field" for="q-comuna"><span>Comuna</span>
+              <input id="q-comuna" name="comuna" type="text" autocomplete="address-level2" maxlength="40" required placeholder="Ej: Las Condes">
+            </label>
+            <label class="q-field q-field--wide" for="q-notes"><span>Detalles (opcional)</span>
+              <textarea id="q-notes" name="notes" rows="3" maxlength="400" placeholder="Ej: quiero cambiar el mesón de la cocina por mármol blanco"></textarea>
+            </label>
+          </fieldset>
+        </div>
+
+        <aside class="quote-summary" aria-live="polite">
+          <span class="label quote-summary__title">Tu solicitud</span>
+          <dl class="quote-summary__list" data-quote-summary></dl>
+          <p class="quote-summary__error" data-quote-error hidden></p>
+          <button class="btn btn--solid quote-summary__send" type="submit">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35m-5.42 7.4a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88a9.86 9.86 0 0 1 9.88 9.89c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41Z"/></svg>
+            Enviar cotización por WhatsApp
+          </button>
+          <p class="quote-summary__note muted">Respondemos el mismo día hábil. Tus datos solo se usan para esta cotización.</p>
+        </aside>
+      </form>
+    </section>
+
+    <!-- 11. Mapa a todo el ancho -->
+    <section class="map" id="ubicacion" aria-labelledby="map-title">
+      <iframe class="map__frame" data-map title="Mapa de ubicación de Chile Mármol" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div class="map__card">
+        <span class="label muted">Showroom y taller</span>
+        <h2 class="h3" id="map-title" data-address>Santiago, Chile</h2>
+        <p class="muted" data-hours></p>
+        <a class="link-line label" href="#" data-directions target="_blank" rel="noopener noreferrer">Cómo llegar <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
@@ -238,6 +313,7 @@
           <li><a href="proyectos.html">Proyectos</a></li>
           <li><a href="index.html#servicios">Servicios</a></li>
           <li><a href="index.html#contacto">Contacto</a></li>
+          <li><a href="index.html#cotizar">Cotizador</a></li>
         </ul>
       </div>
       <div>
